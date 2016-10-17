@@ -36,8 +36,8 @@ User-level Transactions
 -Best-seller list of items
 -Personalized item suggestion list
 */
-CREATE TABLE UserData (
-	id int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS Users (
+	user_id int(11) NOT NULL AUTO_INCREMENT,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
 	address varchar(95) NOT NULL,
@@ -47,10 +47,10 @@ CREATE TABLE UserData (
 	telephone varchar(12) NOT NULL,
 	email varchar(255) NOT NULL,
 	account_number varchar(12) NOT NULL,
-	account_created date NOT NULL,
+	account_created datetime DEFAULT GETDATE(),
 	creditcard varchar(16) NOT NULL, --keep account history
-	preference --advertisements
-	rating --active status in terms of making purchases
+	rating int(1) NOT NULL, --active status in terms of making purchases
+	PRIMARY KEY (user_id)
 	--Can connect with other users
 	--Can post message on page
 	--Can follow up on Wall
@@ -59,54 +59,82 @@ CREATE TABLE UserData (
 	--Can make purchase
 )
 
-CREATE TABLE Group (
-	GroupId
-	GroupName
-	Type
-	Owner
+CREATE TABLE IF NOT EXISTS Preferences (
+	user_id int(11) NOT NULL,
+	type varchar(50) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users(user_id)
 )
 
-CREATE TABLE Pages (
-	PageId
-	Owner
-	Group
-	PostCount
+CREATE TABLE IF NOT EXISTS Groups (
+	group_id int(11) NOT NULL AUTO_INCREMENT,
+	group_name varchar(50) NOT NULL,
+	type varchar(50) NOT NULL,
+	owner_id int(11) NOT NULL,
+	PRIMARY KEY (group_id),
+	FOREIGN KEY (owner_id) REFERENCES Users(user_id)
 )
 
-CREATE TABLE Comments (
-	CommentId
-	Date
-	Content
-	Author
+CREATE TABLE IF NOT EXISTS Pages (
+	page_id int(11) NOT NULL AUTO_INCREMENT,
+	owner_id int(11) NOT NULL,
+	group_id int(11) NOT NULL,
+	post_count int DEFAULT 0,
+	PRIMARY KEY (page_id),
+	FOREIGN KEY (owner_id) REFERENCES Users(user_id),
+	FOREIGN KEY (group_id) REFERENCES Groups(group_id)
 )
 
-CREATE TABLE Messages (
-	MessageId
-	Date
-	Subject
-	Content
-	Sender
-	Receiver
+CREATE TABLE IF NOT EXISTS Posts (
+	post_id int(11) NOT NULL AUTO_INCREMENT,
+	date_created datetime DEFAULT GETDATE(),
+	content text,
+	comment_count int DEFAULT 0,
+	PRIMARY KEY (post_id)
 )
 
-CREATE TABLE Advertisement (
-	AdId
-	EmployeeId
-	Type --(e.g. clothing, computers)
-	Date
-	Company --(e.g. Ford, Gap, Google)
-	ItemName --(e.g. particular car, article of clothing, smartphone)
-	Content
-	UnitPrice
-	NumUnit
+CREATE TABLE IF NOT EXISTS Comments (
+	comment_id int(11) NOT NULL AUTO_INCREMENT,
+	author_id int(11) NOT NULL,
+	date_created datetime DEFAULT GETDATE(),
+	content text NOT NULL,
+	PRIMARY KEY (comment_id),
+	FOREIGN KEY (author_id) REFERENCES Users(user_id)
 )
 
-CREATE TABLE Sales (
-	TransactionId
-	Date
-	AdId
-	NumUnit
-	AccNum
+CREATE TABLE IF NOT EXISTS Messages (
+	message_id int(11) NOT NULL AUTO_INCREMENT,
+	date_created datetime DEFAULT GETDATE(),
+	subject varchar(50) NOT NULL,
+	content text NOT NULL,
+	sender int(11) NOT NULL,
+	receiver int(11) NOT NULL,
+	PRIMARY KEY (message_id),
+	FOREIGN KEY (sender) REFERENCES Users(user_id),
+	FOREIGN KEY (receiver) REFERENCES Users(user_id)
+)
+
+CREATE TABLE IF NOT EXISTS Advertisements (
+	advertisement_id int(11) NOT NULL AUTO_INCREMENT,
+	employee_id int(11) NOT NULL,
+	type varchar(50) NOT NULL,--(e.g. clothing, computers)
+	date_created datetime DEFAULT GETDATE(),
+	company varchar(50) NOT NULL, --(e.g. Ford, Gap, Google)
+	item_name varchar(50) NOT NULL, --(e.g. particular car, article of clothing, smartphone)
+	content text NOT NULL,
+	unit_price decimal(19,4) NOT NULL,
+	number_of_unit int NOT NULL,
+	PRIMARY KEY (advertisement_id),
+	FOREIGN KEY (employee_id) REFERENCES Employees(ssn)
+)
+
+CREATE TABLE IF NOT EXISTS Sales (
+	transaction_id int(11) NOT NULL AUTO_INCREMENT,
+	date_sold datetime DEFAULT GETDATE(),
+	advertisement_id int(11) NOT NULL,
+	number_of_unit int NOT NULL,
+	account_number varchar(12) NOT NULL,
+	PRIMARY KEY (transaction_id),
+	FOREIGN KEY (advertisement_id) REFERENCES Advertisements(advertisement_id)
 )
 /*
 Manager-Level Transactions
@@ -131,15 +159,16 @@ Customer-Representative Transaction
 -Produce customer mailing list
 -Produce a list of item suggestion for a given customer
 */
-CREATE TABLE Employee (
-	SSN
-	LastName
-	FirstName
-	Address
-	City
-	State
-	ZipCode
-	Tel
-	StartDate
-	HourlyRate
+CREATE TABLE IF NOT EXISTS Employees (
+	ssn varchar(11) NOT NULL,
+	first_name varchar(50) NOT NULL,
+	last_name varchar(50) NOT NULL,
+	address varchar(95) NOT NULL,
+	city varchar(35) NOT NULL,
+	state char(2) NOT NULL,
+	zipcode varchar(10) NOT NULL, 
+	telephone varchar(12) NOT NULL,
+	date_started date DEFAULT GETDATE(),
+	hourly_rate decimal(19,4) NOT NULL,
+	PRIMARY KEY (ssn)
 )
