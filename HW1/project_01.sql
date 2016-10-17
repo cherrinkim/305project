@@ -46,10 +46,9 @@ CREATE TABLE IF NOT EXISTS Users (
 	zipcode varchar(10) NOT NULL, 
 	telephone varchar(12) NOT NULL,
 	email varchar(255) NOT NULL,
-	account_number varchar(12) NOT NULL,
 	account_created datetime DEFAULT GETDATE(),
-	creditcard varchar(16) NOT NULL, --keep account history
-	rating int(1) NOT NULL, --active status in terms of making purchases
+	credit_card varchar(16) NOT NULL, --keep account history
+	purchase_rating int(1) NOT NULL, --active status in terms of making purchases
 	PRIMARY KEY (user_id)
 	--Can connect with other users
 	--Can post message on page
@@ -61,7 +60,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 CREATE TABLE IF NOT EXISTS Preferences (
 	user_id int(11) NOT NULL,
-	type varchar(50) NOT NULL,
+	ad_type varchar(50) NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES Users(user_id)
 )
 
@@ -85,20 +84,26 @@ CREATE TABLE IF NOT EXISTS Pages (
 )
 
 CREATE TABLE IF NOT EXISTS Posts (
+	page_id int(11) NOT NULL,
 	post_id int(11) NOT NULL AUTO_INCREMENT,
+	author_id int(11) NOT NULL,
 	date_created datetime DEFAULT GETDATE(),
 	content text,
 	comment_count int DEFAULT 0,
-	PRIMARY KEY (post_id)
+	PRIMARY KEY (post_id),
+	FOREIGN KEY (page_id) REFERENCES Pages (page_id),
+	FOREIGN KEY (author_id) REFERENCES Users (user_id)
 )
 
 CREATE TABLE IF NOT EXISTS Comments (
+	post_id int(11) NOT NULL,
 	comment_id int(11) NOT NULL AUTO_INCREMENT,
 	author_id int(11) NOT NULL,
 	date_created datetime DEFAULT GETDATE(),
 	content text NOT NULL,
 	PRIMARY KEY (comment_id),
-	FOREIGN KEY (author_id) REFERENCES Users(user_id)
+	FOREIGN KEY (author_id) REFERENCES Users(user_id),
+	FOREIGN KEY (post_id) REFERENCES Posts (post_id)
 )
 
 CREATE TABLE IF NOT EXISTS Messages (
@@ -121,20 +126,24 @@ CREATE TABLE IF NOT EXISTS Advertisements (
 	company varchar(50) NOT NULL, --(e.g. Ford, Gap, Google)
 	item_name varchar(50) NOT NULL, --(e.g. particular car, article of clothing, smartphone)
 	content text NOT NULL,
-	unit_price decimal(19,4) NOT NULL,
-	number_of_unit int NOT NULL,
+	unit_price decimal(7,2) NOT NULL,
+	available_units
+ int NOT NULL,
 	PRIMARY KEY (advertisement_id),
 	FOREIGN KEY (employee_id) REFERENCES Employees(ssn)
 )
 
 CREATE TABLE IF NOT EXISTS Sales (
 	transaction_id int(11) NOT NULL AUTO_INCREMENT,
+	buyer_id int(11),
 	date_sold datetime DEFAULT GETDATE(),
 	advertisement_id int(11) NOT NULL,
-	number_of_unit int NOT NULL,
-	account_number varchar(12) NOT NULL,
+	number_of_units int NOT NULL,
+	overseer_id int(11),
 	PRIMARY KEY (transaction_id),
-	FOREIGN KEY (advertisement_id) REFERENCES Advertisements(advertisement_id)
+	FOREIGN KEY (advertisement_id) REFERENCES Advertisements(advertisement_id),
+	FOREIGN KEY (buyer_id) REFERENCES Users (user_id),
+	FOREIGN KEY (overseer_id) REFERENCES Employees (employee_id)
 )
 /*
 Manager-Level Transactions
