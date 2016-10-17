@@ -169,6 +169,7 @@ Customer-Representative Transaction
 -Produce a list of item suggestion for a given customer
 */
 CREATE TABLE IF NOT EXISTS Employees (
+	employee_id int(11) NOT NULL,
 	ssn varchar(11) NOT NULL,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
@@ -178,6 +179,6 @@ CREATE TABLE IF NOT EXISTS Employees (
 	zipcode varchar(10) NOT NULL, 
 	telephone varchar(12) NOT NULL,
 	date_started date DEFAULT GETDATE(),
-	hourly_rate decimal(19,4) NOT NULL,
-	PRIMARY KEY (ssn)
+	hourly_rate decimal(7,2) NOT NULL,
+	PRIMARY KEY (employee_id)
 )
