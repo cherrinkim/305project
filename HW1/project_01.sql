@@ -119,6 +119,38 @@ CREATE TABLE IF NOT EXISTS Messages (
 	FOREIGN KEY (receiver) REFERENCES Users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS Friends (
+	friend1 int(11) NOT NULL,
+    friend2 int(11) NOT NULL,
+    PRIMARY KEY (friend1, friend2),
+    FOREIGN KEY (friend1) REFERENCES Users(user_id),
+    FOREIGN KEY (friend2) REFERENCES Users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS LikedPosts (
+	user_id int(11) NOT NULL,
+    post_id int(11) NOT NULL,
+    PRIMARY KEY (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+);
+
+CREATE TABLE IF NOT EXISTS LikedComments (
+	user_id int(11) NOT NULL,
+    comment_id int(11) NOT NULL,
+    PRIMARY KEY (user_id, comment_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (comment_id) REFERENCES Comments(comment_id)
+);
+
+CREATE TABLE IF NOT EXISTS GroupMembers (
+	user_id int(11) NOT NULL,
+    group_id int(11) NOT NULL,
+    PRIMARY KEY (user_id, group_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (group_id) REFERENCES Groups(group_id)
+);
+
 CREATE TABLE IF NOT EXISTS Employees (
 	employee_id int(11) NOT NULL,
 	ssn char(11) NOT NULL,
@@ -131,6 +163,7 @@ CREATE TABLE IF NOT EXISTS Employees (
 	telephone char(12) NOT NULL,
 	date_started date NOT NULL, # no default exists for date in mysql
 	hourly_rate decimal(7,2) NOT NULL,
+    is_manager BOOLEAN NOT NULL,
 	PRIMARY KEY (employee_id)
 );
 
