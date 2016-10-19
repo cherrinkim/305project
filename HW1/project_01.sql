@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS Groups (
 
 CREATE TABLE IF NOT EXISTS Pages (
 	page_id int(11) NOT NULL AUTO_INCREMENT,
-	owner_id int(11) NOT NULL,
-	group_id int(11) NOT NULL,
+	owner_id int(11),
+	group_id int(11),
 	post_count int DEFAULT 0,
 	PRIMARY KEY (page_id),
 	FOREIGN KEY (owner_id) REFERENCES Users(user_id),
