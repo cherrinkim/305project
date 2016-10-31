@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS Users (
 	account_created datetime DEFAULT CURRENT_TIMESTAMP,
 	credit_card char(16) NOT NULL, # keep account history
 	purchase_rating int(1) NOT NULL, # active status in terms of making purchases
+    UNIQUE (email),
 	PRIMARY KEY (user_id)
 	#Can connect with other users
 	#Can post message on page
