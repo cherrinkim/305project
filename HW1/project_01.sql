@@ -49,9 +49,8 @@ CREATE TABLE IF NOT EXISTS Users (
 	telephone char(12) NOT NULL,
 	email varchar(255) NOT NULL,
 	account_created datetime DEFAULT CURRENT_TIMESTAMP,
-	credit_card char(16) NOT NULL, # keep account history
+	credit_card char(16), # keep account history
 	purchase_rating int(1) NOT NULL, # active status in terms of making purchases
-    UNIQUE (email),
 	PRIMARY KEY (user_id)
 	#Can connect with other users
 	#Can post message on page
@@ -154,7 +153,7 @@ CREATE TABLE IF NOT EXISTS GroupMembers (
 );
 
 CREATE TABLE IF NOT EXISTS Employees (
-	employee_id int(11) NOT NULL,
+	employee_id int(11) NOT NULL AUTO_INCREMENT,
     employee_password CHAR(40) NOT NULL,
 	ssn char(11) NOT NULL,
 	first_name varchar(50) NOT NULL,
@@ -187,7 +186,8 @@ CREATE TABLE IF NOT EXISTS Advertisements (
 
 CREATE TABLE IF NOT EXISTS Sales (
 	transaction_id int(11) NOT NULL AUTO_INCREMENT,
-	buyer_id int(11),
+	buyer_id int(11) NOT NULL,
+    card_number char(16) NOT NULL,
 	date_sold datetime DEFAULT CURRENT_TIMESTAMP,
 	advertisement_id int(11) NOT NULL,
 	number_of_units int NOT NULL,

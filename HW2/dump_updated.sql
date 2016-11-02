@@ -87,7 +87,7 @@ DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employees` (
-  `employee_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_password` char(40) NOT NULL,
   `ssn` char(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `employees` (
   `hourly_rate` decimal(7,2) NOT NULL,
   `is_manager` tinyint(1) NOT NULL,
   PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-01 18:44:39
+-- Dump completed on 2016-11-02  8:47:07
