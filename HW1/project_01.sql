@@ -192,6 +192,7 @@ CREATE TABLE IF NOT EXISTS Sales (
 	advertisement_id int(11) NOT NULL,
 	number_of_units int NOT NULL,
 	overseer_id int(11),
+    charge_amount decimal(10,2) NOT NULL,
 	PRIMARY KEY (transaction_id),
 	FOREIGN KEY (advertisement_id) REFERENCES Advertisements(advertisement_id),
 	FOREIGN KEY (buyer_id) REFERENCES Users (user_id),
