@@ -1,43 +1,43 @@
  INSERT INTO Users (user_id, user_password, first_name, last_name, address, city, state, zipcode,
 					telephone, email, account_created, credit_card, purchase_rating)
                        VALUES
-                       (1, "6ca9d2479e0081472bf07069274c3c06", "Bryan", "Koelbel", "123 South Dr", "Stony Brook",
-                       "NY", "11790", "631-123-4567", "bryan.koelbel@stonybrook.edu", '2016-04-27 10:25:32', "1947234500008264", 1); # password = "sdfsdgf@23423" HD5 encoded
+                       (1, "1CD27F4B2D0588A9804983C09F8AFFB020D3F3355606EA06E0CA76C874157106", "Bryan", "Koelbel", "123 South Dr", "Stony Brook",
+                       "NY", "11790", "631-123-4567", "bryan.koelbel@stonybrook.edu", '2016-04-27 10:25:32', "1947234500008264", 1); # password = "sdfsdgf@23423" SHA256 encoded
 
 INSERT INTO Users VALUES
-                       (2, "25f9e794323b453885f5181f1b624d0b", "Jeonghoon", "Kim", "131 Sunnyside Ave", "Stony Brook",
+                       (2, "15E2B0D3C33891EBB0F1EF609EC419420C20E320CE94C65FBC8C3312448EB225", "Jeonghoon", "Kim", "131 Sunnyside Ave", "Stony Brook",
                        "NY", "11790", "516-244-9813", "jeonghoon.kim@stonybrook.edu", '2016-04-28 09:13:12', NULL, 0); # password = "123456789"
 			
 INSERT INTO Users VALUES
-                       (3, "c44a471bd78cc6c2fea32b9fe028d30a", "Chaerin", "Kim", "24 Oakwood Rd", "Port Jefferson",
+                       (3, "5C80565DB6F29DA0B01AA12522C37B32F121CBE47A861EF7F006CB22922DFFA1", "Chaerin", "Kim", "24 Oakwood Rd", "Port Jefferson",
                        "NY", "11777", "631-343-2265", "chaerin.kim@stonybrook.edu", '2016-04-28 15:45:07', "9999444477772222", 2); # password = "asdfghjkl"
                                               
 INSERT INTO Users VALUES
-                       (4, "f8c0921e52fb066b4d69e8dbbe70d230", "Paul", "Fodor", "5 East Ave", "Smithtown",
+                       (4, "A50254F20F695550A6F7B51665CC30708C014C8F2FF07ED146F0E41DC664E884", "Paul", "Fodor", "5 East Ave", "Smithtown",
                        "NY", "11787", "516-333-7635", "paul.fodor@stonybrook.edu", '2016-06-13 08:00:00', "1111111111111111", 4); # password = "mySQL"
                        
 INSERT INTO Users VALUES
-                       (5, "5c7523cad7e20bdfc86e5f1ed4e52ff3", "Jennifer", "Wong", "32 Creativename St", "Commack",
+                       (5, "940C54EC003028B3358F5B5594CDD53353524F52F2545D9A9A6E5327C3C1D333", "Jennifer", "Wong", "32 Creativename St", "Commack",
                        "NY", "11725", "631-130-2398", "jwong@cs.sunysb.edu", '2016-06-15 06:30:11', "2234983513786645", 5); # password = "s3@w0lf"
                        
 INSERT INTO Users VALUES
-                       (6, "bd06b11bc05c5e6efbe587e7df91e4b4", "Tim", "Cook", "1 Infinite Loop", "Cupertino",
+                       (6, "7513C5FF72CC853C191C04A497B9293A4EAFF4A1BD43CCDA98A04C9BA81DD3CE", "Tim", "Cook", "1 Infinite Loop", "Cupertino",
                        "CA", "95014", "408-996-1010", "tcook@apple.com", '2016-07-01 09:25:33', NULL, 0); # password = "iambetterthanstevejobs"
                        
 INSERT INTO Users VALUES
-                       (7, "aaef13f2e58a39be28c7d86a2a2e6a1b", "Mark", "Zuckerberg", "1 Hacker Way", "Menlo Park",
+                       (7, "DDAE32B0096467007D69A31736C61BF53D9D07184D90E63E2FA1B2C63B3AE4B8", "Mark", "Zuckerberg", "1 Hacker Way", "Menlo Park",
                        "CA", "94025", "650-543-4800", "zuck@facebook.com", '2016-07-01 09:25:33', "4444999912345555", 250); # password = "wolfiebook"
 
 INSERT INTO Users VALUES
-                       (8, "5f4dcc3b5aa765d61d8327deb882cf99", "Ben", "Carson", "43 Main St", "West Palm Beach",
+                       (8, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "Ben", "Carson", "43 Main St", "West Palm Beach",
                        "FL", "33411", "231-456-8888", "benny1248@yahoo.com", '2016-07-30 22:15:01', "3511927539490047", 5001); # password = "password"
 
 INSERT INTO Users VALUES
-                       (9, "25f9e794323b453885f5181f1b624d0b", "Melissa", "Randomperson", "236 Lancaster St", "Bloomington",
+                       (9, "15E2B0D3C33891EBB0F1EF609EC419420C20E320CE94C65FBC8C3312448EB225", "Melissa", "Randomperson", "236 Lancaster St", "Bloomington",
                        "IN", "47401", "212-985-6439", "somerando636@gmail.com", '2016-08-04 19:55:59', "1234123412341234", 5); # password = "123456789"
                        
 INSERT INTO Users VALUES
-                       (10, "25f9e794323b453885f5181f1b624d0b", "Joe", "Randomperson", "236 Lancaster St", "Bloomington",
+                       (10, "15E2B0D3C33891EBB0F1EF609EC419420C20E320CE94C65FBC8C3312448EB225", "Joe", "Randomperson", "236 Lancaster St", "Bloomington",
                        "IN", "47401", "212-985-6439", "someotherrando636@gmail.com", '2016-08-08 09:25:33', NULL, 0); # password = "123456789"
                        
                        
@@ -417,43 +417,43 @@ INSERT INTO GroupMembers VALUES
 INSERT INTO Employees (employee_id, employee_password, ssn, first_name, last_name, address,
 						city, state, zipcode, telephone, date_started, hourly_rate,
                         is_manager) VALUES
-			(1, "5f4dcc3b5aa765d61d8327deb882cf99", "123-45-6789", "John", "Doe", "7746 South Young St",
+			(1, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "123-45-6789", "John", "Doe", "7746 South Young St",
             "Halethorpe", "MD", "21227", "123-456-7890", "2012-06-14", 9.25, TRUE); # password is "password"
             
 INSERT INTO Employees VALUES
-			(2, "5f4dcc3b5aa765d61d8327deb882cf99", "246-83-6790", "Jane", "Doe", "7746 North Young St",
+			(2, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "246-83-6790", "Jane", "Doe", "7746 North Young St",
             "Halethorpe", "MD", "21227", "123-456-7890", "2012-06-18", 10.25, TRUE); # password is "password"
             
 INSERT INTO Employees VALUES
-			(3, "5f4dcc3b5aa765d61d8327deb882cf99", "111-34-2020", "Angus", "McDonald", "717 Lincoln St",
+			(3, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "111-34-2020", "Angus", "McDonald", "717 Lincoln St",
             "Dayton", "OH", "45420", "222-328-7712", "2016-08-03", 3.30, FALSE); # password is "password"
             
 INSERT INTO Employees VALUES
-			(4, "5f4dcc3b5aa765d61d8327deb882cf99", "222-45-3131", "Oliver", "Williams", "200 Lincoln St",
+			(4, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "222-45-3131", "Oliver", "Williams", "200 Lincoln St",
             "Dayton", "OH", "45420", "913-123-0924", "2016-03-23", 9.00, FALSE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(5, "5f4dcc3b5aa765d61d8327deb882cf99", "123-54-9813", "Lisa", "Hollands", "81 Second Ave",
+			(5, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "123-54-9813", "Lisa", "Hollands", "81 Second Ave",
             "Matawan", "NJ", "07747", "346-912-8701", "1993-10-13", 45.00, TRUE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(6, "5f4dcc3b5aa765d61d8327deb882cf99", "213-13-3568", "Marcus", "Smith", "401 Magnolia St",
+			(6, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "213-13-3568", "Marcus", "Smith", "401 Magnolia St",
             "Aliquippa", "PA", "15001", "121-984-3256", "2014-11-25", 12.00, FALSE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(7, "5f4dcc3b5aa765d61d8327deb882cf99", "074-26-1348", "Joe", "Schmoe", "123 North St",
+			(7, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "074-26-1348", "Joe", "Schmoe", "123 North St",
             "Aliquippa", "PA", "15001", "121-234-1349", "2014-11-25", 10.00, FALSE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(8, "5f4dcc3b5aa765d61d8327deb882cf99", "213-13-3568", "Jenna", "Sanders", "38 Somewhere Dr",
+			(8, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "213-13-3568", "Jenna", "Sanders", "38 Somewhere Dr",
             "Aliquippa", "PA", "15001", "121-434-2382", "2014-11-23", 10.15, FALSE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(9, "5f4dcc3b5aa765d61d8327deb882cf99", "012-86-2016", "Sofia", "Stocio", "7114 Stonybrook Ct",
+			(9, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "012-86-2016", "Sofia", "Stocio", "7114 Stonybrook Ct",
             "Central Islip", "NY", "11722", "631-983-3999", "2015-04-03", 11.50, FALSE); # password is "password"
 
 INSERT INTO Employees VALUES
-			(10, "5f4dcc3b5aa765d61d8327deb882cf99", "312-31-4311", "Kevin", "Nadeau", "880 Winchester Rd",
+			(10, "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", "312-31-4311", "Kevin", "Nadeau", "880 Winchester Rd",
             "Concord", "NH", "03301", "121-872-0894", "2013-06-01", 11.00, FALSE); # password is "password"
 
 INSERT INTO Advertisements (advertisement_id, employee_id, type, date_created,

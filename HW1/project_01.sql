@@ -39,7 +39,7 @@ User-level Transactions
 
 CREATE TABLE IF NOT EXISTS Users (
 	user_id int(11) NOT NULL AUTO_INCREMENT,
-    user_password CHAR(40) NOT NULL,
+    user_password CHAR(64) NOT NULL,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
 	address varchar(95) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS GroupMembers (
 
 CREATE TABLE IF NOT EXISTS Employees (
 	employee_id int(11) NOT NULL AUTO_INCREMENT,
-    employee_password CHAR(40) NOT NULL,
+    employee_password CHAR(64) NOT NULL,
 	ssn char(11) NOT NULL,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
