@@ -1,7 +1,7 @@
  INSERT INTO Users (user_id, user_password, first_name, last_name, address, city, state, zipcode,
 					telephone, email, account_created, credit_card, purchase_rating)
                        VALUES
-                       (1, "1CD27F4B2D0588A9804983C09F8AFFB020D3F3355606EA06E0CA76C874157106", "Bryan", "Koelbel", "123 South Dr", "Stony Brook",
+                       (1, "password", "Bryan", "Koelbel", "123 South Dr", "Stony Brook",
                        "NY", "11790", "631-123-4567", "bryan.koelbel@stonybrook.edu", '2016-04-27 10:25:32', "1947234500008264", 1); # password = "sdfsdgf@23423" SHA256 encoded
 
 INSERT INTO Users VALUES
