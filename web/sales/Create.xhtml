@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateSalesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_transactionId}" for="transactionId" />
+                    <h:inputText id="transactionId" value="#{salesController.selected.transactionId}" title="#{bundle.CreateSalesTitle_transactionId}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_transactionId}"/>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_cardNumber}" for="cardNumber" />
+                    <h:inputText id="cardNumber" value="#{salesController.selected.cardNumber}" title="#{bundle.CreateSalesTitle_cardNumber}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_cardNumber}"/>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_dateSold}" for="dateSold" />
+                    <h:inputText id="dateSold" value="#{salesController.selected.dateSold}" title="#{bundle.CreateSalesTitle_dateSold}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_numberOfUnits}" for="numberOfUnits" />
+                    <h:inputText id="numberOfUnits" value="#{salesController.selected.numberOfUnits}" title="#{bundle.CreateSalesTitle_numberOfUnits}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_numberOfUnits}"/>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_chargeAmount}" for="chargeAmount" />
+                    <h:inputText id="chargeAmount" value="#{salesController.selected.chargeAmount}" title="#{bundle.CreateSalesTitle_chargeAmount}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_chargeAmount}"/>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_advertisementId}" for="advertisementId" />
+                    <h:selectOneMenu id="advertisementId" value="#{salesController.selected.advertisementId}" title="#{bundle.CreateSalesTitle_advertisementId}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_advertisementId}">
+                        <f:selectItems value="#{advertisementsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_buyerId}" for="buyerId" />
+                    <h:selectOneMenu id="buyerId" value="#{salesController.selected.buyerId}" title="#{bundle.CreateSalesTitle_buyerId}" required="true" requiredMessage="#{bundle.CreateSalesRequiredMessage_buyerId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSalesLabel_overseerId}" for="overseerId" />
+                    <h:selectOneMenu id="overseerId" value="#{salesController.selected.overseerId}" title="#{bundle.CreateSalesTitle_overseerId}" >
+                        <f:selectItems value="#{employeesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{salesController.create}" value="#{bundle.CreateSalesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{salesController.prepareList}" value="#{bundle.CreateSalesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateSalesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
