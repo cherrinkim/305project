@@ -32,7 +32,7 @@
                         <br />
                         <h2>Manager Actions:</h2>
                         <ul><li><a href="employee.jsp">Add or Edit Employee Information *TODO*</a></li>
-                        <li><a href="sales_report.jsp">Obtain a Sales Report for a Particular Month *TODO*</a></li>
+                        <li><a href="sales_report.jsp">Obtain a Sales Report for a Particular Month</a></li>
                         <li><a href="advertisement_list.jsp">View List of Advertisements *TODO*</a></li>
                         <li><a href="trans_list_item.jsp">View All Transactions by Item Name *TODO*</a></li>
                         <li><a href="trans_list_user.jsp">View All Transactions by User Name *TODO*</a></li>
@@ -43,7 +43,7 @@
                         <li><a href="best_customer.jsp">Determine Which Customer Generated the Most Revenue *TODO*</a></li>
                         <li><a href="active_items.jsp">View Most Active Items *TODO*</a></li>
                         <li><a href="buyer_list.jsp">View All Customers Who Have Purchased an Item *TODO*</a></li>
-                        <li><a href="company_item_list.jsp"View All Items for a Company *TODO*</a></li></ul>
+                        <li><a href="company_item_list.jsp">View All Items for a Company *TODO*</a></li></ul>
                     <% }}; %>
         <% } else { %>
             <div id="error">Please <a href="representative_login.jsp">login</a> to access this page.</div>

@@ -41,11 +41,6 @@ th {
     color: white;
 }
 
-ul {
-    list-style-type: square;
-    background-color: #00ffff;
-}
-
 #login {
   position: absolute;
   width: 300px;
