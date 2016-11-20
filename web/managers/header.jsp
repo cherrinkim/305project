@@ -8,9 +8,9 @@
 <!DOCTYPE html>
 <html>
     <!-- navbar -->
-        <ul>
-            <li>Logged in as <%=session.getAttribute("employeename")%></li>
-            <li><a href="representative_home.jsp">Action Menu</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
-        </ul>
+        <div id="header_ul"><ul>
+            <div id="header_li"><li>Logged in as <%=session.getAttribute("employeename")%></li></div>
+            <div id="header_li"><li><div id="header_li_a"><a href="representative_home.jsp">Action Menu</a></div></li></div>
+            <div id="header_li"><li><div id="header_li_a"><a href="logout.jsp">Logout</a></div></li></div>
+        </ul></div>
 </html>

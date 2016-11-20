@@ -53,7 +53,7 @@
                 <% } %>
                 </table>
                 <% } else {
-                    %> </br><p>No results found. User has not selected any preferences that have a corresponding advertisement.</p></br>
+                    %> </br><p>No results found. User has not purchased any items of a type with a corresponding advertisement.</p></br>
                 <% }
                 
             } else {
