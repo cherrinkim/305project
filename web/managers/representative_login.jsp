@@ -23,7 +23,8 @@
             <table>
                 <thead>
                     <tr>
-                        <h1>Customer Representative & Manager Login</h1>
+                <h2><center>Wolfiebook</center></h2>
+                <h2><center>Customer Representative & Manager Login</center></h2>
                     </tr>
                 </thead>
                 <tbody>
