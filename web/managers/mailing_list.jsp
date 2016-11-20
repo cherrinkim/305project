@@ -1,52 +1,52 @@
 <%-- 
-    Document   : mailinglist
-    Created on : Nov 19, 2016, 11:34:11 AM
+    Document   : mailing_list_new
+    Created on : Nov 19, 2016, 9:57:58 PM
     Author     : bryan
 --%>
 
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
- 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-        <title>Mailing List</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-</h:head>
-<h:body>
-    
-    <b>Customer Mailing List:</b>
-    <br />
-    <br />
- 
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-     url="jdbc:mysql://localhost:3306/wolfiebook?zeroDateTimeBehavior=convertToNull"
-     user="root"  password=""/>
- 
-<sql:query dataSource="${snapshot}" var="result">
-SELECT first_name, last_name, email FROM Users;
-</sql:query>
- 
-<table border="1" width="100%">
-<tr>
-   <th>First Name</th>
-   <th>Last Name</th>
-   <th>Email Address</th>
-</tr>
-<c:forEach var="row" items="${result.rows}">
-<tr>
-   <td><c:out value="${row.first_name}"/></td>
-   <td><c:out value="${row.last_name}"/></td>
-   <td><c:out value="${row.email}"/></td>
-</tr>
-</c:forEach>
-</table>
-
-<br />
-<a href="representative_index.xhtml">Return to Customer Representative Menu</a>
-<br />
- 
-</h:body>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import ="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../resources/css/manager.css" rel="stylesheet" type="text/css">
+        <title>Customer Mailing List</title>
+    </head>
+    <body>
+        <% if (session.getAttribute("ismanager") != null) { %>
+        
+        <jsp:include page="header.jsp"/>
+        
+        <h2>Customer Mailing List:</h2>
+        
+        <table>
+            <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email Address</th>
+            </tr>
+        
+        <%
+            
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Wolfiebook",
+            "root", "");
+        Statement st = con.createStatement();
+        ResultSet rs;
+        rs = st.executeQuery("SELECT first_name, last_name, email FROM Users");
+        
+        while (rs.next()) { %>
+            <tr>
+                <td><%= rs.getString(1) %></td>
+                <td><%= rs.getString(2) %></td>
+                <td><%= rs.getString(3) %></td>
+            </tr>
+        <% }; %>
+        </table>
+        
+        <% } else { %>
+            <div id="error">Please <a href="representative_login.jsp">login</a> to access this page.</div>
+        <% }; %>
+    </body>
 </html>
