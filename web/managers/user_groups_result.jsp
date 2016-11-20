@@ -16,7 +16,7 @@
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
             <jsp:include page="header.jsp"/>
-            <h2>Personalized Item Suggestions</h2>
+            <h2>Find User Groups</h2>
             <%
             String userid = request.getParameter("id");    
             Class.forName("com.mysql.jdbc.Driver");
@@ -28,21 +28,21 @@
             if (rs.next()) {
                 String name = rs.getString("first_name") + " " + rs.getString("last_name");
                 session.setAttribute("queriedname", name);%>
-                </br><p>Personalized item suggestions for <%=session.getAttribute("queriedname")%>:</p></br>
+                <p>User groups for <%=session.getAttribute("queriedname")%>:</p></br>
                 
                 <%  ResultSet rs2;
-                    rs2 = st.executeQuery("SELECT I.item_name, I.content FROM Advertisements I,"
-                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyer_id = '" + userid
-                        + "' AND S.advertisement_id = A.advertisement_id) F WHERE I.type = F.type;");
+                    rs2 = st.executeQuery("SELECT G.group_id, G.group_name"
+                            + " FROM Groups G, GroupMembers M WHERE M.user_id = '" + userid
+                            + "' AND M.group_id = G.group_id;");
                 if (rs2.next()) {
-                    rs2 = st.executeQuery("SELECT I.item_name, I.content FROM Advertisements I,"
-                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyer_id = '" + userid
-                        + "' AND S.advertisement_id = A.advertisement_id) F WHERE I.type = F.type;");
+                    rs2 = st.executeQuery("SELECT G.group_id, G.group_name"
+                            + " FROM Groups G, GroupMembers M WHERE M.user_id = '" + userid
+                            + "' AND M.group_id = G.group_id;");
                     %>
                 <table>
                     <tr>
-                    <th>Item Name</th>
-                    <th>Description</th>
+                    <th>Group ID</th>
+                    <th>Group Name</th>
                     </tr>
                     <% while (rs2.next()) { %>
                     <tr>
@@ -53,7 +53,7 @@
                 <% } %>
                 </table>
                 <% } else {
-                    %> </br><p>No results found. User has not selected any preferences that have a corresponding advertisement.</p></br>
+                    %> </br><p>No results found. User has not joined any groups.</p></br>
                 <% }
                 
             } else {
@@ -63,7 +63,7 @@
             
             <br />
             <br />
-            <a href="item_suggestions.jsp">Start a new query</a>
+            <a href="user_groups.jsp">Start a new query</a>
         
         <% } else { %>
             <div id="error">Please <a href="representative_login.jsp">login</a> to access this page.</div>

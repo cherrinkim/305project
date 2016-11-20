@@ -28,8 +28,8 @@
                     <br /> <a href="users.jsp">Create or Edit User Information *TODO*</a>
                     <br /> <a href="mailing_list.jsp">Produce Customer Mailing List</a>
                     <br /> <a href="item_suggestions.jsp">Get Personalized Item Suggestions for a User</a>
-                    <br /> <a href="user_groups.jsp">Get Current Groups for a User *TODO*</a>
-                    <br /> <a href="account_history.jsp">Get Account History for an Account *TODO*</a>
+                    <br /> <a href="user_groups.jsp">Get Current Groups for a User</a>
+                    <br /> <a href="account_history.jsp">Get Account History for an Account</a>
                     <br /> <a href="best_sellers.jsp">Get Best-Seller Item List *TODO*</a>
                 </tr>
             </tbody>
