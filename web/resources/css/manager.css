@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 19, 2016, 6:35:50 PM
+    Author     : bryan
+*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3a4f54;
+    background-color: #dfecf1;
+    font-size: small;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3a4f54;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3a4f54;
+    font-size: large;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid black;
+}
+
+th {
+    background-color: #4b5f7f;
+    color: white;
+}
+
+#login {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+}
+
+#error {
+   font-family: Arial, Helvetica, sans-serif;
+    color: #ff0000;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4b5f7f;
+}
+
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
