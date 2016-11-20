@@ -14,6 +14,10 @@
         <title>Customer Representative & Manager Login</title>
     </head>
     <body>
+        <% if (session.getAttribute("ismanager") != null) {
+            response.sendRedirect("representative_home.jsp");
+        }; %>
+        
         <form method="post" action="login.jsp">
         <div id="login">
             <table>
@@ -24,11 +28,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Employee ID:</td>
+                        <th>Employee ID:</th>
                         <td><input type="text" name="id" value="" /></td>
                     </tr>
                     <tr>
-                        <td>Password:</td>
+                        <th>Password:</th>
                         <td><input type="password" name="pass" value="" /></td>
                     </tr>
                     <tr>

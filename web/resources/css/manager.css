@@ -30,9 +30,15 @@ h2 {
     font-weight: bold;
 }
 
-table {
-    border: 1px;
-    cellpadding: 300px;
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid black;
+}
+
+th {
+    background-color: #4b5f7f;
+    color: white;
 }
 
 #login {
@@ -51,4 +57,34 @@ table {
     font-size: small;
     font-weight: bold;
     text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4b5f7f;
+}
+
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
 }

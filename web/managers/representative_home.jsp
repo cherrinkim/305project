@@ -14,6 +14,9 @@
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
+        
+        <jsp:include page="header.jsp"/>
+        
         <table>
             <thead>
                 <h2>Customer Representative Actions:</h2>
@@ -23,7 +26,7 @@
                     <a href="advertisement.jsp">Create or Edit an Advertisement *TODO*</a>
                     <br /> <a href="transaction.jsp">Record a Transaction *TODO*</a>
                     <br /> <a href="users.jsp">Create or Edit User Information *TODO*</a>
-                    <br /> <a href="mailing_list.jsp">Produce Customer Mailing List *TODO*</a>
+                    <br /> <a href="mailing_list_new.jsp">Produce Customer Mailing List</a>
                     <br /> <a href="item_suggestions.jsp">Get Item Suggestions for a User *TODO*</a>
                     <br /> <a href="user_groups.jsp">Get Current Groups for a User *TODO*</a>
                     <br /> <a href="account_history.jsp">Get Account History for an Account *TODO*</a>

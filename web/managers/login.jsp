@@ -12,8 +12,10 @@
             "root", "");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("SELECT * FROM Employees where employee_id ='" + userid + "' AND employee_password ='" + pwd + "'");
+    rs = st.executeQuery("SELECT first_name, last_name FROM Employees where employee_id ='" + userid + "' AND employee_password ='" + pwd + "'");
     if (rs.next()) {
+        String name = rs.getString("first_name") + " " + rs.getString("last_name");
+        session.setAttribute("employeename", name);
         session.setAttribute("employeeid", userid);
         session.removeAttribute("invalidlogin");
         Statement checkStatus = con.createStatement();
