@@ -27,7 +27,7 @@
             <li class="dropdown">
                 <div class="dropbtn">Manager Actions</div>
                 <div class="dropdown-content">
-                <a href="employee.jsp">Create, Edit, and View Employee Information *TODO*</a>
+                <a href="employees.jsp">Create, Edit, and View Employee Information</a>
                 <a href="sales_report.jsp">Obtain a Sales Report for a Particular Month</a>
                 <a href="advertisements.jsp">View List of Advertisements</a>
                 <a href="trans_list_item.jsp">View All Transactions by Item Name</a>
