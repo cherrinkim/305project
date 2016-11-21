@@ -15,7 +15,6 @@
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
-        <form method="post" action="advertisement_edit.jsp">
         <jsp:include page="header.jsp"/>
         
         <h2>Advertisements</h2>
@@ -54,16 +53,15 @@
                 <td><%= rs.getString(7) %></td>
                 <td>$<%= rs.getString(8) %></td>
                 <td><%= rs.getString(9) %></td>
-                <td><center><button name="editid" type="submit" value=<%= rs.getString(1) %>>Edit</button><br /><form method="post" action="advertisement_delete.jsp"><button name="deleteid" type="submit" value=<%= rs.getString(1) %>>Delete</button></form></center></td>
+                <td><center><form method="post" action="advertisement_edit.jsp"><button name="editid" type="submit" value=<%= rs.getString(1)%>>Edit</button></form><br /><form method="post" action="advertisement_delete.jsp"><button name="deleteid" type="submit" value=<%= rs.getString(1) %>>Delete</button></form></center></td>
             </tr>
         <% }; %>
         </table>
         
-        </br><button a href="advertisement_create.jsp">Create New Advertisement</button>
+        </br><form method="post" action="advertisement_create.jsp"><button a href="advertisement_create.jsp">Create New Advertisement</button></form>
         
         <% } else { %>
             <div id="error">Please <a href="representative_login.jsp">login</a> to access this page.</div>
         <% }; %>
-        </form>
     </body>
 </html>

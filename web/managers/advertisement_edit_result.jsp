@@ -17,7 +17,7 @@
         <% if (session.getAttribute("ismanager") != null) { %>
             <jsp:include page="header.jsp"/>
             <h2>Edit Advertisement</h2>
-            <% if (request.getParameter("editid") != null) { %>
+            <% if (session.getAttribute("editid") != null) { %>
             <%
             String type = request.getParameter("type");  
             String company = request.getParameter("company");
@@ -56,7 +56,7 @@
                     
             } else {
                 %><p>An error has occurred.</p><%
-            }%>%>
+            }%>
             
             
             <br />
