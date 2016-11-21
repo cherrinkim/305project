@@ -79,7 +79,7 @@
         <input type="date" name="start_date" value="<%=rs.getString(11)%>">
         <br />
         <p>Hourly Rate: </p>
-        <input type="nu" name="hourly_rate" min="0" step="any" value="<%=rs.getString(12)%>" />
+        <input type="number" name="hourly_rate" min="0" step="any" value="<%=rs.getString(12)%>" />
         <br />
         <p>Is Manager: </p>
         <% if (rs.getString(13).equals("1")) {

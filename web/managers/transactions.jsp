@@ -11,26 +11,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/css/manager.css" rel="stylesheet" type="text/css">
-        <title>Create, Edit, and View Advertisements</title>
+        <title>Record and View Transactions</title>
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
         <jsp:include page="header.jsp"/>
         
-        <h2>Advertisements</h2>
+        <h2>Transactions</h2>
         
         <table>
             <tr>
-            <th>Ad ID</th>
-            <th>Employee ID</th>
-            <th>Ad Type</th>
-            <th>Date Created</th>
-            <th>Company</th>
-            <th>Item Name</th>
-            <th>Description</th>
-            <th>Unit Price</th>
-            <th>Available Units</th>
-            <th>Tools</th>
+            <th>Transaction ID</th>
+            <th>Buyer ID</th>
+            <th>Account Number</th>
+            <th>Date Sold</th>
+            <th>Advertisement ID</th>
+            <th>Number of Units</th>
+            <th>Overseer ID</th>
+            <th>Charge Amount</th>
             </tr>
         
         <%
@@ -40,7 +38,7 @@
             "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT * FROM Advertisements");
+        rs = st.executeQuery("SELECT * FROM Sales");
         
         while (rs.next()) { %>
             <tr>
@@ -52,13 +50,11 @@
                 <td><%= rs.getString(6) %></td>
                 <td><%= rs.getString(7) %></td>
                 <td>$<%= rs.getString(8) %></td>
-                <td><%= rs.getString(9) %></td>
-                <td><center><form method="post" action="advertisement_edit.jsp"><button name="editid" type="submit" value=<%= rs.getString(1)%>>Edit</button></form><br /><form method="post" action="advertisement_delete.jsp"><button name="deleteid" type="submit" value=<%= rs.getString(1) %>>Delete</button></form></center></td>
             </tr>
         <% }; %>
         </table>
         
-        </br><form method="post" action="advertisement_create.jsp"><button a href="advertisement_create.jsp">Create New Advertisement</button></form>
+        </br><form method="post" action="transaction_create.jsp"><button a href="transaction_create.jsp">Record New Transaction</button></form>
         
         <% } else { %>
             <div id="error">Please <a href="representative_login.jsp">login</a> to access this page.</div>

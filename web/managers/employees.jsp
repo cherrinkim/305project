@@ -34,7 +34,7 @@
             <th>Start Date</th>
             <th>Hourly Rate</th>
             <th>Is Manager</th>
-            <th></th>
+            <th>Tools</th>
             </tr>
         
         <%

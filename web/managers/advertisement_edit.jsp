@@ -59,7 +59,7 @@
         <input type="text" name="content" value="<%=rs.getString(7)%>" />
         <br />
         <p>Unit Price: </p>
-        <input type="nu" name="unit_price" min="0" step="any" value="<%=rs.getString(8)%>" />
+        <input type="number" name="unit_price" min="0" step="any" value="<%=rs.getString(8)%>" />
         <br />
         <p>Number of Available Units: </p>
         <input type="number" name="num_units" min="0" value="<%=rs.getString(9)%>" />

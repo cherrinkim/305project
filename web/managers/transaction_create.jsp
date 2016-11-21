@@ -11,34 +11,28 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/css/manager.css" rel="stylesheet" type="text/css">
-        <title>Create New Advertisement</title>
+        <title>Record a Transaction</title>
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
-        <form method="post" action="advertisement_create_result.jsp">
+        <form method="post" action="transaction_create_result.jsp">
         <jsp:include page="header.jsp"/>
         
-        <h2>Create New Advertisement</h2>
+        <h2>Record a Transaction</h2>
         
         <p>Enter information below.</p>
         
-        <p>Ad Type:</p>
-        <input type="text" name="type" value="" />
+        <p>Buyer ID:</p>
+        <input type="number" name="buyer_id" min="0" step="1" value="" />
         <br />
-        <p>Company Name: </p>
-        <input type="text" name="company" value="" />
+        <p>Bank Account Number (if blank, defaults to User's current account number): </p>
+        <input type="text" name="account_number" value="" />
         <br />
-        <p>Item Name: </p>
-        <input type="text" name="item_name" value="" />
+        <p>Advertisement ID:</p>
+        <input type="number" name="advertisement_id" min="0" step="1" value="" />
         <br />
-        <p>Description: </p>
-        <input type="text" name="content" value="" />
-        <br />
-        <p>Unit Price: </p>
-        <input type="number" name="unit_price" min="0" step="any" value="" />
-        <br />
-        <p>Number of Available Units: </p>
-        <input type="number" name="num_units" min="0" value="" />
+        <p>Number of Units:</p>
+        <input type="number" name="number_of_units" min="0" step="1" value="" />
         <br /> <br />
         <input type="submit" value="Submit" />
         </form>
