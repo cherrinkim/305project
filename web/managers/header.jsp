@@ -15,8 +15,8 @@
                 <div class="dropbtn">Customer Representative Actions</div>
                 <div class="dropdown-content">
                 <a href="advertisements.jsp">Create, Edit, and View Advertisements</a>
-                <a href="transaction.jsp">Record a Transaction *TODO*</a>
-                <a href="users.jsp">Create, Edit, and View User Information *TODO*</a>
+                <a href="transactions.jsp">Record and View Transactions</a>
+                <a href="users.jsp">Create, Edit, and View User Information</a>
                 <a href="mailing_list.jsp">Produce Customer Mailing List</a>
                 <a href="item_suggestions.jsp">Get Personalized Item Suggestions for a User</a>
                 <a href="user_groups.jsp">Get Current Groups for a User</a>
