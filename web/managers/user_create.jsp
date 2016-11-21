@@ -11,34 +11,46 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/css/manager.css" rel="stylesheet" type="text/css">
-        <title>Create New Advertisement</title>
+        <title>Create New User</title>
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
         <form method="post" action="advertisement_create_result.jsp">
         <jsp:include page="header.jsp"/>
         
-        <h2>Create New Advertisement</h2>
+        <h2>Create New User</h2>
         
         <p>Enter information below.</p>
         
-        <p>Ad Type:</p>
-        <input type="text" name="type" value="" />
+        <p>First Name:</p>
+        <input type="text" name="first_name" value="" />
         <br />
-        <p>Company Name: </p>
-        <input type="text" name="company" value="" />
+        <p>Last Name: </p>
+        <input type="text" name="last_name" value="" />
         <br />
-        <p>Item Name: </p>
-        <input type="text" name="item_name" value="" />
+        <p>Email Address: </p>
+        <input type="text" name="email" value="" />
         <br />
-        <p>Description: </p>
-        <input type="text" name="content" value="" />
+        <p>Address: </p>
+        <input type="text" name="address" value="" />
         <br />
-        <p>Unit Price: </p>
-        <input type="number" name="unit_price" min="0" step="any" value="" />
+        <p>City: </p>
+        <input type="text" name="city" value="" />
         <br />
-        <p>Number of Available Units: </p>
-        <input type="number" name="num_units" min="0" value="" />
+        <p>State: </p>
+        <input type="text" name="state" value="" />
+        <br />
+        <p>Zip: </p>
+        <input type="text" name="zip" value="" />
+        <br />
+        <p>Phone: </p>
+        <input type="text" name="phone" value="" />
+        <br />
+        <p>Bank Account Number (optional): </p>
+        <input type="number" name="account_number" min="0" value="" />
+        <br />
+        <p> Password: </p>
+        <input type="password" name="password" value="" />
         <br /> <br />
         <input type="submit" value="Submit" />
         </form>

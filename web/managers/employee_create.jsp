@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/css/manager.css" rel="stylesheet" type="text/css">
-        <title>Create New Advertisement</title>
+        <title>Create New Employee</title>
     </head>
     <body>
         <% if (session.getAttribute("ismanager") != null) { %>
@@ -51,7 +51,7 @@
         <input type="date" name="start_date">
         <br />
         <p>Hourly Rate: </p>
-        <input type="nu" name="hourly_rate" min="0" step="any" value="" />
+        <input type="number" name="hourly_rate" min="0" step="any" value="" />
         <br />
         <p>Is Manager: </p>
         <input type="checkbox" name="is_manager" value="1" />
