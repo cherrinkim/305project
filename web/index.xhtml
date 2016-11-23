@@ -9,16 +9,23 @@
     <h:body>
         <header class="main-header">
             <h1 id="title">Wolfiebook</h1>
+        
+             
+                
                 <form method="post" id="loginForm" action="login.jsp">
-                <input type="text" name="usr-email" value="Email" placeholder="Email"/>
-                <input type="text" name="usr-psw" value="Password" placeholder="Password"/>
-                <br/>
+                    <input type="email" name="user-email" value="Email" placeholder="Email"/>
+                    <input type="password" name="user-psw" value="Password" />
+                    <br/>
                     <div id="portalButtons">
                         <input type="submit" class="submit" value="Submit"/>
-                    <button type="button" id="registerButton" name="Register" onclick="location.href='user/register.jsp'"> Register</button>
+                        <button type="button" id="registerButton" name="Register" onclick="location.href='users/register.jsp'"> Register</button>
                     </div>
-                
-            </form>
+                </form>
+
+            
+            
+            
+            
             
 
             

@@ -11,15 +11,15 @@
     </head>
     <body>
 
-        <form id="registerForm" method="post" action="../managers/advertisement_create_result.jsp">
+        <form id="registerForm" method="post" action="registerUser.jsp">
         <jsp:include page="header.jsp"/>
         <h2 id="register">Register</h2>
         
         <div id="registerBox1">
         <p>Email Address: </p>
-        <input type="text" name="email" value="" />
+        <input type="email" name="email" value="" />
         <p>Password: </p>
-        <input type="text" name="password" value="" />
+        <input type="password" name="password" value="" />
             
         <p>First Name:</p>
         <input type="text" name="first_name" value="" />
@@ -51,7 +51,7 @@
         </div>
 
         <br /> <br />
-        <input id="submitButton" type="submit" value="Submit" />
+        <input id="submitButton" type="submit" value="Submit" action="registerUser.jsp"/>
         </form>
     </body>
 </html>

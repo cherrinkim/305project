@@ -1,8 +1,8 @@
 <%@page import="java.security.MessageDigest"%>
 <%@ page import ="java.sql.*" %>
 <%
-    String userid = request.getParameter("id");    
-    String pwd = request.getParameter("pass");
+    String email = request.getParameter("user-email");    
+    String pwd = request.getParameter("user-psw");
     MessageDigest md = MessageDigest.getInstance("SHA-256");
     md.update(pwd.getBytes("UTF-8"));
     byte [] digest = md.digest();
@@ -12,23 +12,15 @@
             "root", "");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("SELECT first_name, last_name FROM Employees where employee_id ='" + userid + "' AND employee_password ='" + pwd + "'");
+    rs = st.executeQuery("SELECT first_name, last_name FROM Users where email ='" + email + "' AND user_password ='" + pwd + "'");
     if (rs.next()) {
         String name = rs.getString("first_name") + " " + rs.getString("last_name");
-        session.setAttribute("employeename", name);
-        session.setAttribute("employeeid", userid);
+        session.setAttribute("userName", name);
         session.removeAttribute("invalidlogin");
         Statement checkStatus = con.createStatement();
-        ResultSet status;
-        status = checkStatus.executeQuery("SELECT * FROM Employees where employee_id = '" + userid + "' AND is_manager = 1");
-        if (status.next())
-            session.setAttribute("ismanager", true);
-        else
-            session.setAttribute("ismanager", false);
-        
-        response.sendRedirect("representative_home.jsp");
+        response.sendRedirect("../index.xhtml");
     } else {
         session.setAttribute("invalidlogin", true);
-        response.sendRedirect("representative_login.jsp");
+        response.sendRedirect("../index.html");
     }
 %>
