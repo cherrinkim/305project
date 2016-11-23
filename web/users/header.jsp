@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="/resources/css/header.css" rel="stylesheet" type="text/css">
+        <link href="../resources/css/header.css" rel="stylesheet" type="text/css">
     </head>
     <!-- navbar -->
     <div id="navbar">
