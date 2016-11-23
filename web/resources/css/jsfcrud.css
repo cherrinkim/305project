@@ -51,3 +51,8 @@ input:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
     text-align: center;
     line-height: 2.5em;
 }
+
+
+#portalButtons{
+    padding-top:5px;
+}

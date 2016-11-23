@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/css/user.css" rel="stylesheet" type="text/css">
-        <title>Create New User</title>
+        <title>Register</title>
     </head>
     <body>
 
