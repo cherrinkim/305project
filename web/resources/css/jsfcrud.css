@@ -56,3 +56,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
 #portalButtons{
     padding-top:5px;
 }
+
+#title {
+    font-size: 30px;
+}
