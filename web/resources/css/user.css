@@ -122,14 +122,6 @@ li a:hover {
     background-color: #2d3f5b;
 }
 
-#headerButtons {
-    float:right;
-}
-
-#title {
-    font-size: 30px;
-}
-
 #registerForm {
     margin-top: 100px;
     left:50%;
