@@ -10,47 +10,45 @@
     </h:head>
     <h:body>
         <div class="main-wrapper">
-            <header>
-                <h1>#{bundle['app.title']}</h1>
-                <h:form id="login-form" prependId="false">
+            <header class="clearfix">
+                <h1 class="lfloat">#{bundle['app.title']}</h1>
+                <h:form class="rfloat" id="login-form" prependId="false">
                     <p:panelGrid id="login-grid" columns="3">
                         <h:outputLabel value="Email" for="login-mail"/>
                         <h:outputLabel value="Password" for="login-pwd"/>
                         <h:outputLabel value=""/>
 
-                        <h:inputText id="login-mail"/>
-                        <h:inputSecret id="login-pwd"/>
+                        <h:inputText id="login-mail" required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
+                        <h:inputSecret id="login-pwd" required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
                         <h:commandButton id="login-btn" value="Log In"/>
                     </p:panelGrid>
+                    <h:message for="login-mail"/>
+                    <br/>
+                    <h:message for="login-pwd"/>
                 </h:form>
             </header>
             
-            <div class="content">
-                <div class="banner-img">
+            <div class="content clearfix">
+                <div class="banner-img lfloat">
                     <p:graphicImage name="img/seawolves.png"/>
                 </div>
-                <div class="register">
+                <div class="register rfloat">
+                    <h3>Sign Up</h3>
                     <h:form id="register-form" prependId="false">
-                        <p:panelGrid id="register-grid" columns="2">
-                            <h:inputText id="first_name" required="true" a:placeholder="First name"/>
-                            <h:inputText id="last_name" required="true" a:placeholder="Last name"/>
-                            <p:column colspan="2">
-                                <h:inputText id="email" required="true" a:placeholder="Email address"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:inputSecret id="pwd"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:inputText id="addr" required="true" a:placeholder="Address"/>
-                            </p:column>
-                            <h:inputText id="city" required="true" a:placeholder="City"/>
-                            <h:inputText id="state" required="true" a:placeholder="State"/>
-                            <h:inputText id="zip" required="true" a:placeholder="Zipcode"/>
-                            <h:inputText id="mobile" required="true" a:placeholder="Mobile number"/>
-                            <p:column colspan="2">
-                                <h:commandButton id="register-btn" value="Register"/>
-                            </p:column>
-                        </p:panelGrid>
+                        <div class="clearfix">
+                            <h:inputText class="lfloat mbox" id="first_name" required="true" a:placeholder="First name"/>
+                            <h:inputText class="rfloat mbox" id="last_name" required="true" a:placeholder="Last name"/>
+                        </div>
+                        <h:inputText class="lbox" id="email" required="true" a:placeholder="Email address"/>
+                        <h:inputSecret class="lbox" id="pwd" required="true" a:placeholder="New password"/>
+                        <h:inputText class="lbox" id="addr" required="true" a:placeholder="Address"/>
+                        <div class="clearfix">
+                            <h:inputText class="lfloat sbox" id="city" required="true" a:placeholder="City"/>
+                            <h:inputText class="mfloat sbox" id="state" required="true" a:placeholder="State"/>
+                            <h:inputText class="rfloat sbox" id="zip" required="true" a:placeholder="Zipcode"/>
+                        </div>
+                        <h:inputText class="lbox" id="mobile" required="true" a:placeholder="Mobile number"/>
+                        <h:commandButton id="register-btn" value="Sign Up"/>
                     </h:form>
                 </div>
             </div>
