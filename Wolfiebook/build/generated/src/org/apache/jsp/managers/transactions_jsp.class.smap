@@ -1,0 +1,22 @@
+SMAP
+transactions_jsp.java
+JSP
+*S JSP
+*F
++ 0 transactions.jsp
+managers/transactions.jsp
+*L
+5,12:45
+17,2:57,3
+19,16:63
+36,8:81
+43,2:89
+45,8:91,3
+53:115
+54:116,3
+55,4:119
+59:123,3
+60:126
+61:127,3
+62,3:130
+*E
