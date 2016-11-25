@@ -1,42 +1,64 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <title>#{bundle['app.title']}</title>
+        <h:outputStylesheet name="css/main.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/advertisements/List" value="Show All Advertisements Items"/>
-        <br />
-        <h:link outcome="/comments/List" value="Show All Comments Items"/>
-        <br />
-        <h:link outcome="/employees/List" value="Show All Employees Items"/>
-        <br />
-        <h:link outcome="/groups/List" value="Show All Groups Items"/>
-        <br />
-        <h:link outcome="/messages/List" value="Show All Messages Items"/>
-        <br />
-        <h:link outcome="/pages/List" value="Show All Pages Items"/>
-        <br />
-        <h:link outcome="/posts/List" value="Show All Posts Items"/>
-        <br />
-        <h:link outcome="/sales/List" value="Show All Sales Items"/>
-        <br />
-        <h:link outcome="/users/List" value="Show All Users Items"/>
+        <div class="main-wrapper">
+            <header>
+                <h1>#{bundle['app.title']}</h1>
+                <h:form id="login-form" prependId="false">
+                    <p:panelGrid id="login-grid" columns="3">
+                        <h:outputLabel value="Email" for="login-mail"/>
+                        <h:outputLabel value="Password" for="login-pwd"/>
+                        <h:outputLabel value=""/>
+
+                        <h:inputText id="login-mail"/>
+                        <h:inputSecret id="login-pwd"/>
+                        <h:commandButton id="login-btn" value="Log In"/>
+                    </p:panelGrid>
+                </h:form>
+            </header>
+            
+            <div class="content">
+                <div class="banner-img">
+                    <p:graphicImage name="img/seawolves.png"/>
+                </div>
+                <div class="register">
+                    <h:form id="register-form" prependId="false">
+                        <p:panelGrid id="register-grid" columns="2">
+                            <h:inputText id="first_name" required="true" a:placeholder="First name"/>
+                            <h:inputText id="last_name" required="true" a:placeholder="Last name"/>
+                            <p:column colspan="2">
+                                <h:inputText id="email" required="true" a:placeholder="Email address"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <h:inputSecret id="pwd"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <h:inputText id="addr" required="true" a:placeholder="Address"/>
+                            </p:column>
+                            <h:inputText id="city" required="true" a:placeholder="City"/>
+                            <h:inputText id="state" required="true" a:placeholder="State"/>
+                            <h:inputText id="zip" required="true" a:placeholder="Zipcode"/>
+                            <h:inputText id="mobile" required="true" a:placeholder="Mobile number"/>
+                            <p:column colspan="2">
+                                <h:commandButton id="register-btn" value="Log In"/>
+                            </p:column>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+            
+            <footer>
+                #{bundle['footer.copyright']}
+            </footer>
+        </div>
     </h:body>
-
-
-
-
-
-
-
-
-
 </html>
 
