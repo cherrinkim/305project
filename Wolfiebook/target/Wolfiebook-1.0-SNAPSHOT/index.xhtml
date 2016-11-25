@@ -18,10 +18,13 @@
                         <h:outputLabel value="Password" for="login-pwd"/>
                         <h:outputLabel value=""/>
 
-                        <h:inputText id="login-mail"/>
-                        <h:inputSecret id="login-pwd"/>
+                        <h:inputText id="login-mail" required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
+                        <h:inputSecret id="login-pwd" required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
                         <h:commandButton id="login-btn" value="Log In"/>
                     </p:panelGrid>
+                    <h:message for="login-mail"/>
+                    <br/>
+                    <h:message for="login-pwd"/>
                 </h:form>
             </header>
             
