@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMessagesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_messageId}" for="messageId" />
+                    <h:inputText id="messageId" value="#{messagesController.selected.messageId}" title="#{bundle.EditMessagesTitle_messageId}" required="true" requiredMessage="#{bundle.EditMessagesRequiredMessage_messageId}"/>
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_dateSent}" for="dateSent" />
+                    <h:inputText id="dateSent" value="#{messagesController.selected.dateSent}" title="#{bundle.EditMessagesTitle_dateSent}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_subject}" for="subject" />
+                    <h:inputText id="subject" value="#{messagesController.selected.subject}" title="#{bundle.EditMessagesTitle_subject}" required="true" requiredMessage="#{bundle.EditMessagesRequiredMessage_subject}"/>
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_content}" for="content" />
+                    <h:inputTextarea rows="4" cols="30" id="content" value="#{messagesController.selected.content}" title="#{bundle.EditMessagesTitle_content}" required="true" requiredMessage="#{bundle.EditMessagesRequiredMessage_content}"/>
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_sender}" for="sender" />
+                    <h:selectOneMenu id="sender" value="#{messagesController.selected.sender}" title="#{bundle.EditMessagesTitle_sender}" required="true" requiredMessage="#{bundle.EditMessagesRequiredMessage_sender}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMessagesLabel_receiver}" for="receiver" />
+                    <h:selectOneMenu id="receiver" value="#{messagesController.selected.receiver}" title="#{bundle.EditMessagesTitle_receiver}" required="true" requiredMessage="#{bundle.EditMessagesRequiredMessage_receiver}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{messagesController.update}" value="#{bundle.EditMessagesSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMessagesViewLink}"/>
+                <br />
+                <h:commandLink action="#{messagesController.prepareList}" value="#{bundle.EditMessagesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMessagesIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

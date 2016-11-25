@@ -1,0 +1,20 @@
+SMAP
+revenue_005fitem_jsp.java
+JSP
+*S JSP
+*F
++ 0 revenue_item.jsp
+managers/revenue_item.jsp
+*L
+5,11:44
+16,2:55,3
+18,3:61
+21:64,3
+22,9:67
+31:76,3
+32:79
+33:80,3
+34:83
+35:84,3
+36,2:87
+*E
