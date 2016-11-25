@@ -6,6 +6,10 @@ body {
     padding: 0;
 }
 
+header {
+    height: 100px;
+}
+
 header h1 {
     float: left;
     margin-bottom: 0;
@@ -27,6 +31,25 @@ header h1 {
 #login-grid > * > *,
 #login-grid > * > * > * {
     border: none;
+}
+
+.content {
+    clear: both;
+    margin-top: 20px;
+}
+
+.banner-img {
+    float: left;
+    width: 50%;
+}
+
+.banner-img img {
+    height: 400px;
+}
+
+.register-form {
+    float: right;
+    width: 50%;
 }
 
 .ui-widget {
