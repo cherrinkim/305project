@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalesViewDlg" widgetVar="SalesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSalesTitle}">
+            <h:form id="SalesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSalesLabel_transactionId}"/>
+                        <h:outputText value="#{salesController.selected.transactionId}" title="#{bundle.ViewSalesTitle_transactionId}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_cardNumber}"/>
+                        <h:outputText value="#{salesController.selected.cardNumber}" title="#{bundle.ViewSalesTitle_cardNumber}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_dateSold}"/>
+                        <h:outputText value="#{salesController.selected.dateSold}" title="#{bundle.ViewSalesTitle_dateSold}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSalesLabel_numberOfUnits}"/>
+                        <h:outputText value="#{salesController.selected.numberOfUnits}" title="#{bundle.ViewSalesTitle_numberOfUnits}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_chargeAmount}"/>
+                        <h:outputText value="#{salesController.selected.chargeAmount}" title="#{bundle.ViewSalesTitle_chargeAmount}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_advertisementId}"/>
+                        <h:outputText value="#{salesController.selected.advertisementId}" title="#{bundle.ViewSalesTitle_advertisementId}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_buyerId}"/>
+                        <h:outputText value="#{salesController.selected.buyerId}" title="#{bundle.ViewSalesTitle_buyerId}"/>
+                        <h:outputText value="#{bundle.ViewSalesLabel_overseerId}"/>
+                        <h:outputText value="#{salesController.selected.overseerId}" title="#{bundle.ViewSalesTitle_overseerId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SalesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

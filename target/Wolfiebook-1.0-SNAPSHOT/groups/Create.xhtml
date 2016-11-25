@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GroupsCreateDlg" widgetVar="GroupsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGroupsTitle}">
+            <h:form id="GroupsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{groupsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateGroupsLabel_groupId}" for="groupId" />
+                        <p:inputText id="groupId" value="#{groupsController.selected.groupId}" title="#{bundle.CreateGroupsTitle_groupId}" required="true" requiredMessage="#{bundle.CreateGroupsRequiredMessage_groupId}"/>
+                        <p:outputLabel value="#{bundle.CreateGroupsLabel_groupName}" for="groupName" />
+                        <p:inputText id="groupName" value="#{groupsController.selected.groupName}" title="#{bundle.CreateGroupsTitle_groupName}" required="true" requiredMessage="#{bundle.CreateGroupsRequiredMessage_groupName}"/>
+                        <p:outputLabel value="#{bundle.CreateGroupsLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{groupsController.selected.type}" title="#{bundle.CreateGroupsTitle_type}" required="true" requiredMessage="#{bundle.CreateGroupsRequiredMessage_type}"/>
+                        <p:outputLabel value="#{bundle.CreateGroupsLabel_ownerId}" for="ownerId" />
+                        <p:selectOneMenu id="ownerId" value="#{groupsController.selected.ownerId}" required="true" requiredMessage="#{bundle.EditGroupsRequiredMessage_ownerId}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="ownerIdItem"
+                                           itemValue="#{ownerIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{groupsController.create}" value="#{bundle.Save}" update="display,:GroupsListForm:datalist,:growl" oncomplete="handleSubmit(args,'GroupsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GroupsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

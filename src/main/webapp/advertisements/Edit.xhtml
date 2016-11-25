@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdvertisementsEditDlg" widgetVar="AdvertisementsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAdvertisementsTitle}">
+            <h:form id="AdvertisementsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{advertisementsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_advertisementId}" for="advertisementId" />
+                        <p:inputText id="advertisementId" value="#{advertisementsController.selected.advertisementId}" title="#{bundle.EditAdvertisementsTitle_advertisementId}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_advertisementId}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{advertisementsController.selected.type}" title="#{bundle.EditAdvertisementsTitle_type}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_type}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_dateCreated}" for="dateCreated" />
+                        <p:calendar id="dateCreated" pattern="MM/dd/yyyy HH:mm:ss" value="#{advertisementsController.selected.dateCreated}" title="#{bundle.EditAdvertisementsTitle_dateCreated}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_company}" for="company" />
+                        <p:inputText id="company" value="#{advertisementsController.selected.company}" title="#{bundle.EditAdvertisementsTitle_company}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_company}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_itemName}" for="itemName" />
+                        <p:inputText id="itemName" value="#{advertisementsController.selected.itemName}" title="#{bundle.EditAdvertisementsTitle_itemName}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_itemName}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_content}" for="content" />
+                        <p:inputTextarea rows="4" cols="30" id="content" value="#{advertisementsController.selected.content}" title="#{bundle.EditAdvertisementsTitle_content}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_content}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_unitPrice}" for="unitPrice" />
+                        <p:inputText id="unitPrice" value="#{advertisementsController.selected.unitPrice}" title="#{bundle.EditAdvertisementsTitle_unitPrice}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_unitPrice}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_availableUnits}" for="availableUnits" />
+                        <p:inputText id="availableUnits" value="#{advertisementsController.selected.availableUnits}" title="#{bundle.EditAdvertisementsTitle_availableUnits}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_availableUnits}"/>
+                        <p:outputLabel value="#{bundle.EditAdvertisementsLabel_employeeId}" for="employeeId" />
+                        <p:selectOneMenu id="employeeId" value="#{advertisementsController.selected.employeeId}" required="true" requiredMessage="#{bundle.EditAdvertisementsRequiredMessage_employeeId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeesController.itemsAvailableSelectOne}"
+                                           var="employeeIdItem"
+                                           itemValue="#{employeeIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{advertisementsController.update}" value="#{bundle.Save}" update="display,:AdvertisementsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AdvertisementsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AdvertisementsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
