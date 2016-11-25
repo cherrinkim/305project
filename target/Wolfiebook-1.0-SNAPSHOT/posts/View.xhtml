@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PostsViewDlg" widgetVar="PostsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPostsTitle}">
+            <h:form id="PostsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{postsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPostsLabel_postId}"/>
+                        <h:outputText value="#{postsController.selected.postId}" title="#{bundle.ViewPostsTitle_postId}"/>
+                        <h:outputText value="#{bundle.ViewPostsLabel_dateCreated}"/>
+                        <h:outputText value="#{postsController.selected.dateCreated}" title="#{bundle.ViewPostsTitle_dateCreated}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPostsLabel_content}"/>
+                        <h:outputText value="#{postsController.selected.content}" title="#{bundle.ViewPostsTitle_content}"/>
+                        <h:outputText value="#{bundle.ViewPostsLabel_commentCount}"/>
+                        <h:outputText value="#{postsController.selected.commentCount}" title="#{bundle.ViewPostsTitle_commentCount}"/>
+                        <h:outputText value="#{bundle.ViewPostsLabel_pageId}"/>
+                        <h:outputText value="#{postsController.selected.pageId}" title="#{bundle.ViewPostsTitle_pageId}"/>
+                        <h:outputText value="#{bundle.ViewPostsLabel_authorId}"/>
+                        <h:outputText value="#{postsController.selected.authorId}" title="#{bundle.ViewPostsTitle_authorId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PostsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

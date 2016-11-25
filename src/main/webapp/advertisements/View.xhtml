@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdvertisementsViewDlg" widgetVar="AdvertisementsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAdvertisementsTitle}">
+            <h:form id="AdvertisementsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{advertisementsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_advertisementId}"/>
+                        <h:outputText value="#{advertisementsController.selected.advertisementId}" title="#{bundle.ViewAdvertisementsTitle_advertisementId}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_type}"/>
+                        <h:outputText value="#{advertisementsController.selected.type}" title="#{bundle.ViewAdvertisementsTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_dateCreated}"/>
+                        <h:outputText value="#{advertisementsController.selected.dateCreated}" title="#{bundle.ViewAdvertisementsTitle_dateCreated}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_company}"/>
+                        <h:outputText value="#{advertisementsController.selected.company}" title="#{bundle.ViewAdvertisementsTitle_company}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_itemName}"/>
+                        <h:outputText value="#{advertisementsController.selected.itemName}" title="#{bundle.ViewAdvertisementsTitle_itemName}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_content}"/>
+                        <h:outputText value="#{advertisementsController.selected.content}" title="#{bundle.ViewAdvertisementsTitle_content}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_unitPrice}"/>
+                        <h:outputText value="#{advertisementsController.selected.unitPrice}" title="#{bundle.ViewAdvertisementsTitle_unitPrice}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_availableUnits}"/>
+                        <h:outputText value="#{advertisementsController.selected.availableUnits}" title="#{bundle.ViewAdvertisementsTitle_availableUnits}"/>
+                        <h:outputText value="#{bundle.ViewAdvertisementsLabel_employeeId}"/>
+                        <h:outputText value="#{advertisementsController.selected.employeeId}" title="#{bundle.ViewAdvertisementsTitle_employeeId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AdvertisementsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

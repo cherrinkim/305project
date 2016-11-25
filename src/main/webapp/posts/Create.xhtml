@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PostsCreateDlg" widgetVar="PostsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePostsTitle}">
+            <h:form id="PostsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{postsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_postId}" for="postId" />
+                        <p:inputText id="postId" value="#{postsController.selected.postId}" title="#{bundle.CreatePostsTitle_postId}" required="true" requiredMessage="#{bundle.CreatePostsRequiredMessage_postId}"/>
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_dateCreated}" for="dateCreated" />
+                        <p:calendar id="dateCreated" pattern="MM/dd/yyyy HH:mm:ss" value="#{postsController.selected.dateCreated}" title="#{bundle.EditPostsTitle_dateCreated}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_content}" for="content" />
+                        <p:inputTextarea rows="4" cols="30" id="content" value="#{postsController.selected.content}" title="#{bundle.CreatePostsTitle_content}" />
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_commentCount}" for="commentCount" />
+                        <p:inputText id="commentCount" value="#{postsController.selected.commentCount}" title="#{bundle.CreatePostsTitle_commentCount}" />
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_pageId}" for="pageId" />
+                        <p:selectOneMenu id="pageId" value="#{postsController.selected.pageId}" required="true" requiredMessage="#{bundle.EditPostsRequiredMessage_pageId}">
+                            <f:selectItems value="#{pagesController.itemsAvailableSelectOne}"
+                                           var="pageIdItem"
+                                           itemValue="#{pageIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePostsLabel_authorId}" for="authorId" />
+                        <p:selectOneMenu id="authorId" value="#{postsController.selected.authorId}" required="true" requiredMessage="#{bundle.EditPostsRequiredMessage_authorId}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="authorIdItem"
+                                           itemValue="#{authorIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{postsController.create}" value="#{bundle.Save}" update="display,:PostsListForm:datalist,:growl" oncomplete="handleSubmit(args,'PostsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PostsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
