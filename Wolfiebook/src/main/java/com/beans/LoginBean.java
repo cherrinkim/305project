@@ -24,17 +24,18 @@ public class LoginBean extends GlobalBean implements Serializable {
     
     @EJB
     private UsersFacade userService;
+    private String email;
+    private String password;
     
     public String login() {
         
-        Users curUsr = (Users) getBean("#{users}", Users.class);
+        Users currentUser = userService.getUser(email, password);
         
-        try {
-            curUsr = userService.getUser(curUsr.getEmail(), curUsr.getUserPassword());
-            getSession().setAttribute("userSession", curUsr);
-            return "";
-        } catch(NullPointerException e) {
-            sendMessage("login-msg", FacesMessage.SEVERITY_ERROR, "Incorrect Username and Passowrd");
+        if(currentUser != null) {
+            getSession().setAttribute("userSession", currentUser);
+            return "/pages/home?faces-redirect=true";
+        } else {
+            sendMessage("login-msg", FacesMessage.SEVERITY_ERROR, "Incorrect Username and Password");
             return null;
         }
     }
