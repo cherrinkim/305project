@@ -40,12 +40,12 @@ public class Groups implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "group_id")
+    @Column(name = "groupId")
     private Integer groupId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "group_name")
+    @Column(name = "groupName")
     private String groupName;
     @Basic(optional = false)
     @NotNull
@@ -56,7 +56,7 @@ public class Groups implements Serializable {
     private List<Users> usersList;
     @OneToMany(mappedBy = "groupId")
     private List<Pages> pagesList;
-    @JoinColumn(name = "owner_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "ownerId", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users ownerId;
 
@@ -143,7 +143,7 @@ public class Groups implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Groups[ groupId=" + groupId + " ]";
+        return "com.model.Groups[ groupId=" + groupId + " ]";
     }
     
 }

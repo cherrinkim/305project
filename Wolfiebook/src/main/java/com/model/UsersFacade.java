@@ -29,12 +29,13 @@ public class UsersFacade extends AbstractFacade<Users> {
         super(Users.class);
     }
     
-    public Users getUser(String email, String password) {
+    public Users authenticateUser(String email, String password) {    
         try {
-            return (Users) em.createNamedQuery("Users.getUser")
+            Users usr = (Users) em.createNamedQuery("Users.getUser")
                 .setParameter("email", email)
                 .setParameter("userPassword", password)
                 .getSingleResult();
+            return usr;
         } catch(NoResultException e) {
             return null;
         }
@@ -50,5 +51,4 @@ public class UsersFacade extends AbstractFacade<Users> {
             em.persist(user);
         }
     }
-    
 }

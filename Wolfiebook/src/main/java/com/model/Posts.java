@@ -44,25 +44,25 @@ public class Posts implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "post_id")
+    @Column(name = "postId")
     private Integer postId;
-    @Column(name = "date_created")
+    @Column(name = "dateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     @Lob
     @Size(max = 65535)
     @Column(name = "content")
     private String content;
-    @Column(name = "comment_count")
+    @Column(name = "commentCount")
     private Integer commentCount;
     @ManyToMany(mappedBy = "postsList")
     private List<Users> usersList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postId")
     private List<Comments> commentsList;
-    @JoinColumn(name = "page_id", referencedColumnName = "page_id")
+    @JoinColumn(name = "pageId", referencedColumnName = "pageId")
     @ManyToOne(optional = false)
     private Pages pageId;
-    @JoinColumn(name = "author_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "authorId", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users authorId;
 
@@ -159,7 +159,7 @@ public class Posts implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Posts[ postId=" + postId + " ]";
+        return "com.model.Posts[ postId=" + postId + " ]";
     }
     
 }

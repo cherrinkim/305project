@@ -40,9 +40,9 @@ public class Messages implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "message_id")
+    @Column(name = "messageId")
     private Integer messageId;
-    @Column(name = "date_sent")
+    @Column(name = "dateSent")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateSent;
     @Size(max = 50)
@@ -52,10 +52,10 @@ public class Messages implements Serializable {
     @Size(max = 65535)
     @Column(name = "content")
     private String content;
-    @JoinColumn(name = "sender", referencedColumnName = "user_id")
+    @JoinColumn(name = "sender", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users sender;
-    @JoinColumn(name = "receiver", referencedColumnName = "user_id")
+    @JoinColumn(name = "receiver", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users receiver;
 
@@ -136,7 +136,7 @@ public class Messages implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Messages[ messageId=" + messageId + " ]";
+        return "com.model.Messages[ messageId=" + messageId + " ]";
     }
     
 }

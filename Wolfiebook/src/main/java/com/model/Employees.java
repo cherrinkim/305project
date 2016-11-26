@@ -52,12 +52,12 @@ public class Employees implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "employee_id")
+    @Column(name = "employeeId")
     private Integer employeeId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
-    @Column(name = "employee_password")
+    @Column(name = "employeePassword")
     private String employeePassword;
     @Basic(optional = false)
     @NotNull
@@ -67,12 +67,12 @@ public class Employees implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "first_name")
+    @Column(name = "firstName")
     private String firstName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     private String lastName;
     @Basic(optional = false)
     @NotNull
@@ -101,17 +101,17 @@ public class Employees implements Serializable {
     private String telephone;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date_started")
+    @Column(name = "dateStarted")
     @Temporal(TemporalType.DATE)
     private Date dateStarted;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "hourly_rate")
+    @Column(name = "hourlyRate")
     private BigDecimal hourlyRate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "is_manager")
+    @Column(name = "isManager")
     private boolean isManager;
     @OneToMany(mappedBy = "overseerId")
     private List<Sales> salesList;
@@ -283,7 +283,7 @@ public class Employees implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Employees[ employeeId=" + employeeId + " ]";
+        return "com.model.Employees[ employeeId=" + employeeId + " ]";
     }
     
 }
