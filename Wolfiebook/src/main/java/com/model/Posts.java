@@ -159,7 +159,7 @@ public class Posts implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Posts[ postId=" + postId + " ]";
+        return "com.wolfiebook.Posts[ postId=" + postId + " ]";
     }
     
 }

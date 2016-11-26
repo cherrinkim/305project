@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UsersFacade extends AbstractFacade<Users> {
 
-    @PersistenceContext(unitName = "com.wolfiebook_Wolfiebook_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "com_Wolfiebook_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     @Override
@@ -28,4 +28,27 @@ public class UsersFacade extends AbstractFacade<Users> {
     public UsersFacade() {
         super(Users.class);
     }
+    
+    public Users getUser(String email, String password) {
+        try {
+            return (Users) em.createNamedQuery("Users.getUser")
+                .setParameter("email", email)
+                .setParameter("userPassword", password)
+                .getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
+    }
+    
+    public void registerUser(Users user) throws UserExistsException {
+        try {
+            em.createNamedQuery("Users.findByEmail")
+                    .setParameter("email", user.getEmail())
+                    .getSingleResult();
+            throw new UserExistsException();
+        } catch(NoResultException e) {
+            em.persist(user);
+        }
+    }
+    
 }

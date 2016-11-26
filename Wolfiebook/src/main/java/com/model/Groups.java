@@ -143,7 +143,7 @@ public class Groups implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Groups[ groupId=" + groupId + " ]";
+        return "com.wolfiebook.Groups[ groupId=" + groupId + " ]";
     }
     
 }

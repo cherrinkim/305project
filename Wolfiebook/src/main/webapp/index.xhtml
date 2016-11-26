@@ -18,15 +18,13 @@
                         <h:outputLabel value="Password" for="login-pwd"/>
                         <h:outputLabel value=""/>
 
-                        <h:inputText id="login-mail" value="#{loginBean2.user.username}" 
+                        <h:inputText id="login-mail" value="#{users.email}" 
                                      required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
-                        <h:inputSecret id="login-pwd" value="#{loginBean2.user.password}" 
+                        <h:inputSecret id="login-pwd" value="#{users.userPassword}" 
                                        required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
-                        <h:commandButton id="login-btn" value="Log In" action="#{loginBean2.returnHome()}"/>
+                        <h:commandButton id="login-btn" value="Log In" action="#{loginBean.login()}"/>
                     </p:panelGrid>
-                    <h:message for="login-mail"/>
-                    <br/>
-                    <h:message for="login-pwd"/>
+                    <h:messages id="login-msg"/>
                 </h:form>
             </header>
             
@@ -61,4 +59,3 @@
         </div>
     </h:body>
 </html>
-

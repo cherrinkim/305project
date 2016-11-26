@@ -21,7 +21,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -46,15 +45,11 @@ public class Messages implements Serializable {
     @Column(name = "date_sent")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateSent;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "subject")
     private String subject;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "content")
     private String content;
     @JoinColumn(name = "sender", referencedColumnName = "user_id")
@@ -69,12 +64,6 @@ public class Messages implements Serializable {
 
     public Messages(Integer messageId) {
         this.messageId = messageId;
-    }
-
-    public Messages(Integer messageId, String subject, String content) {
-        this.messageId = messageId;
-        this.subject = subject;
-        this.content = content;
     }
 
     public Integer getMessageId() {
@@ -147,7 +136,7 @@ public class Messages implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Messages[ messageId=" + messageId + " ]";
+        return "com.wolfiebook.Messages[ messageId=" + messageId + " ]";
     }
     
 }

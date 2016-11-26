@@ -144,7 +144,7 @@ public class Comments implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Comments[ commentId=" + commentId + " ]";
+        return "com.wolfiebook.Comments[ commentId=" + commentId + " ]";
     }
     
 }

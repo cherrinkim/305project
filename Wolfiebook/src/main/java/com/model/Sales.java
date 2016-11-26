@@ -172,7 +172,7 @@ public class Sales implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Sales[ transactionId=" + transactionId + " ]";
+        return "com.wolfiebook.Sales[ transactionId=" + transactionId + " ]";
     }
     
 }

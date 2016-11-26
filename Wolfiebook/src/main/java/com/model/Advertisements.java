@@ -209,7 +209,7 @@ public class Advertisements implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Advertisements[ advertisementId=" + advertisementId + " ]";
+        return "com.wolfiebook.Advertisements[ advertisementId=" + advertisementId + " ]";
     }
     
 }

@@ -8,8 +8,6 @@ package com.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,22 +35,21 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Users")
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId"),
-    @NamedQuery(name = "Users.findByUserPassword", query = "SELECT u FROM Users u WHERE u.userPassword = :userPassword"),
-    @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "Users.findByAddress", query = "SELECT u FROM Users u WHERE u.address = :address"),
-    @NamedQuery(name = "Users.findByCity", query = "SELECT u FROM Users u WHERE u.city = :city"),
-    @NamedQuery(name = "Users.findByState", query = "SELECT u FROM Users u WHERE u.state = :state"),
-    @NamedQuery(name = "Users.findByZipcode", query = "SELECT u FROM Users u WHERE u.zipcode = :zipcode"),
-    @NamedQuery(name = "Users.findByTelephone", query = "SELECT u FROM Users u WHERE u.telephone = :telephone"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByAccountCreated", query = "SELECT u FROM Users u WHERE u.accountCreated = :accountCreated"),
-    @NamedQuery(name = "Users.findByCreditCard", query = "SELECT u FROM Users u WHERE u.creditCard = :creditCard"),
-    @NamedQuery(name = "Users.findByPurchaseRating", query = "SELECT u FROM Users u WHERE u.purchaseRating = :purchaseRating")})
-@Named
-@RequestScoped
+    @NamedQuery(name = "Users.getUser", query = "SELECT u FROM Users u WHERE u.email = :email AND u.userPassword = :userPassword"),
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
+    , @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId")
+    , @NamedQuery(name = "Users.findByUserPassword", query = "SELECT u FROM Users u WHERE u.userPassword = :userPassword")
+    , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
+    , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
+    , @NamedQuery(name = "Users.findByAddress", query = "SELECT u FROM Users u WHERE u.address = :address")
+    , @NamedQuery(name = "Users.findByCity", query = "SELECT u FROM Users u WHERE u.city = :city")
+    , @NamedQuery(name = "Users.findByState", query = "SELECT u FROM Users u WHERE u.state = :state")
+    , @NamedQuery(name = "Users.findByZipcode", query = "SELECT u FROM Users u WHERE u.zipcode = :zipcode")
+    , @NamedQuery(name = "Users.findByTelephone", query = "SELECT u FROM Users u WHERE u.telephone = :telephone")
+    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
+    , @NamedQuery(name = "Users.findByAccountCreated", query = "SELECT u FROM Users u WHERE u.accountCreated = :accountCreated")
+    , @NamedQuery(name = "Users.findByCreditCard", query = "SELECT u FROM Users u WHERE u.creditCard = :creditCard")
+    , @NamedQuery(name = "Users.findByPurchaseRating", query = "SELECT u FROM Users u WHERE u.purchaseRating = :purchaseRating")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -101,7 +98,7 @@ public class Users implements Serializable {
     @Size(min = 1, max = 12)
     @Column(name = "telephone")
     private String telephone;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -113,10 +110,8 @@ public class Users implements Serializable {
     @Size(max = 16)
     @Column(name = "credit_card")
     private String creditCard;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "purchase_rating")
-    private int purchaseRating;
+    private Integer purchaseRating;
     @JoinTable(name = "LikedComments", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
         @JoinColumn(name = "comment_id", referencedColumnName = "comment_id")})
@@ -161,7 +156,7 @@ public class Users implements Serializable {
         this.userId = userId;
     }
 
-    public Users(Integer userId, String userPassword, String firstName, String lastName, String address, String city, String state, String zipcode, String telephone, String email, int purchaseRating) {
+    public Users(Integer userId, String userPassword, String firstName, String lastName, String address, String city, String state, String zipcode, String telephone, String email) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.firstName = firstName;
@@ -172,7 +167,6 @@ public class Users implements Serializable {
         this.zipcode = zipcode;
         this.telephone = telephone;
         this.email = email;
-        this.purchaseRating = purchaseRating;
     }
 
     public Integer getUserId() {
@@ -271,11 +265,11 @@ public class Users implements Serializable {
         this.creditCard = creditCard;
     }
 
-    public int getPurchaseRating() {
+    public Integer getPurchaseRating() {
         return purchaseRating;
     }
 
-    public void setPurchaseRating(int purchaseRating) {
+    public void setPurchaseRating(Integer purchaseRating) {
         this.purchaseRating = purchaseRating;
     }
 
@@ -397,7 +391,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Users[ userId=" + userId + " ]";
+        return "com.wolfiebook.Users[ userId=" + userId + " ]";
     }
     
 }

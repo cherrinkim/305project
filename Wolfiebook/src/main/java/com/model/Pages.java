@@ -119,7 +119,7 @@ public class Pages implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.Pages[ pageId=" + pageId + " ]";
+        return "com.wolfiebook.Pages[ pageId=" + pageId + " ]";
     }
     
 }

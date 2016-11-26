@@ -5,9 +5,13 @@
  */
 package com.beans;
 
+import com.model.Users;
+import com.model.UsersFacade;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 
 
 /**
@@ -15,7 +19,23 @@ import java.io.Serializable;
  * @author jeonghoon-kim
  */
 @Named(value = "loginBean")
-@SessionScoped
-public class LoginBean implements Serializable {
-
+@RequestScoped
+public class LoginBean extends GlobalBean implements Serializable {
+    
+    @EJB
+    private UsersFacade userService;
+    
+    public String login() {
+        
+        Users curUsr = (Users) getBean("#{users}", Users.class);
+        
+        try {
+            curUsr = userService.getUser(curUsr.getEmail(), curUsr.getUserPassword());
+            getSession().setAttribute("userSession", curUsr);
+            return "";
+        } catch(NullPointerException e) {
+            sendMessage("login-msg", FacesMessage.SEVERITY_ERROR, "Incorrect Username and Passowrd");
+            return null;
+        }
+    }
 }
