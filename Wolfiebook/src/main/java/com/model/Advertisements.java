@@ -49,14 +49,14 @@ public class Advertisements implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "advertisement_id")
+    @Column(name = "advertisementId")
     private Integer advertisementId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "type")
     private String type;
-    @Column(name = "date_created")
+    @Column(name = "dateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     @Basic(optional = false)
@@ -67,7 +67,7 @@ public class Advertisements implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "item_name")
+    @Column(name = "itemName")
     private String itemName;
     @Basic(optional = false)
     @NotNull
@@ -78,15 +78,15 @@ public class Advertisements implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "unit_price")
+    @Column(name = "unitPrice")
     private BigDecimal unitPrice;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "available_units")
+    @Column(name = "availableUnits")
     private int availableUnits;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "advertisementId")
     private List<Sales> salesList;
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    @JoinColumn(name = "employeeId", referencedColumnName = "employeeId")
     @ManyToOne(optional = false)
     private Employees employeeId;
 
@@ -209,7 +209,7 @@ public class Advertisements implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Advertisements[ advertisementId=" + advertisementId + " ]";
+        return "com.model.Advertisements[ advertisementId=" + advertisementId + " ]";
     }
     
 }

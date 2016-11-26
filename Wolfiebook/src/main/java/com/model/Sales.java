@@ -43,32 +43,32 @@ public class Sales implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "transaction_id")
+    @Column(name = "transactionId")
     private Integer transactionId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 16)
-    @Column(name = "card_number")
+    @Column(name = "cardNumber")
     private String cardNumber;
-    @Column(name = "date_sold")
+    @Column(name = "dateSold")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateSold;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "number_of_units")
+    @Column(name = "numberOfUnits")
     private int numberOfUnits;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "charge_amount")
+    @Column(name = "chargeAmount")
     private BigDecimal chargeAmount;
-    @JoinColumn(name = "advertisement_id", referencedColumnName = "advertisement_id")
+    @JoinColumn(name = "advertisementId", referencedColumnName = "advertisementId")
     @ManyToOne(optional = false)
     private Advertisements advertisementId;
-    @JoinColumn(name = "buyer_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "buyerId", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users buyerId;
-    @JoinColumn(name = "overseer_id", referencedColumnName = "employee_id")
+    @JoinColumn(name = "overseerId", referencedColumnName = "employeeId")
     @ManyToOne
     private Employees overseerId;
 
@@ -172,7 +172,7 @@ public class Sales implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Sales[ transactionId=" + transactionId + " ]";
+        return "com.model.Sales[ transactionId=" + transactionId + " ]";
     }
     
 }

@@ -37,14 +37,14 @@ public class Pages implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "page_id")
+    @Column(name = "pageId")
     private Integer pageId;
-    @Column(name = "post_count")
+    @Column(name = "postCount")
     private Integer postCount;
-    @JoinColumn(name = "owner_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "ownerId", referencedColumnName = "userId")
     @ManyToOne
     private Users ownerId;
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    @JoinColumn(name = "groupId", referencedColumnName = "groupId")
     @ManyToOne
     private Groups groupId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pageId")
@@ -119,7 +119,7 @@ public class Pages implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Pages[ pageId=" + pageId + " ]";
+        return "com.model.Pages[ pageId=" + pageId + " ]";
     }
     
 }

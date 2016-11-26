@@ -60,22 +60,22 @@ public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private Integer userId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 64)
-    @Column(name = "user_password")
+    @Column(name = "userPassword")
     private String userPassword;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "first_name")
+    @Column(name = "firstName")
     private String firstName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     private String lastName;
     @Basic(optional = false)
     @NotNull
@@ -108,34 +108,34 @@ public class Users implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "email")
     private String email;
-    @Column(name = "account_created")
+    @Column(name = "accountCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date accountCreated;
     @Size(max = 16)
-    @Column(name = "credit_card")
+    @Column(name = "creditCard")
     private String creditCard;
-    @Column(name = "purchase_rating")
+    @Column(name = "purchaseRating")
     private Integer purchaseRating;
     @JoinTable(name = "LikedComments", joinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "comment_id", referencedColumnName = "comment_id")})
+        @JoinColumn(name = "userId", referencedColumnName = "userId")}, inverseJoinColumns = {
+        @JoinColumn(name = "commentId", referencedColumnName = "commentId")})
     @ManyToMany
     private List<Comments> commentsList;
     @JoinTable(name = "Friends", joinColumns = {
-        @JoinColumn(name = "friend1", referencedColumnName = "user_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "friend2", referencedColumnName = "user_id")})
+        @JoinColumn(name = "friend1", referencedColumnName = "userId")}, inverseJoinColumns = {
+        @JoinColumn(name = "friend2", referencedColumnName = "userId")})
     @ManyToMany
     private List<Users> usersList;
     @ManyToMany(mappedBy = "usersList")
     private List<Users> usersList1;
     @JoinTable(name = "LikedPosts", joinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "post_id", referencedColumnName = "post_id")})
+        @JoinColumn(name = "userId", referencedColumnName = "userId")}, inverseJoinColumns = {
+        @JoinColumn(name = "postId", referencedColumnName = "postId")})
     @ManyToMany
     private List<Posts> postsList;
     @JoinTable(name = "GroupMembers", joinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "group_id", referencedColumnName = "group_id")})
+        @JoinColumn(name = "userId", referencedColumnName = "userId")}, inverseJoinColumns = {
+        @JoinColumn(name = "groupId", referencedColumnName = "groupId")})
     @ManyToMany
     private List<Groups> groupsList;
     @OneToMany(mappedBy = "ownerId")
@@ -395,7 +395,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Users[ userId=" + userId + " ]";
+        return "com.model.Users[ userId=" + userId + " ]";
     }
     
 }

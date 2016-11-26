@@ -29,14 +29,30 @@ public class LoginBean extends GlobalBean implements Serializable {
     
     public String login() {
         
-        Users currentUser = userService.getUser(email, password);
+        Users user = userService.authenticateUser(email, password);
         
-        if(currentUser != null) {
-            getSession().setAttribute("userSession", currentUser);
+        if(user != null) {
+            getSession().setAttribute("userSession", user);
             return "/pages/home?faces-redirect=true";
         } else {
             sendMessage("login-msg", FacesMessage.SEVERITY_ERROR, "Incorrect Username and Password");
             return null;
         }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

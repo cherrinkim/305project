@@ -42,9 +42,9 @@ public class Comments implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "comment_id")
+    @Column(name = "commentId")
     private Integer commentId;
-    @Column(name = "date_created")
+    @Column(name = "dateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     @Basic(optional = false)
@@ -55,10 +55,10 @@ public class Comments implements Serializable {
     private String content;
     @ManyToMany(mappedBy = "commentsList")
     private List<Users> usersList;
-    @JoinColumn(name = "author_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "authorId", referencedColumnName = "userId")
     @ManyToOne(optional = false)
     private Users authorId;
-    @JoinColumn(name = "post_id", referencedColumnName = "post_id")
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
     @ManyToOne(optional = false)
     private Posts postId;
 
@@ -144,7 +144,7 @@ public class Comments implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wolfiebook.Comments[ commentId=" + commentId + " ]";
+        return "com.model.Comments[ commentId=" + commentId + " ]";
     }
     
 }
