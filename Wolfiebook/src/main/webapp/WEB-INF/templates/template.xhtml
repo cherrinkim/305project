@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet name="index.css" library="css"/>
+        <title>
+            <ui:insert name="title">
+                #{bundle['app.title']}
+            </ui:insert>
+        </title>
+        <ui:insert name="css"/>
+        <ui:insert name="js"/>
+    </h:head>
+    <h:body>
+        <header>
+                <ui:insert name="header">
+                    <div class="clearfix" id="logobox">
+                        <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
+                        <h3 class="rfloat">#{bundle['app.title']}</h3>
+                    </div>
+                </ui:insert>
+            </header>
+            
+            <div class="content">
+                <div id="pna">
+                    <ui:insert name="content">
+                        <h3>#{bundle['content.sorry']}</h3>
+                    </ui:insert>
+                </div>
+            </div>
+            
+            <footer>
+                <ui:insert name="footer">
+                    <p>#{bundle['footer.copyright']}</p>
+                </ui:insert>
+            </footer>
+    </h:body>
+</html>
+

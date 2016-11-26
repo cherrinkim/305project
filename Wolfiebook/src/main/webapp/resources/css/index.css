@@ -36,6 +36,18 @@ header h1 {
 .content {
     margin-top: 40px;
     margin-bottom: 60px;
+    min-height: 500px;
+}
+
+#logobox {
+    width: 145px;
+    margin-left: 15px;
+}
+
+#logo {
+    width: 40px;
+    margin-top: 20px;
+    margin-right: 5px;
 }
 
 .banner-img {
@@ -83,7 +95,13 @@ header h1 {
     font-size: 15px;
 }
 
+#pna {
+    text-align: center;
+    line-height: 400px;
+}
+
 footer {
+    text-align: center;
 }
 
 .lfloat {
