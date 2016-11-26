@@ -17,11 +17,20 @@
     <h:body>
         <header>
                 <ui:insert name="header">
-                    <div class="lfloat clearfix" id="logobox">
-                        <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
-                        <h3 class="rfloat">#{bundle['app.title']}</h3>
+                    <div class="nav-wrapper clearfix">
+                        <div class="lfloat clearfix" id="logobox">
+                            <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
+                            <h3 class="rfloat">#{bundle['app.title']}</h3>
+                        </div>
+                        <div class="navbar rfloat">
+                            <p:menubar>
+                                <p:menuitem value="Page" url="#" icon="fa fa-file-o fa-2x" />
+                                <p:menuitem value="Group" url="#" icon="fa fa-file-text-o fa-2x"/>
+                                <p:menuitem value="Messages" url="#" icon="fa fa-envelope-o fa-2x"/>
+                                <p:menuitem value="Friends" url="#" icon="fa fa-users fa-2x"/>
+                            </p:menubar>
+                        </div>
                     </div>
-                    <div class="rfloat"></div>
                 </ui:insert>
             </header>
             
