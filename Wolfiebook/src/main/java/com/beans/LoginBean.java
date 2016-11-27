@@ -40,6 +40,8 @@ public class LoginBean extends GlobalBean implements Serializable {
             return null;
         }
     }
+    
+    
 
     public Users getUser() {
         return user;

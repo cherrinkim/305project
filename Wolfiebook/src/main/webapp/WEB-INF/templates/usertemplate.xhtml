@@ -24,7 +24,7 @@
                         </div>
                         <div class="navbar rfloat">
                             <p:menubar>
-                                <p:menuitem value="Page" url="#" icon="fa fa-file-o fa-2x" />
+                                <p:menuitem value="Home" url="#" icon="fa fa-home fa-2x" />
                                 <p:menuitem value="Group" url="#" icon="fa fa-file-text-o fa-2x"/>
                                 <p:menuitem value="Messages" url="#" icon="fa fa-envelope-o fa-2x"/>
                                 <p:menuitem value="Friends" url="#" icon="fa fa-users fa-2x"/>
@@ -35,11 +35,11 @@
             </header>
             
             <div class="content" id="content">
-                <div id="pna">
-                    <ui:insert name="content">
+                <ui:insert name="content">
+                    <div id="pna">
                         <h3>#{bundle['content.sorry']}</h3>
-                    </ui:insert>
-                </div>
+                    </div>
+                </ui:insert>
             </div>
             
             <footer>

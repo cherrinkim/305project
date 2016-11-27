@@ -114,6 +114,11 @@ header h1 {
     line-height: 400px;
 }
 
+/* HOME PAGE - MAIN DIV */
+#main-div {
+    text-align: center;
+}
+
 /* HOME PAGE - NAVIGATION BAR */
 .navbar {
     margin-top: 10px;
