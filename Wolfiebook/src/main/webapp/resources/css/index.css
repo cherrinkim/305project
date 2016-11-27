@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+/* GENERAL */
 body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
@@ -7,6 +8,11 @@ body {
     line-height: 1.34;
 }
 
+footer {
+    text-align: center;
+}
+
+/* INDEX PAGE - HEADER */
 header {
     height: 100px;
 }
@@ -17,6 +23,7 @@ header h1 {
     margin-left: 15px;
 }
 
+/* INDEX PAGE - LOGIN FORM */
 #login-form {
     margin-top: 20px;
     margin-right: 15px;
@@ -33,11 +40,7 @@ header h1 {
     border: none;
 }
 
-.content {
-    margin-top: 40px;
-    margin-bottom: 60px;
-}
-
+/* INDEX PAGE - BANNER IMG */
 .banner-img {
     
 }
@@ -46,6 +49,8 @@ header h1 {
     height: 400px;
 }
 
+
+/* INDEX PAGE - REGISTER FORM */
 #register-form {
     margin: 0;
     padding: 0;
@@ -73,6 +78,7 @@ header h1 {
     font-size: 18px;
 }
 
+/* INDEX PAGE - BUTTON */
 #login-btn,
 #register-btn {
     padding: 7px 20px;
@@ -83,8 +89,43 @@ header h1 {
     font-size: 15px;
 }
 
-footer {
+/* CONTENT */
+.content {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    min-height: 500px;
 }
+
+/* HOME PAGE - LOGO */
+#logobox {
+    width: 145px;
+    margin-left: 15px;
+}
+
+#logo {
+    width: 40px;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+/* HOME PAGE - PAGE NOT AVAILABLE */
+#pna {
+    text-align: center;
+    line-height: 400px;
+}
+
+/* HOME PAGE - MAIN DIV */
+#main-div {
+    text-align: center;
+}
+
+/* HOME PAGE - NAVIGATION BAR */
+.navbar {
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+/* FLOAT AND CLEARFIX */
 
 .lfloat {
     float: left;
@@ -117,7 +158,10 @@ footer {
     visibility: hidden;
 }
 
+/* PRIMEFACES GENERAL */
+
 .ui-widget {
+    font-family: 'Ubuntu', sans-serif;
     font-size: 12px !important;
 }
 .ui-layout-north {
@@ -133,4 +177,19 @@ footer {
 }
 .ui-button {
     margin-top: 10px !important;
+}
+
+/* PRIMEFACES MENU BAR */
+.ui-menu {
+    background: #fff;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
 }

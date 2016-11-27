@@ -10,7 +10,7 @@ import com.model.UsersFacade;
 import javax.inject.Named;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 
 
@@ -19,17 +19,18 @@ import javax.faces.application.FacesMessage;
  * @author jeonghoon-kim
  */
 @Named(value = "loginBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean extends GlobalBean implements Serializable {
     
     @EJB
     private UsersFacade userService;
+    private Users user;
     private String email;
     private String password;
     
     public String login() {
         
-        Users user = userService.authenticateUser(email, password);
+        user = userService.authenticateUser(email, password);
         
         if(user != null) {
             getSession().setAttribute("userSession", user);
@@ -39,7 +40,17 @@ public class LoginBean extends GlobalBean implements Serializable {
             return null;
         }
     }
+    
+    
 
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+    
     public String getEmail() {
         return email;
     }

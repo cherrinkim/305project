@@ -1,11 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>#{bundle['app.title']}</title>
-    </h:head>
-    <h:body>
-        Hello #{loginBean.email} welcome back!
-    </h:body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
+        <ui:define name="content">
+            <div id="main-div">
+                <p>Hello #{loginBean.user.firstName}</p>
+                <br/>
+                <p>Your user id is #{loginBean.user.userId}</p>
+                <br/>
+                <h:form>
+                    <ui:repeat value="#{pageBean.getPage(1)}" var="page">
+                        <h:outputText value="#{page.pageId}"/>
+                    </ui:repeat>
+                    <h:messages id="page-msg"/>
+                </h:form>
+            </div>
+            
+        </ui:define>
+    </ui:composition>
 </html>

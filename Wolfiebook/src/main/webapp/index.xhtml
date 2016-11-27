@@ -6,7 +6,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>#{bundle['app.title']}</title>
-        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="css/index.css"/>
     </h:head>
     <h:body>
         <div class="main-wrapper">
@@ -27,7 +27,7 @@
                     <h:messages id="login-msg"/>
                 </h:form>
             </header>
-            
+
             <div class="content clearfix">
                 <div class="banner-img lfloat">
                     <p:graphicImage name="img/seawolves.png"/>
@@ -52,10 +52,12 @@
                     </h:form>
                 </div>
             </div>
-            
+
             <footer>
                 #{bundle['footer.copyright']}
             </footer>
         </div>
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>

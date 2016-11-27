@@ -5,8 +5,10 @@
  */
 package com.model;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -28,4 +30,14 @@ public class PagesFacade extends AbstractFacade<Pages> {
         super(Pages.class);
     }
     
+    public List<Pages> getPersonalPage(Integer ownerId) {
+        try {
+            List<Pages> items = (List<Pages>) em.createNamedQuery("Pages.findByOwner")
+                    .setParameter("ownerId", ownerId)
+                    .getResultList();
+            return items;
+        } catch(NoResultException e) {
+            return null;
+        }
+    }
 }
