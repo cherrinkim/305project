@@ -21,15 +21,15 @@
             <%
             String type = request.getParameter("type");  
             String company = request.getParameter("company");
-            String item_name = request.getParameter("item_name");
+            String itemName = request.getParameter("itemName");
             String content = request.getParameter("content");
-            String unit_price = request.getParameter("unit_price");
+            String unitPrice = request.getParameter("unitPrice");
             String num_units = request.getParameter("num_units");
             
-            if (Double.parseDouble(unit_price) < 0 || Integer.parseInt(num_units) < 0) { %>
+            if (Double.parseDouble(unitPrice) < 0 || Integer.parseInt(num_units) < 0) { %>
             <p>Advertisement not updated. Invalid unit price or quantity.</p>
-            <% } else if (type.equals("") || company.equals("") || item_name.equals("") || content.equals("")
-                          || unit_price.equals("") || num_units.equals("")) { %>
+            <% } else if (type.equals("") || company.equals("") || itemName.equals("") || content.equals("")
+                          || unitPrice.equals("") || num_units.equals("")) { %>
             <p>Advertisement not updated. Values cannot be empty.</p>
             <% } else {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -41,11 +41,11 @@
                     st.executeUpdate("UPDATE Advertisements SET "
                         + "type = '" + type + "', "
                         + "company = '" + company + "', "
-                        + "item_name = '" + item_name + "', "
+                        + "itemName = '" + itemName + "', "
                         + "content = '" + content + "', "
-                        + "unit_price = '" + unit_price + "', "
-                        + "available_units = '" + num_units + "'"
-                        + " WHERE advertisement_id = '" + session.getAttribute("editid") + "';");
+                        + "unitPrice = '" + unitPrice + "', "
+                        + "availableUnits = '" + num_units + "'"
+                        + " WHERE advertisementId = '" + session.getAttribute("editid") + "';");
                     session.removeAttribute("editid");
                     %> Advertisement successfully updated! <%
                 } catch (Exception e) {

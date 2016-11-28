@@ -25,13 +25,13 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT DISTINCT item_name FROM Advertisements WHERE company = '" + id + "';");
+            rs = st.executeQuery("SELECT DISTINCT itemName FROM Advertisements WHERE company = '" + id + "';");
             if (rs.next()) {
                 session.setAttribute("queriedid", id); %>
                 <p><%=session.getAttribute("queriedid")%> sells the following items:</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT DISTINCT item_name FROM Advertisements WHERE company = '" + id + "';");
+                    rs = st.executeQuery("SELECT DISTINCT itemName FROM Advertisements WHERE company = '" + id + "';");
                     %>
                 <table>
                     <tr>

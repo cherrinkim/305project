@@ -25,17 +25,17 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT S.overseer_id, SUM(S.charge_amount) as 'revenue' "
+            rs = st.executeQuery("SELECT S.overseerId, SUM(S.chargeAmount) as 'revenue' "
                     + "FROM Sales S "
-                    + "GROUP BY overseer_id "
+                    + "GROUP BY overseerId "
                     + "ORDER BY revenue DESC LIMIT 1;");
             String revenue = "$";
             if (rs.next()) {
                 id = rs.getString(1);
                 revenue += rs.getString(2);
-                rs = st.executeQuery("SELECT first_name, last_name "
+                rs = st.executeQuery("SELECT firstName, lastName "
                     + "FROM Employees "
-                    + "WHERE employee_id = '" + id + "';");
+                    + "WHERE employeeId = '" + id + "';");
                 String final_name = "dummy";
                 if (rs.next()) {
                     final_name = rs.getString(1) + " " + rs.getString(2);
@@ -47,10 +47,10 @@
                 <p>They have generated <%=session.getAttribute("revenue")%> to date.</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT S.transaction_id, S.buyer_id, S.card_number, S.date_sold, "
-                    + "S.advertisement_id, S.number_of_units, S.overseer_id, S.charge_amount "
+                    rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
+                    + "S.advertisementId, S.numberOfUnits, S.overseerId, S.chargeAmount "
                     + "FROM Sales S "
-                    + "WHERE S.overseer_id = '" + id + "';");
+                    + "WHERE S.overseerId = '" + id + "';");
                     %>
                 <table>
                     <tr>

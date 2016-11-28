@@ -19,29 +19,29 @@
             <jsp:include page="header.jsp"/>
             <h2>View Transactions by User Name</h2>
             <%
-            String first_name = request.getParameter("first_name");
-            String last_name = request.getParameter("last_name");
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Wolfiebook",
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT S.transaction_id, S.buyer_id, S.card_number, S.date_sold, "
-                    + "S.advertisement_id, S.number_of_units, S.overseer_id, S.charge_amount "
+            rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
+                    + "S.advertisementId, S.numberOfUnits, S.overseerId, S.chargeAmount "
                     + "FROM Sales S, Users U "
-                    + "WHERE S.buyer_id = U.user_id AND U.first_name = '" + first_name
-                    + "' AND U.last_name = '" + last_name + "';");
+                    + "WHERE S.buyerId = U.userId AND U.firstName = '" + firstName
+                    + "' AND U.lastName = '" + lastName + "';");
             if (rs.next()) {
-                session.setAttribute("queriedfirstname", first_name);
-                session.setAttribute("queriedlastname", last_name);%>
+                session.setAttribute("queriedfirstname", firstName);
+                session.setAttribute("queriedlastname", lastName);%>
                 </br><p>Transactions by user(s) named <%=session.getAttribute("queriedfirstname")%> <%=session.getAttribute("queriedlastname")%>:</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT S.transaction_id, S.buyer_id, S.card_number, S.date_sold, "
-                    + "S.advertisement_id, S.number_of_units, S.overseer_id, S.charge_amount "
+                    rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
+                    + "S.advertisementId, S.numberOfUnits, S.overseerId, S.chargeAmount "
                     + "FROM Sales S, Users U "
-                    + "WHERE S.buyer_id = U.user_id AND U.first_name = '" + first_name
-                    + "' AND U.last_name = '" + last_name + "';");
+                    + "WHERE S.buyerId = U.userId AND U.firstName = '" + firstName
+                    + "' AND U.lastName = '" + lastName + "';");
                     %>
                 <table>
                     <tr>

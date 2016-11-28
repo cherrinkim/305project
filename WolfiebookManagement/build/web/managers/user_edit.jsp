@@ -31,11 +31,11 @@
         "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT * FROM Users WHERE user_id = '" + id + "';");
+        rs = st.executeQuery("SELECT * FROM Users WHERE userId = '" + id + "';");
         if (rs.next()) {
-            String user_id = rs.getString(1);
-            String first_name = rs.getString(3);  
-            String last_name = rs.getString(4);
+            String userId = rs.getString(1);
+            String firstName = rs.getString(3);  
+            String lastName = rs.getString(4);
             String address = rs.getString(5);
             String city = rs.getString(6);
             String state = rs.getString(7);
@@ -44,17 +44,17 @@
             String email = rs.getString(10);
             String created = rs.getString(11);
             String account_number = rs.getString(12);
-            String purchase_rating = rs.getString(13);
+            String purchaseRating = rs.getString(13);
             
             %>
             <p><b>User #<%=rs.getString(1)%> (<%=rs.getString(3)%> <%=rs.getString(4)%>)</b></p>
             <p>Account created at <%=rs.getString(11)%></p>
             
             <p>First Name:</p>
-        <input type="text" name="first_name" value="<%=rs.getString(3)%>" />
+        <input type="text" name="firstName" value="<%=rs.getString(3)%>" />
         <br />
         <p>Last Name: </p>
-        <input type="text" name="last_name" value="<%=rs.getString(4)%>" />
+        <input type="text" name="lastName" value="<%=rs.getString(4)%>" />
         <br />
         <p>Email Address: </p>
         <input type="text" name="email" value="<%=rs.getString(10)%>" />
@@ -78,7 +78,7 @@
         <input type="number" name="account_number" min="0" value="<%=rs.getString(12)%>">
         <br />
         <p>Purchase Rating: </p>
-        <input type="number" name="purchase_rating" min="0" step="1" value="<%=rs.getString(13)%>" />
+        <input type="number" name="purchaseRating" min="0" step="1" value="<%=rs.getString(13)%>" />
         <br />
         <p>New Password (leave blank for unchanged): </p>
         <input type="password" name="password" value="" />

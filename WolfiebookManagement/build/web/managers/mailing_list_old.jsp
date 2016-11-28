@@ -26,7 +26,7 @@
      user="root"  password=""/>
  
 <sql:query dataSource="${snapshot}" var="result">
-SELECT first_name, last_name, email FROM Users;
+SELECT firstName, lastName, email FROM Users;
 </sql:query>
  
 <table border="1" width="100%">
@@ -37,8 +37,8 @@ SELECT first_name, last_name, email FROM Users;
 </tr>
 <c:forEach var="row" items="${result.rows}">
 <tr>
-   <td><c:out value="${row.first_name}"/></td>
-   <td><c:out value="${row.last_name}"/></td>
+   <td><c:out value="${row.firstName}"/></td>
+   <td><c:out value="${row.lastName}"/></td>
    <td><c:out value="${row.email}"/></td>
 </tr>
 </c:forEach>

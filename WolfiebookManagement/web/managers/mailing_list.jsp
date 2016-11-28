@@ -34,7 +34,7 @@
             "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT first_name, last_name, email FROM Users");
+        rs = st.executeQuery("SELECT firstName, lastName, email FROM Users");
         
         while (rs.next()) { %>
             <tr>

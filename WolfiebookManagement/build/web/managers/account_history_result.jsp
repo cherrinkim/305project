@@ -24,17 +24,17 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT S.transaction_id, S.date_sold, A.item_name, S.charge_amount, S.overseer_id"
+            rs = st.executeQuery("SELECT S.transactionId, S.dateSold, A.itemName, S.chargeAmount, S.overseerId"
                     + " FROM Sales S, Advertisements A"
-                    + " WHERE S.card_number = '" + userid + "' AND S.advertisement_id = A.advertisement_id;");
+                    + " WHERE S.cardNumber = '" + userid + "' AND S.advertisementId = A.advertisementId;");
             if (rs.next()) {
                 session.setAttribute("queriedname", userid);%>
                 <p>Account history for <%=session.getAttribute("queriedname")%>:</p></br>
                 
                 <%  ResultSet rs2;
-                    rs2 = st.executeQuery("SELECT S.transaction_id, S.date_sold, A.item_name, S.charge_amount, S.overseer_id"
+                    rs2 = st.executeQuery("SELECT S.transactionId, S.dateSold, A.itemName, S.chargeAmount, S.overseerId"
                     + " FROM Sales S, Advertisements A"
-                    + " WHERE S.card_number = '" + userid + "' AND S.advertisement_id = A.advertisement_id;"); %>
+                    + " WHERE S.cardNumber = '" + userid + "' AND S.advertisementId = A.advertisementId;"); %>
                 <table>
                     <tr>
                     <th>Transaction ID</th>

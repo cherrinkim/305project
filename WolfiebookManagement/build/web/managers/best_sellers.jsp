@@ -33,11 +33,11 @@
             "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT A.item_name, SUM(S.number_of_units) as units_sold"
+        rs = st.executeQuery("SELECT A.itemName, SUM(S.numberOfUnits) as units_sold"
                 + " FROM Sales S, Advertisements A"
-                + " WHERE A.advertisement_id = S.advertisement_id"
-                + " GROUP BY item_name"
-                + " ORDER BY units_sold DESC, item_name DESC;");
+                + " WHERE A.advertisementId = S.advertisementId"
+                + " GROUP BY itemName"
+                + " ORDER BY units_sold DESC, itemName DESC;");
         
         while (rs.next()) { %>
             <tr>

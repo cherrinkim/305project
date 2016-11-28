@@ -31,16 +31,16 @@
         "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT * FROM Advertisements WHERE advertisement_id = '" + id + "';");
+        rs = st.executeQuery("SELECT * FROM Advertisements WHERE advertisementId = '" + id + "';");
         if (rs.next()) {
-            String employee_id = rs.getString(2);
+            String employeeId = rs.getString(2);
             String type = rs.getString(3);
-            String date_created = rs.getString(4);
+            String dateCreated = rs.getString(4);
             String company = rs.getString(5);
-            String item_name = rs.getString(6);
+            String itemName = rs.getString(6);
             String content = rs.getString(7);
-            String unit_price = rs.getString(8);
-            String available_units = rs.getString(9);
+            String unitPrice = rs.getString(8);
+            String availableUnits = rs.getString(9);
             
             %>
             <p><b>Advertisement #<%=rs.getString(1)%></b></p>
@@ -53,13 +53,13 @@
         <input type="text" name="company" value="<%=rs.getString(5)%>" />
         <br />
         <p>Item Name: </p>
-        <input type="text" name="item_name" value="<%=rs.getString(6)%>" />
+        <input type="text" name="itemName" value="<%=rs.getString(6)%>" />
         <br />
         <p>Description: </p>
         <input type="text" name="content" value="<%=rs.getString(7)%>" />
         <br />
         <p>Unit Price: </p>
-        <input type="number" name="unit_price" min="0" step="any" value="<%=rs.getString(8)%>" />
+        <input type="number" name="unitPrice" min="0" step="any" value="<%=rs.getString(8)%>" />
         <br />
         <p>Number of Available Units: </p>
         <input type="number" name="num_units" min="0" value="<%=rs.getString(9)%>" />

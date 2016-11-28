@@ -26,10 +26,10 @@
                 Statement st = con.createStatement();
                 ResultSet rs;
                 String id = request.getParameter("deleteid");
-                rs = st.executeQuery("SELECT * FROM Sales WHERE overseer_id = '" + id + "';");
+                rs = st.executeQuery("SELECT * FROM Sales WHERE overseerId = '" + id + "';");
                 Statement st2 = con.createStatement();
                 ResultSet rs2;
-                rs2 = st2.executeQuery("SELECT * FROM Advertisements WHERE employee_id = '" + id + "';");
+                rs2 = st2.executeQuery("SELECT * FROM Advertisements WHERE employeeId = '" + id + "';");
                 if (request.getParameter("deleteid").equals(session.getAttribute("employeeid"))) {
                 %> <p>Cannot delete yourself.</p> <%
                 } else if (rs.next() || rs2.next()) {
@@ -38,7 +38,7 @@
                 } else {
                     try {
                     st.executeUpdate("DELETE FROM Employees"
-                        + " WHERE employee_id = '" + id + "';");
+                        + " WHERE employeeId = '" + id + "';");
                     %> <p>Employee successfully deleted!</p> <%
                     } catch (Exception e) {
                         %> <p> An error occurred when deleting the Employee.</p> <%

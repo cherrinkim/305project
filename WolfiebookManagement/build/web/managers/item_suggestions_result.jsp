@@ -24,20 +24,20 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT first_name, last_name FROM Users where user_id = '" + userid + "'");
+            rs = st.executeQuery("SELECT firstName, lastName FROM Users where userId = '" + userid + "'");
             if (rs.next()) {
-                String name = rs.getString("first_name") + " " + rs.getString("last_name");
+                String name = rs.getString("firstName") + " " + rs.getString("lastName");
                 session.setAttribute("queriedname", name);%>
                 </br><p>Personalized item suggestions for <%=session.getAttribute("queriedname")%>:</p></br>
                 
                 <%  ResultSet rs2;
-                    rs2 = st.executeQuery("SELECT I.item_name, I.content FROM Advertisements I,"
-                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyer_id = '" + userid
-                        + "' AND S.advertisement_id = A.advertisement_id) F WHERE I.type = F.type;");
+                    rs2 = st.executeQuery("SELECT I.itemName, I.content FROM Advertisements I,"
+                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyerId = '" + userid
+                        + "' AND S.advertisementId = A.advertisementId) F WHERE I.type = F.type;");
                 if (rs2.next()) {
-                    rs2 = st.executeQuery("SELECT I.item_name, I.content FROM Advertisements I,"
-                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyer_id = '" + userid
-                        + "' AND S.advertisement_id = A.advertisement_id) F WHERE I.type = F.type;");
+                    rs2 = st.executeQuery("SELECT I.itemName, I.content FROM Advertisements I,"
+                        + " (SELECT A.type FROM Advertisements A, Sales S WHERE S.buyerId = '" + userid
+                        + "' AND S.advertisementId = A.advertisementId) F WHERE I.type = F.type;");
                     %>
                 <table>
                     <tr>

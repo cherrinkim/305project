@@ -24,10 +24,10 @@
         <p>Enter information below.</p>
         
         <p>First Name:</p>
-        <input type="text" name="first_name" value="" />
+        <input type="text" name="firstName" value="" />
         <br />
         <p>Last Name: </p>
-        <input type="text" name="last_name" value="" />
+        <input type="text" name="lastName" value="" />
         <br />
         <p>SSN: </p>
         <input type="text" name="ssn" value="" />
@@ -51,10 +51,10 @@
         <input type="date" name="start_date">
         <br />
         <p>Hourly Rate: </p>
-        <input type="number" name="hourly_rate" min="0" step="any" value="" />
+        <input type="number" name="hourlyRate" min="0" step="any" value="" />
         <br />
         <p>Is Manager: </p>
-        <input type="checkbox" name="is_manager" value="1" />
+        <input type="checkbox" name="isManager" value="1" />
         <br />
         <p> Password: </p>
         <input type="password" name="password" value="" />

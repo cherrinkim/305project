@@ -20,8 +20,8 @@
             <jsp:include page="header.jsp"/>
             <h2>Create New Employee</h2>
             <%
-            String first_name = request.getParameter("first_name");  
-            String last_name = request.getParameter("last_name");
+            String firstName = request.getParameter("firstName");  
+            String lastName = request.getParameter("lastName");
             String ssn = request.getParameter("ssn");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
@@ -29,21 +29,21 @@
             String zip = request.getParameter("zip");
             String phone = request.getParameter("phone");
             String start_date = request.getParameter("start_date");
-            String hourly_rate = request.getParameter("hourly_rate");
-            String is_manager = request.getParameter("is_manager");
-            if (is_manager != null) {
-                if (!is_manager.equals("1"))
-                    is_manager = "0";
+            String hourlyRate = request.getParameter("hourlyRate");
+            String isManager = request.getParameter("isManager");
+            if (isManager != null) {
+                if (!isManager.equals("1"))
+                    isManager = "0";
             } else {
-                is_manager = "0";
+                isManager = "0";
             }
             String password = request.getParameter("password");
             
-            if (Double.parseDouble(hourly_rate) < 0) { %>
+            if (Double.parseDouble(hourlyRate) < 0) { %>
             <p>Employee not created. Invalid hourly rate.</p>
-            <% } else if (first_name.equals("") || last_name.equals("") || ssn.equals("") || address.equals("")
+            <% } else if (firstName.equals("") || lastName.equals("") || ssn.equals("") || address.equals("")
                           || city.equals("") || state.equals("") || zip.equals("") || phone.equals("") || start_date.equals("")
-                          || hourly_rate.equals("") || is_manager.equals("") || password.equals("")) { %>
+                          || hourlyRate.equals("") || isManager.equals("") || password.equals("")) { %>
             <p>Employee not created. Values cannot be empty.</p>
             <% } else {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -56,20 +56,20 @@
                 byte [] digest = md.digest();
                 password = String.format("%064x", new java.math.BigInteger(1, digest));
                 try {
-                    st.executeUpdate("INSERT INTO Employees (employee_password, ssn, "
-                                    + "first_name, last_name, address, city, state, zipcode, telephone, "
-                                    + "date_started, hourly_rate, is_manager) VALUES ('" + password + "', "
+                    st.executeUpdate("INSERT INTO Employees (employeePassword, ssn, "
+                                    + "firstName, lastName, address, city, state, zipcode, telephone, "
+                                    + "dateStarted, hourlyRate, isManager) VALUES ('" + password + "', "
                         + "'" + ssn + "', "
-                        + "'" + first_name + "', "
-                        + "'" + last_name + "', "
+                        + "'" + firstName + "', "
+                        + "'" + lastName + "', "
                         + "'" + address + "', "
                         + "'" + city + "', "
                         + "'" + state + "', "
                         + "'" + zip + "', "
                         + "'" + phone + "', "
                         + "'" + start_date + "', "
-                        + "'" + hourly_rate + "', "
-                        + "'" + is_manager + "');");
+                        + "'" + hourlyRate + "', "
+                        + "'" + isManager + "');");
                     %> Employee successfully created! <%
                 } catch (Exception e) {
                     %> <p> An error occurred creating the Employee. Make sure all entered values are valid.</p> <%
