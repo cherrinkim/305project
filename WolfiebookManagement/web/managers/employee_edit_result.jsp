@@ -21,8 +21,8 @@
             <h2>Edit Employee</h2>
             <% if (session.getAttribute("editid") != null) { %>
             <%
-            String first_name = request.getParameter("first_name");  
-            String last_name = request.getParameter("last_name");
+            String firstName = request.getParameter("firstName");  
+            String lastName = request.getParameter("lastName");
             String ssn = request.getParameter("ssn");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
@@ -30,21 +30,21 @@
             String zip = request.getParameter("zip");
             String phone = request.getParameter("phone");
             String start_date = request.getParameter("start_date");
-            String hourly_rate = request.getParameter("hourly_rate");
-            String is_manager = request.getParameter("is_manager");
-            if (is_manager != null) {
-                if (!is_manager.equals("1"))
-                    is_manager = "0";
+            String hourlyRate = request.getParameter("hourlyRate");
+            String isManager = request.getParameter("isManager");
+            if (isManager != null) {
+                if (!isManager.equals("1"))
+                    isManager = "0";
             } else {
-                is_manager = "0";
+                isManager = "0";
             }
             String password = request.getParameter("password");
             
-            if (hourly_rate.equals("") ||Double.parseDouble(hourly_rate) < 0) { %>
+            if (hourlyRate.equals("") ||Double.parseDouble(hourlyRate) < 0) { %>
             <p>Employee not updated. Invalid hourly rate.</p>
-            <% } else if (first_name.equals("") || last_name.equals("") || ssn.equals("") || address.equals("")
+            <% } else if (firstName.equals("") || lastName.equals("") || ssn.equals("") || address.equals("")
                           || city.equals("") || state.equals("") || zip.equals("") || phone.equals("") || start_date.equals("")
-                          || hourly_rate.equals("") || is_manager.equals("")) { %>
+                          || hourlyRate.equals("") || isManager.equals("")) { %>
             <p>Employee not updated. Values cannot be empty.</p>
             <% } else {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -61,33 +61,33 @@
                 try {
                     if (!password.equals("")) {
                         st.executeUpdate("UPDATE Employees SET "
-                        + "first_name = '" + first_name + "', "
-                        + "last_name = '" + last_name + "', "
+                        + "firstName = '" + firstName + "', "
+                        + "lastName = '" + lastName + "', "
                         + "ssn = '" + ssn + "', "
                         + "address = '" + address + "', "
                         + "city = '" + city + "', "
                         + "state = '" + state + "', "
                         + "zipcode = '" + zip + "', "
                         + "telephone = '" + phone + "', "
-                        + "date_started = '" + start_date + "', "
-                        + "hourly_rate = '" + hourly_rate + "', "
-                        + "employee_password = '" + password + "', "
-                        + "is_manager = '" + is_manager + "'"
-                        + " WHERE employee_id = '" + session.getAttribute("editid") + "';");
+                        + "dateStarted = '" + start_date + "', "
+                        + "hourlyRate = '" + hourlyRate + "', "
+                        + "employeePassword = '" + password + "', "
+                        + "isManager = '" + isManager + "'"
+                        + " WHERE employeeId = '" + session.getAttribute("editid") + "';");
                     } else {
                         st.executeUpdate("UPDATE Employees SET "
-                        + "first_name = '" + first_name + "', "
-                        + "last_name = '" + last_name + "', "
+                        + "firstName = '" + firstName + "', "
+                        + "lastName = '" + lastName + "', "
                         + "ssn = '" + ssn + "', "
                         + "address = '" + address + "', "
                         + "city = '" + city + "', "
                         + "state = '" + state + "', "
                         + "zipcode = '" + zip + "', "
                         + "telephone = '" + phone + "', "
-                        + "date_started = '" + start_date + "', "
-                        + "hourly_rate = '" + hourly_rate + "', "
-                        + "is_manager = '" + is_manager + "'"
-                        + " WHERE employee_id = '" + session.getAttribute("editid") + "';");
+                        + "dateStarted = '" + start_date + "', "
+                        + "hourlyRate = '" + hourlyRate + "', "
+                        + "isManager = '" + isManager + "'"
+                        + " WHERE employeeId = '" + session.getAttribute("editid") + "';");
                     }
                     
                     session.removeAttribute("editid");

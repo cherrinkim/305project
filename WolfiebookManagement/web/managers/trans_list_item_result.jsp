@@ -25,19 +25,19 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT S.transaction_id, S.buyer_id, S.card_number, S.date_sold, "
-                    + "S.advertisement_id, S.number_of_units, S.overseer_id, S.charge_amount "
+            rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
+                    + "S.advertisementId, S.numberOfUnits, S.overseerId, S.chargeAmount "
                     + "FROM Sales S, Advertisements A "
-                    + "WHERE A.item_name = '" + item + "' AND A.advertisement_id = S.advertisement_id;");
+                    + "WHERE A.itemName = '" + item + "' AND A.advertisementId = S.advertisementId;");
             if (rs.next()) {
                 session.setAttribute("querieditem", item);%>
                 </br><p>Transactions involving item <%=session.getAttribute("querieditem")%>:</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT S.transaction_id, S.buyer_id, S.card_number, S.date_sold, "
-                    + "S.advertisement_id, S.number_of_units, S.overseer_id, S.charge_amount "
+                    rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
+                    + "S.advertisementId, S.numberOfUnits, S.overseerId, S.chargeAmount "
                     + "FROM Sales S, Advertisements A "
-                    + "WHERE A.item_name = '" + item + "' AND A.advertisement_id = S.advertisement_id;");
+                    + "WHERE A.itemName = '" + item + "' AND A.advertisementId = S.advertisementId;");
                     %>
                 <table>
                     <tr>

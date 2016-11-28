@@ -19,8 +19,8 @@
             <jsp:include page="header.jsp"/>
             <h2>Create New User</h2>
             <%
-            String first_name = request.getParameter("first_name");  
-            String last_name = request.getParameter("last_name");
+            String firstName = request.getParameter("firstName");  
+            String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
@@ -30,7 +30,7 @@
             String account_number = request.getParameter("account_number");
             String password = request.getParameter("password");
             
-            if (first_name.equals("") || last_name.equals("") || email.equals("") || address.equals("")
+            if (firstName.equals("") || lastName.equals("") || email.equals("") || address.equals("")
                           || city.equals("") || state.equals("") || zip.equals("") || phone.equals("") || password.equals("")) { %>
             <p>User not created. Values cannot be empty.</p>
             <% } else {
@@ -46,11 +46,11 @@
                 try {
                     String overseer = (String) session.getAttribute("employeeid");
                     st.executeUpdate("INSERT INTO Users "
-                        + "(user_password, first_name, last_name, address, city, state, zipcode, "
-                        + " telephone, email, account_created, credit_card, purchase_rating)"
+                        + "(userPassword, firstName, lastName, address, city, state, zipcode, "
+                        + " telephone, email, accountCreated, creditCard, purchaseRating)"
                         + " VALUES ('" + password + "', "
-                        + "'" + first_name + "', "
-                        + "'" + last_name + "', "
+                        + "'" + firstName + "', "
+                        + "'" + lastName + "', "
                         + "'" + address + "', "
                         + "'" + city + "', "
                         + "'" + state + "', "

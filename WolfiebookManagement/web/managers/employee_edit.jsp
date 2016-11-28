@@ -32,11 +32,11 @@
         "root", "");
         Statement st = con.createStatement();
         ResultSet rs;
-        rs = st.executeQuery("SELECT * FROM Employees WHERE employee_id = '" + id + "';");
+        rs = st.executeQuery("SELECT * FROM Employees WHERE employeeId = '" + id + "';");
         if (rs.next()) {
-            String employee_id = rs.getString(1);
-            String first_name = rs.getString(4);  
-            String last_name = rs.getString(5);
+            String employeeId = rs.getString(1);
+            String firstName = rs.getString(4);  
+            String lastName = rs.getString(5);
             String ssn = rs.getString(3);
             String address = rs.getString(6);
             String city = rs.getString(7);
@@ -44,18 +44,18 @@
             String zip = rs.getString(9);
             String phone = rs.getString(10);
             String start_date = rs.getString(11);
-            String hourly_rate = rs.getString(12);
-            String is_manager = rs.getString(13);
+            String hourlyRate = rs.getString(12);
+            String isManager = rs.getString(13);
             
             %>
             <p><b>Employee #<%=rs.getString(1)%></b></p>
             <p><%=rs.getString(4)%> <%=rs.getString(5)%></p>
             
             <p>First Name:</p>
-        <input type="text" name="first_name" value="<%=rs.getString(4)%>" />
+        <input type="text" name="firstName" value="<%=rs.getString(4)%>" />
         <br />
         <p>Last Name: </p>
-        <input type="text" name="last_name" value="<%=rs.getString(5)%>" />
+        <input type="text" name="lastName" value="<%=rs.getString(5)%>" />
         <br />
         <p>SSN: </p>
         <input type="text" name="ssn" value="<%=rs.getString(3)%>" />
@@ -79,13 +79,13 @@
         <input type="date" name="start_date" value="<%=rs.getString(11)%>">
         <br />
         <p>Hourly Rate: </p>
-        <input type="number" name="hourly_rate" min="0" step="any" value="<%=rs.getString(12)%>" />
+        <input type="number" name="hourlyRate" min="0" step="any" value="<%=rs.getString(12)%>" />
         <br />
         <p>Is Manager: </p>
         <% if (rs.getString(13).equals("1")) {
-            %> <input type="checkbox" name="is_manager" value="1" checked/> <%
+            %> <input type="checkbox" name="isManager" value="1" checked/> <%
         } else {
-            %> <input type="checkbox" name="is_manager" value="1" /><%
+            %> <input type="checkbox" name="isManager" value="1" /><%
         } %>
         <br />
         <p>New Password (leave blank for unchanged): </p>

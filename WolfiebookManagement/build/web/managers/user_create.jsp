@@ -23,10 +23,10 @@
         <p>Enter information below.</p>
         
         <p>First Name:</p>
-        <input type="text" name="first_name" value="" />
+        <input type="text" name="firstName" value="" />
         <br />
         <p>Last Name: </p>
-        <input type="text" name="last_name" value="" />
+        <input type="text" name="lastName" value="" />
         <br />
         <p>Email Address: </p>
         <input type="text" name="email" value="" />

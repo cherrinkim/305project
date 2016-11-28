@@ -24,20 +24,20 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT first_name, last_name FROM Users where user_id = '" + userid + "'");
+            rs = st.executeQuery("SELECT firstName, lastName FROM Users where userId = '" + userid + "'");
             if (rs.next()) {
-                String name = rs.getString("first_name") + " " + rs.getString("last_name");
+                String name = rs.getString("firstName") + " " + rs.getString("lastName");
                 session.setAttribute("queriedname", name);%>
                 <p>User groups for <%=session.getAttribute("queriedname")%>:</p></br>
                 
                 <%  ResultSet rs2;
-                    rs2 = st.executeQuery("SELECT G.group_id, G.group_name"
-                            + " FROM Groups G, GroupMembers M WHERE M.user_id = '" + userid
-                            + "' AND M.group_id = G.group_id;");
+                    rs2 = st.executeQuery("SELECT G.groupId, G.groupName"
+                            + " FROM Groups G, GroupMembers M WHERE M.userId = '" + userid
+                            + "' AND M.groupId = G.groupId;");
                 if (rs2.next()) {
-                    rs2 = st.executeQuery("SELECT G.group_id, G.group_name"
-                            + " FROM Groups G, GroupMembers M WHERE M.user_id = '" + userid
-                            + "' AND M.group_id = G.group_id;");
+                    rs2 = st.executeQuery("SELECT G.groupId, G.groupName"
+                            + " FROM Groups G, GroupMembers M WHERE M.userId = '" + userid
+                            + "' AND M.groupId = G.groupId;");
                     %>
                 <table>
                     <tr>

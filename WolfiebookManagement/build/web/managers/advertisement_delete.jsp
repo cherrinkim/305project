@@ -25,14 +25,14 @@
                 Statement st = con.createStatement();
                 ResultSet rs;
                 String id = request.getParameter("deleteid");
-                rs = st.executeQuery("SELECT * FROM Sales WHERE advertisement_id = '" + id + "';");
+                rs = st.executeQuery("SELECT * FROM Sales WHERE advertisementId = '" + id + "';");
                 if (rs.next()) {
                 %> <p>Advertisement could not be deleted.</p>
                    <p>To maintain database integrity, advertisements associated with a transaction cannot be deleted.</p> <%
                 } else {
                     try {
                     st.executeUpdate("DELETE FROM Advertisements"
-                        + " WHERE advertisement_id = '" + id + "';");
+                        + " WHERE advertisementId = '" + id + "';");
                     %> <p>Advertisement successfully deleted!</p> <%
                     } catch (Exception e) {
                         %> <p> An error occurred when deleting the Advertisement.</p> <%

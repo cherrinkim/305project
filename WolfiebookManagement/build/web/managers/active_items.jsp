@@ -29,11 +29,11 @@
                 <p>Ranking of most active items, by number of associated transactions:</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT A.item_name, COUNT(A.item_name) as number_of_transactions "
+                    rs = st.executeQuery("SELECT A.itemName, COUNT(A.itemName) as number_of_transactions "
                             + "FROM Sales S, Advertisements A "
-                            + "WHERE A.advertisement_id = S.advertisement_id "
-                            + "GROUP BY item_name "
-                            + "ORDER BY number_of_transactions DESC, item_name DESC;");
+                            + "WHERE A.advertisementId = S.advertisementId "
+                            + "GROUP BY itemName "
+                            + "ORDER BY number_of_transactions DESC, itemName DESC;");
 
                     %>
                 <table>

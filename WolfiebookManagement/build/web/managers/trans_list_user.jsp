@@ -23,10 +23,10 @@
         <h2>View Transactions by User Name</h2>
         <p>First Name: </p>
         
-        <input type="text" name="first_name" value="" />
+        <input type="text" name="firstName" value="" />
         <br />
         <p>Last Name: </p>
-        <input type="text" name="last_name" value="" />
+        <input type="text" name="lastName" value="" />
         <br /><br />
         <input type="submit" value="Submit" />
         

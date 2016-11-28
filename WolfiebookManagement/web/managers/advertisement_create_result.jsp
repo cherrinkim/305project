@@ -20,15 +20,15 @@
             <%
             String type = request.getParameter("type");  
             String company = request.getParameter("company");
-            String item_name = request.getParameter("item_name");
+            String itemName = request.getParameter("itemName");
             String content = request.getParameter("content");
-            String unit_price = request.getParameter("unit_price");
+            String unitPrice = request.getParameter("unitPrice");
             String num_units = request.getParameter("num_units");
             
-            if (Double.parseDouble(unit_price) < 0 || Integer.parseInt(num_units) < 0) { %>
+            if (Double.parseDouble(unitPrice) < 0 || Integer.parseInt(num_units) < 0) { %>
             <p>Advertisement not created. Invalid unit price or quantity.</p>
-            <% } else if (type.equals("") || company.equals("") || item_name.equals("") || content.equals("")
-                          || unit_price.equals("") || num_units.equals("")) { %>
+            <% } else if (type.equals("") || company.equals("") || itemName.equals("") || content.equals("")
+                          || unitPrice.equals("") || num_units.equals("")) { %>
             <p>Advertisement not created. Values cannot be empty.</p>
             <% } else {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -38,13 +38,13 @@
                 try {
                     String overseer = (String) session.getAttribute("employeeid");
                     st.executeUpdate("INSERT INTO Advertisements "
-                        + "(employee_id, type, date_created, company, item_name, content, unit_price, available_units)"
+                        + "(employeeId, type, dateCreated, company, itemName, content, unitPrice, availableUnits)"
                         + " VALUES ('" + overseer + "', "
                         + "'" + type + "', NOW(), "
                         + "'" + company + "', "
-                        + "'" + item_name + "', "
+                        + "'" + itemName + "', "
                         + "'" + content + "', "
-                        + "'" + unit_price + "', "
+                        + "'" + unitPrice + "', "
                         + "'" + num_units + "');");
                     %> Advertisement successfully created! <%
                 } catch (Exception e) {

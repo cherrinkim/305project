@@ -18,14 +18,14 @@
             <jsp:include page="header.jsp"/>
             <h2>Record a Transaction</h2>
             <%
-            String buyer_id = request.getParameter("buyer_id");  
-            String card_number = request.getParameter("account_number");
-            String advertisement_id = request.getParameter("advertisement_id");
-            String number_of_units = request.getParameter("number_of_units");
-            String overseer_id = (String) session.getAttribute("employeeid");
+            String buyerId = request.getParameter("buyerId");  
+            String cardNumber = request.getParameter("account_number");
+            String advertisementId = request.getParameter("advertisementId");
+            String numberOfUnits = request.getParameter("numberOfUnits");
+            String overseerId = (String) session.getAttribute("employeeid");
             boolean valid_card = true;
-            boolean valid_buyer_id = true;
-            boolean valid_advertisement_id = true;
+            boolean valid_buyerId = true;
+            boolean valid_advertisementId = true;
             boolean valid_quantity = true;
             int new_quantity = 0;
             
@@ -36,11 +36,11 @@
             ResultSet rs;
             
             // get card number, if not provided
-            if (card_number.equals("")) {
-                rs = st.executeQuery("SELECT credit_card FROM Users WHERE user_id = '" + buyer_id + "';");
+            if (cardNumber.equals("")) {
+                rs = st.executeQuery("SELECT creditCard FROM Users WHERE userId = '" + buyerId + "';");
                 if (rs.next())
                     if (rs.getString(1) != null)
-                        card_number = rs.getString(1);
+                        cardNumber = rs.getString(1);
                     else
                         valid_card = false;
                 else
@@ -49,33 +49,33 @@
             
             // check valid IDs
             ResultSet rs2;
-            rs2 = st.executeQuery("SELECT * FROM Users WHERE user_id = '" + buyer_id + "';");
+            rs2 = st.executeQuery("SELECT * FROM Users WHERE userId = '" + buyerId + "';");
             if (!rs2.next())
-                valid_buyer_id = false;
+                valid_buyerId = false;
             
             ResultSet rs3;
-            rs3 = st.executeQuery("SELECT * FROM Advertisements WHERE advertisement_id = '" + advertisement_id + "';");
+            rs3 = st.executeQuery("SELECT * FROM Advertisements WHERE advertisementId = '" + advertisementId + "';");
             if (!rs3.next())
-                valid_advertisement_id = false;
+                valid_advertisementId = false;
             
             // check valid quantity
-            if (valid_advertisement_id) {
+            if (valid_advertisementId) {
                 ResultSet rs4;
-                rs4 = st.executeQuery("SELECT available_units FROM Advertisements WHERE advertisement_id = '" + advertisement_id + "';");
+                rs4 = st.executeQuery("SELECT availableUnits FROM Advertisements WHERE advertisementId = '" + advertisementId + "';");
                 if (rs4.next()) {
                     int quantity = Integer.parseInt(rs4.getString(1));
-                    if (Integer.parseInt(number_of_units) > quantity || Integer.parseInt(number_of_units) < 0)
+                    if (Integer.parseInt(numberOfUnits) > quantity || Integer.parseInt(numberOfUnits) < 0)
                         valid_quantity = false;
                     else
-                        new_quantity = quantity - Integer.parseInt(number_of_units);
+                        new_quantity = quantity - Integer.parseInt(numberOfUnits);
                 } else {
                     valid_quantity = false;
                 }
             }
             
-            if (!valid_buyer_id) { %>
+            if (!valid_buyerId) { %>
                 <p>Transaction not recorded. A customer with the given ID does not exist.</p>
-            <% } else if (!valid_advertisement_id) {
+            <% } else if (!valid_advertisementId) {
                  %><p>Transaction not recorded. An advertisement with the given ID does not exist.</p><%
                 } else if (!valid_card) {
                  %><p>Transaction not recorded. The user does not have an associated bank account number, and none was provided.</p><%
@@ -85,17 +85,17 @@
                 try {
                     
                     st.executeUpdate("INSERT INTO Sales "
-                        + "(buyer_id, card_number, date_sold, advertisement_id, number_of_units, "
-                        + " overseer_id, charge_amount)"
-                        + " VALUES ('" + buyer_id + "', "
-                        + "'" + card_number + "', NOW(), "
-                        + "'" + advertisement_id + "', "
-                        + "'" + number_of_units + "', "
-                        + "'" + overseer_id + "', "
-                        + "(SELECT " + number_of_units + " * unit_price FROM Advertisements A WHERE advertisement_id = '" + advertisement_id + "'));");
+                        + "(buyerId, cardNumber, dateSold, advertisementId, numberOfUnits, "
+                        + " overseerId, chargeAmount)"
+                        + " VALUES ('" + buyerId + "', "
+                        + "'" + cardNumber + "', NOW(), "
+                        + "'" + advertisementId + "', "
+                        + "'" + numberOfUnits + "', "
+                        + "'" + overseerId + "', "
+                        + "(SELECT " + numberOfUnits + " * unitPrice FROM Advertisements A WHERE advertisementId = '" + advertisementId + "'));");
 
-                    st.executeUpdate("UPDATE Users SET purchase_rating = purchase_rating + " + number_of_units + " WHERE user_id = @buyer_id;");
-                    st.executeUpdate("UPDATE Advertisements SET available_units = available_units - " + number_of_units + " WHERE advertisement_id = " + advertisement_id + ";");
+                    st.executeUpdate("UPDATE Users SET purchaseRating = purchaseRating + " + numberOfUnits + " WHERE userId = @buyerId;");
+                    st.executeUpdate("UPDATE Advertisements SET availableUnits = availableUnits - " + numberOfUnits + " WHERE advertisementId = " + advertisementId + ";");
                     %> Transaction successfully recorded! <%
                 } catch (Exception e) {
                     %> <p> An error occurred recording the transaction. Make sure all entered values are valid.</p> <%

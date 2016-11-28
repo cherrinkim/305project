@@ -29,13 +29,13 @@
         <input type="text" name="company" value="" />
         <br />
         <p>Item Name: </p>
-        <input type="text" name="item_name" value="" />
+        <input type="text" name="itemName" value="" />
         <br />
         <p>Description: </p>
         <input type="text" name="content" value="" />
         <br />
         <p>Unit Price: </p>
-        <input type="number" name="unit_price" min="0" step="any" value="" />
+        <input type="number" name="unitPrice" min="0" step="any" value="" />
         <br />
         <p>Number of Available Units: </p>
         <input type="number" name="num_units" min="0" value="" />

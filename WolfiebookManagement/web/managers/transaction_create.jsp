@@ -23,16 +23,16 @@
         <p>Enter information below.</p>
         
         <p>Buyer ID:</p>
-        <input type="number" name="buyer_id" min="0" step="1" value="" />
+        <input type="number" name="buyerId" min="0" step="1" value="" />
         <br />
         <p>Bank Account Number (if blank, defaults to User's current account number): </p>
         <input type="text" name="account_number" value="" />
         <br />
         <p>Advertisement ID:</p>
-        <input type="number" name="advertisement_id" min="0" step="1" value="" />
+        <input type="number" name="advertisementId" min="0" step="1" value="" />
         <br />
         <p>Number of Units:</p>
-        <input type="number" name="number_of_units" min="0" step="1" value="" />
+        <input type="number" name="numberOfUnits" min="0" step="1" value="" />
         <br /> <br />
         <input type="submit" value="Submit" />
         </form>

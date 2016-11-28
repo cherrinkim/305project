@@ -30,7 +30,7 @@
             Statement st = con.createStatement();
             ResultSet rs;
             rs = st.executeQuery("SELECT * FROM Sales"
-                    + " WHERE YEAR(date_sold) = '" + year + "' AND MONTH(date_sold) = '" + month + "';");
+                    + " WHERE YEAR(dateSold) = '" + year + "' AND MONTH(dateSold) = '" + month + "';");
             if (rs.next()) {
                 session.setAttribute("month", month);
                 session.setAttribute("year", year);%>
@@ -49,7 +49,7 @@
                     </tr>
                 
                 <% rs = st.executeQuery("SELECT * FROM Sales"
-                    + " WHERE YEAR(date_sold) = '" + year + "' AND MONTH(date_sold) = '" + month + "';");
+                    + " WHERE YEAR(dateSold) = '" + year + "' AND MONTH(dateSold) = '" + month + "';");
                 while (rs.next()) { %>
                     <tr>
                     <td><%= rs.getString(1) %></td>

@@ -20,8 +20,8 @@
             <h2>Edit User</h2>
             <% if (session.getAttribute("editid") != null) { %>
             <%
-            String first_name = request.getParameter("first_name");  
-            String last_name = request.getParameter("last_name");
+            String firstName = request.getParameter("firstName");  
+            String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
@@ -30,12 +30,12 @@
             String phone = request.getParameter("phone");
             String account_number = request.getParameter("account_number");
             String password = request.getParameter("password");
-            String purchase_rating = request.getParameter("purchase_rating");
+            String purchaseRating = request.getParameter("purchaseRating");
             
-            if (purchase_rating.equals("") || Integer.parseInt(purchase_rating) < 0) { %>
+            if (purchaseRating.equals("") || Integer.parseInt(purchaseRating) < 0) { %>
             <p>User not updated. Invalid purchase rating.</p>
-            <% } else if (first_name.equals("") || last_name.equals("") || email.equals("") || address.equals("")
-                          || city.equals("") || state.equals("") || zip.equals("") || phone.equals("") || purchase_rating.equals("")) { %>
+            <% } else if (firstName.equals("") || lastName.equals("") || email.equals("") || address.equals("")
+                          || city.equals("") || state.equals("") || zip.equals("") || phone.equals("") || purchaseRating.equals("")) { %>
             <p>User not updated. Values cannot be empty.</p>
             <% } else {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -52,34 +52,34 @@
                 try {
                     if (!password.equals("")) {
                         st.executeUpdate("UPDATE Users SET "
-                        + "first_name = '" + first_name + "', "
-                        + "last_name = '" + last_name + "', "
+                        + "firstName = '" + firstName + "', "
+                        + "lastName = '" + lastName + "', "
                         + "email = '" + email + "', "
                         + "address = '" + address + "', "
                         + "city = '" + city + "', "
                         + "state = '" + state + "', "
                         + "zipcode = '" + zip + "', "
                         + "telephone = '" + phone + "', "
-                        + "credit_card = '" + account_number + "', "
-                        + "purchase_rating = '" + purchase_rating + "', "
-                        + "user_password = '" + password + "'"
-                        + " WHERE user_id = '" + session.getAttribute("editid") + "';");
+                        + "creditCard = '" + account_number + "', "
+                        + "purchaseRating = '" + purchaseRating + "', "
+                        + "userPassword = '" + password + "'"
+                        + " WHERE userId = '" + session.getAttribute("editid") + "';");
                     } else {
                         st.executeUpdate("UPDATE Users SET "
-                        + "first_name = '" + first_name + "', "
-                        + "last_name = '" + last_name + "', "
+                        + "firstName = '" + firstName + "', "
+                        + "lastName = '" + lastName + "', "
                         + "email = '" + email + "', "
                         + "address = '" + address + "', "
                         + "city = '" + city + "', "
                         + "state = '" + state + "', "
                         + "zipcode = '" + zip + "', "
                         + "telephone = '" + phone + "', "
-                        + "credit_card = '" + account_number + "', "
-                        + "purchase_rating = '" + purchase_rating + "'"
-                        + " WHERE user_id = '" + session.getAttribute("editid") + "';");
+                        + "creditCard = '" + account_number + "', "
+                        + "purchaseRating = '" + purchaseRating + "'"
+                        + " WHERE userId = '" + session.getAttribute("editid") + "';");
                     }
                     if (account_number.equals(""))
-                        st.executeUpdate("UPDATE Users SET credit_card = null WHERE user_id = '" + session.getAttribute("editid") + "';");
+                        st.executeUpdate("UPDATE Users SET creditCard = null WHERE userId = '" + session.getAttribute("editid") + "';");
 
                     session.removeAttribute("editid");
                     %> User successfully updated! <%

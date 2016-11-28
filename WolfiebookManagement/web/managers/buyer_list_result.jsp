@@ -25,24 +25,24 @@
             "root", "");
             Statement st = con.createStatement();
             ResultSet rs;
-            rs = st.executeQuery("SELECT DISTINCT U.user_id, U.first_name, U.last_name"
+            rs = st.executeQuery("SELECT DISTINCT U.userId, U.firstName, U.lastName"
                     + " FROM Sales S, Users U "
-                    + "WHERE S.buyer_id = U.user_id AND S.advertisement_id = '" + id + "';");
+                    + "WHERE S.buyerId = U.userId AND S.advertisementId = '" + id + "';");
 
             if (rs.next()) {
                 session.setAttribute("queriedid", id);
-                rs = st.executeQuery("SELECT item_name "
+                rs = st.executeQuery("SELECT itemName "
                     + "FROM Advertisements "
-                    + "WHERE advertisement_id = '" + id + "';");
+                    + "WHERE advertisementId = '" + id + "';");
                 if (rs.next()) {
                     session.setAttribute("querieditemname", rs.getString(1));
                 };%>
                 <p>The following users have purchased item #<%=session.getAttribute("queriedid")%> (<%=session.getAttribute("querieditemname")%>):</p></br>
                 
                 <%  
-                    rs = st.executeQuery("SELECT DISTINCT U.user_id, U.first_name, U.last_name"
+                    rs = st.executeQuery("SELECT DISTINCT U.userId, U.firstName, U.lastName"
                     + " FROM Sales S, Users U "
-                    + "WHERE S.buyer_id = U.user_id AND S.advertisement_id = '" + id + "';");
+                    + "WHERE S.buyerId = U.userId AND S.advertisementId = '" + id + "';");
                     %>
                 <table>
                     <tr>
