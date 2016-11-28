@@ -23,18 +23,18 @@ DROP TABLE IF EXISTS `Advertisements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Advertisements` (
-  `advertisement_id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` int(11) NOT NULL,
+  `advertisementId` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeId` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `dateCreated` datetime DEFAULT CURRENT_TIMESTAMP,
   `company` varchar(50) NOT NULL,
-  `item_name` varchar(50) NOT NULL,
+  `itemName` varchar(50) NOT NULL,
   `content` text NOT NULL,
-  `unit_price` decimal(7,2) NOT NULL,
-  `available_units` int(11) NOT NULL,
-  PRIMARY KEY (`advertisement_id`),
-  KEY `employee_id` (`employee_id`),
-  CONSTRAINT `advertisements_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employees` (`employee_id`)
+  `unitPrice` decimal(7,2) NOT NULL,
+  `availableUnits` int(11) NOT NULL,
+  PRIMARY KEY (`advertisementId`),
+  KEY `employeeId` (`employeeId`),
+  CONSTRAINT `advertisements_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `Employees` (`employeeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,16 +56,16 @@ DROP TABLE IF EXISTS `Comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Comments` (
-  `post_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `author_id` int(11) NOT NULL,
-  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `postId` int(11) NOT NULL,
+  `commentId` int(11) NOT NULL AUTO_INCREMENT,
+  `authorId` int(11) NOT NULL,
+  `dateCreated` datetime DEFAULT CURRENT_TIMESTAMP,
   `content` text NOT NULL,
-  PRIMARY KEY (`comment_id`),
-  KEY `author_id` (`author_id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `Posts` (`post_id`)
+  PRIMARY KEY (`commentId`),
+  KEY `authorId` (`authorId`),
+  KEY `postId` (`postId`),
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`postId`) REFERENCES `Posts` (`postId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,20 +87,20 @@ DROP TABLE IF EXISTS `Employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Employees` (
-  `employee_id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_password` char(64) NOT NULL,
+  `employeeId` int(11) NOT NULL AUTO_INCREMENT,
+  `employeePassword` char(64) NOT NULL,
   `ssn` char(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
   `address` varchar(95) NOT NULL,
   `city` varchar(35) NOT NULL,
   `state` char(2) NOT NULL,
   `zipcode` varchar(10) NOT NULL,
   `telephone` char(12) NOT NULL,
-  `date_started` date NOT NULL,
-  `hourly_rate` decimal(7,2) NOT NULL,
-  `is_manager` tinyint(1) NOT NULL,
-  PRIMARY KEY (`employee_id`)
+  `dateStarted` date NOT NULL,
+  `hourlyRate` decimal(7,2) NOT NULL,
+  `isManager` tinyint(1) NOT NULL,
+  PRIMARY KEY (`employeeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,8 +126,8 @@ CREATE TABLE `Friends` (
   `friend2` int(11) NOT NULL,
   PRIMARY KEY (`friend1`,`friend2`),
   KEY `friend2` (`friend2`),
-  CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`friend1`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`friend2`) REFERENCES `Users` (`user_id`)
+  CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`friend1`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`friend2`) REFERENCES `Users` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,12 +149,12 @@ DROP TABLE IF EXISTS `GroupMembers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `GroupMembers` (
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`group_id`),
-  KEY `group_id` (`group_id`),
-  CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `groupmembers_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `Groups` (`group_id`)
+  `userId` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  PRIMARY KEY (`userId`,`groupId`),
+  KEY `groupId` (`groupId`),
+  CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `groupmembers_ibfk_2` FOREIGN KEY (`groupId`) REFERENCES `Groups` (`groupId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -176,13 +176,13 @@ DROP TABLE IF EXISTS `Groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Groups` (
-  `group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(50) NOT NULL,
+  `groupId` int(11) NOT NULL AUTO_INCREMENT,
+  `groupName` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `owner_id` int(11) NOT NULL,
-  PRIMARY KEY (`group_id`),
-  KEY `owner_id` (`owner_id`),
-  CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `Users` (`user_id`)
+  `ownerId` int(11) NOT NULL,
+  PRIMARY KEY (`groupId`),
+  KEY `ownerId` (`ownerId`),
+  CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `Users` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -204,12 +204,12 @@ DROP TABLE IF EXISTS `LikedComments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LikedComments` (
-  `user_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`comment_id`),
-  KEY `comment_id` (`comment_id`),
-  CONSTRAINT `likedcomments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `likedcomments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `Comments` (`comment_id`)
+  `userId` int(11) NOT NULL,
+  `commentId` int(11) NOT NULL,
+  PRIMARY KEY (`userId`,`commentId`),
+  KEY `commentId` (`commentId`),
+  CONSTRAINT `likedcomments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `likedcomments_ibfk_2` FOREIGN KEY (`commentId`) REFERENCES `Comments` (`commentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,12 +231,12 @@ DROP TABLE IF EXISTS `LikedPosts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LikedPosts` (
-  `user_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`post_id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `likedposts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `likedposts_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `Posts` (`post_id`)
+  `userId` int(11) NOT NULL,
+  `postId` int(11) NOT NULL,
+  PRIMARY KEY (`userId`,`postId`),
+  KEY `postId` (`postId`),
+  CONSTRAINT `likedposts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `likedposts_ibfk_2` FOREIGN KEY (`postId`) REFERENCES `Posts` (`postId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -258,17 +258,17 @@ DROP TABLE IF EXISTS `Messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Messages` (
-  `message_id` int(11) NOT NULL AUTO_INCREMENT,
-  `date_sent` datetime DEFAULT CURRENT_TIMESTAMP,
+  `messageId` int(11) NOT NULL AUTO_INCREMENT,
+  `dateSent` datetime DEFAULT CURRENT_TIMESTAMP,
   `subject` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
-  PRIMARY KEY (`message_id`),
+  PRIMARY KEY (`messageId`),
   KEY `sender` (`sender`),
   KEY `receiver` (`receiver`),
-  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver`) REFERENCES `Users` (`user_id`)
+  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver`) REFERENCES `Users` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -290,15 +290,15 @@ DROP TABLE IF EXISTS `Pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Pages` (
-  `page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `owner_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL,
-  `post_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`page_id`),
-  KEY `owner_id` (`owner_id`),
-  KEY `group_id` (`group_id`),
-  CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `pages_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `Groups` (`group_id`)
+  `pageId` int(11) NOT NULL AUTO_INCREMENT,
+  `ownerId` int(11) DEFAULT NULL,
+  `groupId` int(11) DEFAULT NULL,
+  `postCount` int(11) DEFAULT '0',
+  PRIMARY KEY (`pageId`),
+  KEY `ownerId` (`ownerId`),
+  KEY `groupId` (`groupId`),
+  CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `pages_ibfk_2` FOREIGN KEY (`groupId`) REFERENCES `Groups` (`groupId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -320,17 +320,17 @@ DROP TABLE IF EXISTS `Posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Posts` (
-  `page_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL AUTO_INCREMENT,
-  `author_id` int(11) NOT NULL,
-  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `pageId` int(11) NOT NULL,
+  `postId` int(11) NOT NULL AUTO_INCREMENT,
+  `authorId` int(11) NOT NULL,
+  `dateCreated` datetime DEFAULT CURRENT_TIMESTAMP,
   `content` text,
-  `comment_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`post_id`),
-  KEY `page_id` (`page_id`),
-  KEY `author_id` (`author_id`),
-  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `Pages` (`page_id`),
-  CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `Users` (`user_id`)
+  `commentCount` int(11) DEFAULT '0',
+  PRIMARY KEY (`postId`),
+  KEY `pageId` (`pageId`),
+  KEY `authorId` (`authorId`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`pageId`) REFERENCES `Pages` (`pageId`),
+  CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`authorId`) REFERENCES `Users` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -352,10 +352,10 @@ DROP TABLE IF EXISTS `Preferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Preferences` (
-  `user_id` int(11) NOT NULL,
-  `ad_type` varchar(50) NOT NULL,
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`)
+  `userId` int(11) NOT NULL,
+  `adType` varchar(50) NOT NULL,
+  KEY `userId` (`userId`),
+  CONSTRAINT `preferences_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -377,21 +377,21 @@ DROP TABLE IF EXISTS `Sales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Sales` (
-  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
-  `buyer_id` int(11) NOT NULL,
-  `card_number` char(16) NOT NULL,
-  `date_sold` datetime DEFAULT CURRENT_TIMESTAMP,
-  `advertisement_id` int(11) NOT NULL,
-  `number_of_units` int(11) NOT NULL,
-  `overseer_id` int(11) DEFAULT NULL,
-  `charge_amount` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`transaction_id`),
-  KEY `advertisement_id` (`advertisement_id`),
-  KEY `buyer_id` (`buyer_id`),
-  KEY `overseer_id` (`overseer_id`),
-  CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`advertisement_id`) REFERENCES `Advertisements` (`advertisement_id`),
-  CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`buyer_id`) REFERENCES `Users` (`user_id`),
-  CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`overseer_id`) REFERENCES `Employees` (`employee_id`)
+  `transactionId` int(11) NOT NULL AUTO_INCREMENT,
+  `buyerId` int(11) NOT NULL,
+  `cardNumber` char(16) NOT NULL,
+  `dateSold` datetime DEFAULT CURRENT_TIMESTAMP,
+  `advertisementId` int(11) NOT NULL,
+  `numberOfUnits` int(11) NOT NULL,
+  `overseerId` int(11) DEFAULT NULL,
+  `chargeAmount` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`transactionId`),
+  KEY `advertisementId` (`advertisementId`),
+  KEY `buyerId` (`buyerId`),
+  KEY `overseerId` (`overseerId`),
+  CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`advertisementId`) REFERENCES `Advertisements` (`advertisementId`),
+  CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`buyerId`) REFERENCES `Users` (`userId`),
+  CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`overseerId`) REFERENCES `Employees` (`employeeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,21 +413,21 @@ DROP TABLE IF EXISTS `Users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_password` char(64) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `userPassword` char(64) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
   `address` varchar(95) NOT NULL,
   `city` varchar(35) NOT NULL,
   `state` char(2) NOT NULL,
   `zipcode` varchar(10) NOT NULL,
   `telephone` char(12) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `account_created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `credit_card` char(16) DEFAULT NULL,
-  `purchase_rating` int(1) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  FULLTEXT KEY `first_name` (`first_name`,`last_name`)
+  `accountCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `creditCard` char(16) DEFAULT NULL,
+  `purchaseRating` int(1) NOT NULL,
+  PRIMARY KEY (`userId`),
+  FULLTEXT KEY `firstName` (`firstName`,`lastName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
