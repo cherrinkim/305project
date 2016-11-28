@@ -25,13 +25,15 @@ header h1 {
 
 /* INDEX PAGE - LOGIN FORM */
 #login-form {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 15px;
+    float:right;
 }
 
 #login-grid {
     font-family: 'Ubuntu', sans-serif;
     font-size: 15px !important;
+    margin: 5px 5px;
 }
 
 #login-grid > *,
@@ -42,7 +44,7 @@ header h1 {
 
 /* INDEX PAGE - BANNER IMG */
 .banner-img {
-    
+    margin-left: 100px;
 }
 
 .banner-img img {
@@ -54,6 +56,8 @@ header h1 {
 #register-form {
     margin: 0;
     padding: 0;
+    margin-right: 100px;
+    float:right;
 }
 
 .sbox {
@@ -87,6 +91,10 @@ header h1 {
     box-shadow: inset 0 1px 1px #a4e388;
     border-color: #3b6e22 #3b6e22 #2c5115;
     font-size: 15px;
+}
+
+#register-btn {
+    margin-top: 20px;
 }
 
 /* CONTENT */
@@ -136,7 +144,7 @@ header h1 {
 }
 
 .rfloat {
-    float: right;
+/*    float: right;*/
 }
 
 .clearfix {
