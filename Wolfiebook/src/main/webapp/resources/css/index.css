@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/* GENERAL */
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.34;
+}
+
+footer {
+    text-align: center;
+}
+
+/* INDEX PAGE - HEADER */
+header {
+    height: 100px;
+}
+
+header h1 {
+    margin-bottom: 0;
+    margin-top: 30px;
+    margin-left: 15px;
+}
+
+/* INDEX PAGE - LOGIN FORM */
+#login-form {
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+#login-grid {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px !important;
+}
+
+#login-grid > *,
+#login-grid > * > *,
+#login-grid > * > * > * {
+    border: none;
+}
+
+/* INDEX PAGE - BANNER IMG */
+.banner-img {
+    
+}
+
+.banner-img img {
+    height: 400px;
+}
+
+
+/* INDEX PAGE - REGISTER FORM */
+#register-form {
+    margin: 0;
+    padding: 0;
+}
+
+.sbox {
+    padding: 8px 10px;
+    width: 133px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
+.mbox {
+    padding: 8px 10px;
+    width: 194px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
+.lbox {
+    padding: 8px 10px;
+    display: block;
+    width: 399px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
+/* INDEX PAGE - BUTTON */
+#login-btn,
+#register-btn {
+    padding: 7px 20px;
+    background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    font-size: 15px;
+}
+
+/* CONTENT */
+.content {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    min-height: 500px;
+}
+
+/* HOME PAGE - LOGO */
+#logobox {
+    width: 145px;
+    margin-left: 15px;
+}
+
+#logo {
+    width: 40px;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+/* HOME PAGE - PAGE NOT AVAILABLE */
+#pna {
+    text-align: center;
+    line-height: 400px;
+}
+
+/* HOME PAGE - MAIN DIV */
+#main-div {
+    text-align: center;
+}
+
+/* HOME PAGE - NAVIGATION BAR */
+.navbar {
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+/* FLOAT AND CLEARFIX */
+
+.lfloat {
+    float: left;
+}
+
+.mfloat {
+    display: inline-block;
+}
+
+.rfloat {
+    float: right;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+    content:" ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+/* PRIMEFACES GENERAL */
+
+.ui-widget {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+
+/* PRIMEFACES MENU BAR */
+.ui-menu {
+    background: #fff;
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.ui-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
+}
