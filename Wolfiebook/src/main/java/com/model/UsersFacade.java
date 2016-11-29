@@ -43,10 +43,7 @@ public class UsersFacade extends AbstractFacade<Users> {
     
     public void registerUser(Users user) throws UserExistsException {
         try {
-            em.createNamedQuery("Users.findByEmail")
-                    .setParameter("email", user.getEmail())
-                    .getSingleResult();
-            throw new UserExistsException();
+            em.persist(user);
         } catch(NoResultException e) {
             em.persist(user);
         }

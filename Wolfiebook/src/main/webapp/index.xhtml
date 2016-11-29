@@ -37,19 +37,19 @@
                     <h:form id="register-form" prependId="false">
                         <h3>Sign Up</h3>
                         <div class="clearfix">
-                            <h:inputText class="lfloat mbox" id="first_name" required="true" a:placeholder="First name"/>
-                            <h:inputText class="rfloat mbox" id="last_name" required="true" a:placeholder="Last name"/>
+                            <h:inputText class="lfloat mbox" value="#{registerBean.firstName}"  id="first_name" required="true" a:placeholder="First name"/>
+                            <h:inputText class="rfloat mbox" value="#{registerBean.lastName}"  id="last_name" required="true" a:placeholder="Last name"/>
                         </div>
-                        <h:inputText class="lbox" id="email" required="true" a:placeholder="Email address"/>
-                        <h:inputSecret class="lbox" id="pwd" required="true" a:placeholder="New password"/>
-                        <h:inputText class="lbox" id="addr" required="true" a:placeholder="Address"/>
+                        <h:inputText class="lbox" value="#{registerBean.email}" id="email" required="true" a:placeholder="Email address"/>
+                        <h:inputSecret class="lbox" value="#{registerBean.userPassword}" id="pwd" required="true" a:placeholder="New password"/>
+                        <h:inputText class="lbox" value="#{registerBean.address}" id="addr" required="true" a:placeholder="Address"/>
                         <div class="clearfix">
-                            <h:inputText class="lfloat sbox" id="city" required="true" a:placeholder="City"/>
-                            <h:inputText class="mfloat sbox" id="state" required="true" a:placeholder="State"/>
-                            <h:inputText class="rfloat sbox" id="zip" required="true" a:placeholder="Zipcode"/>
+                            <h:inputText class="lfloat sbox" value="#{registerBean.city}" id="city" required="true" a:placeholder="City"/>
+                            <h:inputText class="mfloat sbox" value="#{registerBean.state}" id="state" required="true" a:placeholder="State"/>
+                            <h:inputText class="rfloat sbox" value="#{registerBean.zipcode}" id="zip" required="true" a:placeholder="Zipcode"/>
                         </div>
-                        <h:inputText class="lbox" id="mobile" required="true" a:placeholder="Mobile number"/>
-                        <h:commandButton id="register-btn" value="Sign Up"/>
+                        <h:inputText class="lbox" value="#{registerBean.telephone}" id="mobile" required="true" a:placeholder="Mobile number"/>
+                        <h:commandButton id="register-btn" value="Sign Up" action="#{registerBean.register()}"/>
                     </h:form>
                 </div>
             </div>
