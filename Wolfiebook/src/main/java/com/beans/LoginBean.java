@@ -24,13 +24,13 @@ public class LoginBean extends GlobalBean implements Serializable {
     
     @EJB
     private UsersFacade userService;
-    private Users user;
+
     private String email;
     private String password;
     
     public String login() {
         
-        user = userService.authenticateUser(email, password);
+        Users user = userService.authenticateUser(email, password);
         
         if(user != null) {
             getSession().setAttribute("userSession", user);
@@ -41,14 +41,10 @@ public class LoginBean extends GlobalBean implements Serializable {
         }
     }
     
-    
-
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
+    public String userName() {
+        
+        Users user = (Users) getSession().getAttribute("userSession");
+        return user.getFirstName();
     }
     
     public String getEmail() {

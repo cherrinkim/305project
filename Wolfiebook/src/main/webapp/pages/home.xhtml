@@ -3,20 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
             <div id="main-div">
-                <p>Hello #{loginBean.user.firstName}</p>
+                <p>Hello #{loginBean.userName()}</p>
                 <br/>
-                <p>Your user id is #{loginBean.user.userId}</p>
+                
                 <br/>
                 <h:form>
-                    <ui:repeat value="#{pageBean.getPage(1)}" var="page">
-                        <h:outputText value="#{page.pageId}"/>
-                    </ui:repeat>
-                    <h:messages id="page-msg"/>
+                    <h:outputText value="#{pageBean.getPage()}"/>
+                    <h:dataTable value="#{pageBean.getPosts()}" var="post">
+                        <h:column> 
+                            <f:facet name="header">Content</f:facet>
+                            #{post.content}
+                            <h:dataTable value="#{post.getCommentsList()}" var="comment">
+                                <h:column>
+                                    <f:facet name="header">Comment</f:facet>
+                                    #{comment.content}
+                                </h:column>
+                            </h:dataTable>
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages id="load-msg"/>
                 </h:form>
             </div>
             

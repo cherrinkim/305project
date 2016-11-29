@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.model;
 
 import java.util.List;
@@ -28,16 +23,5 @@ public class PagesFacade extends AbstractFacade<Pages> {
 
     public PagesFacade() {
         super(Pages.class);
-    }
-    
-    public List<Pages> getPersonalPage(Integer ownerId) {
-        try {
-            List<Pages> items = (List<Pages>) em.createNamedQuery("Pages.findByOwner")
-                    .setParameter("ownerId", ownerId)
-                    .getResultList();
-            return items;
-        } catch(NoResultException e) {
-            return null;
-        }
     }
 }

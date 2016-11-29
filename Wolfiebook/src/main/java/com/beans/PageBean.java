@@ -7,10 +7,13 @@ package com.beans;
 
 import com.model.Pages;
 import com.model.PagesFacade;
+import com.model.Posts;
+import com.model.Users;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 
@@ -19,49 +22,48 @@ import javax.inject.Named;
  * @author jeonghoon-kim
  */
 @Named("pageBean")
-@SessionScoped
+@RequestScoped
 public class PageBean extends GlobalBean implements Serializable {
     
     @EJB
     private PagesFacade pageFacade;
-    private List<Pages> items;
-    private Integer ownerId;
+    private Users user;
     
-    public List<Pages> getPages() {
-        if (items == null) {
-            items = getPageFacade().findAll();
+    
+    @PostConstruct
+    public void init() {
+        try {
+            user = (Users) getSession().getAttribute("userSession");
+            
+        } catch(NullPointerException e) {
+            getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
-        return items;
     }
     
-    public List<Pages> getPage() {
+    public Pages getPage() {
         
-        items = getPageFacade().getPersonalPage(ownerId);
+        Pages page = pageFacade.find(user.getUserId());
         
-        if(items != null) {
-            getSession().setAttribute("pageSession", items);
-            return items;
+        if(page != null) {
+            getSession().setAttribute("pageSession", page);
+            return page;
         } else {
-            sendMessage("page-msg", FacesMessage.SEVERITY_ERROR, "No page available");
+            sendMessage("load-msg", FacesMessage.SEVERITY_ERROR, "No page available.");
             return null;
         }
     }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public PagesFacade getPageFacade() {
-        return pageFacade;
-    }
-
-    public void setPageFacade(PagesFacade pageFacade) {
-        this.pageFacade = pageFacade;
-    }
     
-    
+    public List<Posts> getPosts() {
+        
+        Pages page = pageFacade.find(user.getUserId());
+        
+        if(page != null) {
+            getSession().setAttribute("pageSession", page);
+            return page.getPostsList();
+        } else {
+            sendMessage("load-msg", FacesMessage.SEVERITY_ERROR, "No page available.");
+            return null;
+        }
+        
+    }
 }
