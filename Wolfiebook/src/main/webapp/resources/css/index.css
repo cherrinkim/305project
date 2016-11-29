@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 /* GENERAL */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
@@ -99,9 +103,7 @@ header h1 {
 
 /* CONTENT */
 .content {
-    margin-top: 40px;
-    margin-bottom: 60px;
-    min-height: 500px;
+    margin-bottom: 30px;
 }
 
 /* HOME PAGE - LOGO */
@@ -124,7 +126,65 @@ header h1 {
 
 /* HOME PAGE - MAIN DIV */
 #main-div {
+    background-color: #eee;
     text-align: center;
+    margin: 0 auto;
+}
+
+.personalPage {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.personalPage table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.personalPage table table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.post {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.postContents{
+    font-size: 1.2em;
+}
+
+.comment {
+    background-color: snow;
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+}
+
+.commentContent {
+    font-size: 0.85em;
+}
+
+.authorDate {
+    background-color: gainsboro;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.authorDatec {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.author,
+.createdDate {
+    font-size: 0.7em;
+    color: slategray;
 }
 
 /* HOME PAGE - NAVIGATION BAR */
@@ -144,7 +204,7 @@ header h1 {
 }
 
 .rfloat {
-/*    float: right;*/
+    float: right;
 }
 
 .clearfix {

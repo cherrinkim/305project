@@ -9,11 +9,8 @@ import com.model.UserExistsException;
 import com.model.Users;
 import com.model.UsersFacade;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 
 /**
@@ -58,7 +55,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
     }
 
 
-public String getUserPassword() {
+    public String getUserPassword() {
         return userPassword;
     }
 
