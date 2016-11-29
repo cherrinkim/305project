@@ -7,28 +7,37 @@
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
             <div id="main-div">
-                <p>Hello #{loginBean.userName()}</p>
-                <br/>
-                
-                <br/>
-                <h:form>
-                    <h:outputText value="#{pageBean.getPage()}"/>
-                    <h:dataTable value="#{pageBean.getPosts()}" var="post">
-                        <h:column> 
-                            <f:facet name="header">Content</f:facet>
-                            #{post.content}
-                            <h:dataTable value="#{post.getCommentsList()}" var="comment">
-                                <h:column>
-                                    <f:facet name="header">Comment</f:facet>
-                                    #{comment.content}
-                                </h:column>
-                            </h:dataTable>
-                        </h:column>
-                    </h:dataTable>
-                    <h:messages id="load-msg"/>
-                </h:form>
+                <div class="personalPage">
+                    <h:form>
+                        <h:dataTable value="#{pageBean.getPosts()}" var="post">
+                            <h:column>
+                                <div class="post">
+                                    &nbsp;
+                                    <p class="postContents">#{post.content}</p>
+                                    <div class="authorDate clearfix">
+                                        <p class="author lfloat">#{post.authorId.firstName} #{post.authorId.lastName}</p>
+                                        <p class="createdDate rfloat">#{post.dateCreated}</p>
+                                    </div>
+                                    <h:dataTable value="#{post.getCommentsList()}" var="comment">
+                                        <h:column>
+                                            <f:facet name="header">Comments</f:facet>
+                                            <div class="comment">
+                                                <p class="commentContent">#{comment.content}</p>
+                                                <div class="authorDatec clearfix">
+                                                    <p class="author lfloat">#{comment.authorId.firstName} #{comment.authorId.lastName}</p>
+                                                    <p class="createdDate rfloat">#{comment.dateCreated}</p>
+                                                </div>
+                                            </div>
+                                        </h:column>
+                                    </h:dataTable>
+                                    &nbsp;
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                        <h:messages id="load-msg"/>
+                    </h:form>
+                </div>
             </div>
-            
         </ui:define>
     </ui:composition>
 </html>
