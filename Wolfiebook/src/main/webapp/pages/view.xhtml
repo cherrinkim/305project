@@ -11,15 +11,20 @@
         <p:dialog id="UsersViewDlg" widgetVar="UsersViewDialog" modal="true" resizable="false" appendTo="@(content)" header="hello">
             <h:form id="UsersViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{userBean.selected != null}">
-                        <h:outputText value="Message"/>
-                        <h:outputText value="#{userBean.selected.userId}" title="khgkh"/>
+                    <p:panelGrid columns="3" rendered="#{userBean.selected != null}">
+                        <h:outputText value="Message with"/>
+                        <h:outputText value="#{userBean.selected.firstName}"/>
+                        <h:outputText value="#{userBean.selected.lastName}"/>
                     </p:panelGrid>
-                    <p:dataTable value="#{messageBean.getMessages(userBean.selected)}" var="msg">
+                    <p:dataTable value="#{messageBean.getMessages(userBean.selected)}" var="msg"
+                                 emptyMessage="No messages">
                         <p:column headerText="MSG">
                             <h:outputText value="#{msg.content}"/>
                         </p:column>
                     </p:dataTable>
+                    <h:inputText value="#{messageBean.subject}"/>
+                    <h:inputTextarea value="#{messageBean.content}"/>
+                    <p:commandButton value="Send" action="messageBean.sendMessages()"/>
                     <p:commandButton value="#{bundle['button.close']}" onclick="UsersViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
