@@ -423,7 +423,7 @@ CREATE TABLE `Users` (
   `zipcode` varchar(10) NOT NULL,
   `telephone` char(12) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `accountCreated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `accountCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `creditCard` char(16) DEFAULT NULL,
   `purchaseRating` int(1) NOT NULL,
   PRIMARY KEY (`userId`),
