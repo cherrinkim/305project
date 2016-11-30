@@ -24,4 +24,18 @@ public class PagesFacade extends AbstractFacade<Pages> {
     public PagesFacade() {
         super(Pages.class);
     }
+    
+    public void createPage(Users user){
+        try {
+            Users usr = (Users) em.createNamedQuery("Users.findByEmail")
+                    .setParameter("email", user.getEmail())
+                    .getSingleResult();
+
+            Pages page = new Pages();
+            page.setOwnerId(usr);
+            em.persist(page);
+            } catch(NoResultException e){
+                
+            }  
+    }
 }
