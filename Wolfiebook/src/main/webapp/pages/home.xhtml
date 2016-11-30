@@ -14,18 +14,18 @@
                                      required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
                             <p:commandButton  update="post-data" id="post-btn" value="Post" action="#{pageBean.newPost()}"/>
                         </div>
-                        <p:dataTable id="post-data" value="#{pageBean.getPosts()}" var="post"
+                        <p:dataTable id="post-data" value="#{pageBean.posts}" var="post"
                                      sortBy="#{post.postId}" sortOrder="descending">
                             <p:column class="post-box" headerText="Post">
                                 <div class="post-div">
                                     <h:outputText value="#{post.content}" class="post-contents" rendered="#{not pageBean.editmode}"/>
-                                    <h:inputText value="#{post.content}" class="post-contents" rendered="#{pageBean.editmode}" />
+                                    <h:inputText id="editPost" value="#{post.content}" class="post-contents" rendered="#{pageBean.editmode}" />
 ..
                                     <div class="post-meta">
                                         <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}" class="post-author"/>
                                         <h:outputText value="#{post.dateCreated}" class="post-created"/>
-                                        <h:commandButton id="editPostButton" value="Edit" action="#{pageBean.edit()}" rendered="#{not pageBean.editmode}"/>
-                                        <h:commandButton id="savePostButton" value="Save" action="#{pageBean.save()}" rendered="#{pageBean.editmode}" />
+                                        <p:commandButton id="editPostButton" value="Edit" action="#{pageBean.edit()}" rendered="#{not pageBean.editmode}"/>
+                                        <p:commandButton id="savePostButton" value="Save" action="#{pageBean.save(post)}" rendered="#{pageBean.editmode}" />
                                     </div>
                                     <div class="comment-div">
                                         <p:dataTable id="comment-data" value="#{post.getCommentsList()}" var="comment">

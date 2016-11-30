@@ -40,6 +40,8 @@ public class PageBean extends GlobalBean implements Serializable {
     private String postContent;
     private String commentContent;
     
+    private List<Posts> posts;
+    
     private boolean editmode;
     
     
@@ -151,10 +153,11 @@ public class PageBean extends GlobalBean implements Serializable {
         editmode = true;
     }
     
-    public void save() {
-        // save pagefacade entity
+    public void save(Posts post) {
+        postFacade.editPost(post);
         editmode = false;
     }
+
     
     public boolean isEditmode(){
         return editmode;

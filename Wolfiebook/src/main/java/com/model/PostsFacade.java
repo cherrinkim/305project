@@ -28,4 +28,8 @@ public class PostsFacade extends AbstractFacade<Posts> {
         super(Posts.class);
     }
     
+    public void editPost(Posts post){
+        em.persist(post);
+    }
+    
 }
