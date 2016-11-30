@@ -22,7 +22,7 @@
             <%
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Wolfiebook",
-                "root", "");
+                "root", "!Q@W3e4r");
                 Statement st = con.createStatement();
                 ResultSet rs;
                 String id = request.getParameter("deleteid");
