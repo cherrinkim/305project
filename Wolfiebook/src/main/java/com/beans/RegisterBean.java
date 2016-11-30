@@ -5,6 +5,7 @@
  */
 package com.beans;
 
+import com.model.PagesFacade;
 import com.model.UserExistsException;
 import com.model.Users;
 import com.model.UsersFacade;
@@ -23,6 +24,8 @@ import javax.inject.Named;
 public class RegisterBean extends GlobalBean implements Serializable {
     @EJB
     private UsersFacade userService;
+    @EJB
+    private PagesFacade pageService;
     private Users user;
     private String email;
     private String userPassword;
@@ -48,8 +51,11 @@ public class RegisterBean extends GlobalBean implements Serializable {
         user.setZipcode(zipcode);
         user.setPurchaseRating(0);
         
+     
+        
         try {
             userService.registerUser(user);
+            pageService.createPage(user);
             sendMessage("register-msg", FacesMessage.SEVERITY_INFO, "You can now log in");
         } catch (UserExistsException ex) {
             System.out.println("user exists");
