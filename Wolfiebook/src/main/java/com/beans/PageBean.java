@@ -66,7 +66,7 @@ public class PageBean extends GlobalBean implements Serializable {
     
     public List<Posts> getPosts() {
         
-        Pages page = pageFacade.find(user.getUserId());
+        Pages page = pageFacade.findPage(user);
         
         if(page != null) {
             getSession().setAttribute("pageSession", page);
