@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import com.model.UserExistsException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,13 +45,13 @@ public class UsersFacade extends AbstractFacade<Users> {
     }
     
     public void registerUser(Users user) throws UserExistsException{
-            List usrs = (List) em.createNamedQuery("Users.findByEmail")
+            try {
+                Users usr = (Users) em.createNamedQuery("Users.findByEmail")
                     .setParameter("email", user.getEmail())
-                    .getResultList();
-            if(usrs.get(0) != null){
+                    .getSingleResult();
                 throw new UserExistsException();
-            }
-            em.persist(user);           
-      
+            } catch(NoResultException e){
+                em.persist(user);
+            }  
     }
 }
