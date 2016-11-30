@@ -33,7 +33,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Messages.findAll", query = "SELECT m FROM Messages m")
     , @NamedQuery(name = "Messages.findByMessageId", query = "SELECT m FROM Messages m WHERE m.messageId = :messageId")
     , @NamedQuery(name = "Messages.findByDateSent", query = "SELECT m FROM Messages m WHERE m.dateSent = :dateSent")
-    , @NamedQuery(name = "Messages.findBySubject", query = "SELECT m FROM Messages m WHERE m.subject = :subject")})
+    , @NamedQuery(name = "Messages.findBySubject", query = "SELECT m FROM Messages m WHERE m.subject = :subject")
+    , @NamedQuery(name= "Messages.findBySR", query = "SELECT m FROM Messages m WHERE m.sender = :sender AND m.receiver = :receiver")})
 public class Messages implements Serializable {
 
     private static final long serialVersionUID = 1L;
