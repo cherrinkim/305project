@@ -33,9 +33,23 @@ public class PagesFacade extends AbstractFacade<Pages> {
 
             Pages page = new Pages();
             page.setOwnerId(usr);
+            page.setPostCount(0);
             em.persist(page);
             } catch(NoResultException e){
                 
             }  
+    }
+    
+    public Pages findPage(Users user){
+        try{
+            Pages page = (Pages) em.createNamedQuery("Pages.findByOwner")
+                    .setParameter("ownerId", user)
+                    .getSingleResult();
+            
+            return page;
+        } catch(NoResultException e){
+            
+        }
+        return null;
     }
 }
