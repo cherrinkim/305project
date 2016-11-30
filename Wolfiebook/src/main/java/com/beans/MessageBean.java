@@ -23,6 +23,8 @@ public class MessageBean extends GlobalBean {
     
     private List<Messages> messages;
     private Users user;
+    private String subject;
+    private String content;
     
     @ManagedProperty (value="#{param.receiver}")
     private Users receiver;
@@ -50,5 +52,33 @@ public class MessageBean extends GlobalBean {
         } else {
             return null;
         }
+    }
+    
+    public void sendMessages(Users receiver) {
+        
+        Messages msg = new Messages();
+        msg.setSubject(subject);
+        msg.setContent(content);
+        msg.setSender(user);
+        msg.setReceiver(receiver);
+        
+        
+        
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

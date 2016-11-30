@@ -42,4 +42,7 @@ public class MessagesFacade extends AbstractFacade<Messages> {
         }
     }
     
+    public void send(String subject, String content) {
+        
+    }
 }

@@ -277,6 +277,10 @@ header h1 {
     border: none !important;
 }
 
+.ui-panelgrid-cell {
+    border: none !important;
+}
+
 /* PRIMEFACES MENU BAR */
 .ui-menu {
     background: #fff;
