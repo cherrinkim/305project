@@ -11,6 +11,7 @@ import com.model.UsersFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 
 /**
@@ -49,9 +50,10 @@ public class RegisterBean extends GlobalBean implements Serializable {
         
         try {
             userService.registerUser(user);
+            sendMessage("register-msg", FacesMessage.SEVERITY_INFO, "You can now log in");
         } catch (UserExistsException ex) {
             System.out.println("user exists");
-            return null;
+            sendMessage("register-msg", FacesMessage.SEVERITY_ERROR, "User with email already exists.");
         }
         return "";
     }
