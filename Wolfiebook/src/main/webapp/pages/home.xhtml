@@ -3,37 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
             <div id="main-div">
                 <div class="personalPage">
-                    <h:form>
-                        <h:dataTable value="#{pageBean.getPosts()}" var="post">
-                            <h:column>
-                                <div class="post">
-                                    &nbsp;
-                                    <p class="postContents">#{post.content}</p>
-                                    <div class="authorDate clearfix">
-                                        <p class="author lfloat">#{post.authorId.firstName} #{post.authorId.lastName}</p>
-                                        <p class="createdDate rfloat">#{post.dateCreated}</p>
+                    <h:form id="pPageForm">
+                        <div class="post-input">
+                            <p:inputText id="newPost" value="#{pageBean.postContent}" 
+                                     required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
+                            <p:commandButton  update="post-data" id="post-btn" value="Post" action="#{pageBean.newPost()}"/>
+                        </div>
+                        <p:dataTable id="post-data" value="#{pageBean.getPosts()}" var="post"
+                                     sortBy="#{post.postId}" sortOrder="descending">
+                            <p:column class="post-box" headerText="Post">
+                                <div class="post-div">
+                                    <h:outputText value="#{post.content}" class="post-contents"/>
+                                    <div class="post-meta">
+                                        <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}" class="post-author"/>
+                                        <h:outputText value="#{post.dateCreated}" class="post-created"/>
                                     </div>
-                                    <h:dataTable value="#{post.getCommentsList()}" var="comment">
-                                        <h:column>
-                                            <f:facet name="header">Comments</f:facet>
-                                            <div class="comment">
-                                                <p class="commentContent">#{comment.content}</p>
-                                                <div class="authorDatec clearfix">
-                                                    <p class="author lfloat">#{comment.authorId.firstName} #{comment.authorId.lastName}</p>
-                                                    <p class="createdDate rfloat">#{comment.dateCreated}</p>
+                                    <div class="comment-div">
+                                        <p:dataTable id="comment-data" value="#{post.getCommentsList()}" var="comment">
+                                            <p:column class="comment-box" headerText="Comment">
+                                                <h:outputText value="#{comment.content}" class="comment-contents"/>
+                                                <div class="comment-meta">
+                                                    <h:outputText value="#{comment.authorId.firstName} #{comment.authorId.lastName}" class="comment-author"/>
+                                                    <h:outputText value="#{comment.dateCreated}" class="comment-created"/>
                                                 </div>
-                                            </div>
-                                        </h:column>
-                                    </h:dataTable>
-                                    &nbsp;
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
                                 </div>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                         <h:messages id="load-msg"/>
                     </h:form>
                 </div>
