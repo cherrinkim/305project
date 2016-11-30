@@ -81,7 +81,7 @@ public class PageBean extends GlobalBean implements Serializable {
         
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
         
-        Pages page = pageFacade.find(user.getUserId());
+        Pages page = pageFacade.findPage(user);
         page.setPostCount(page.getPostCount()+1);
         
         Posts post = new Posts();

@@ -33,6 +33,7 @@ public class PagesFacade extends AbstractFacade<Pages> {
 
             Pages page = new Pages();
             page.setOwnerId(usr);
+            page.setPostCount(0);
             em.persist(page);
             } catch(NoResultException e){
                 
