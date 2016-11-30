@@ -142,22 +142,36 @@ header h1 {
     text-align: left;
 }
 
-.personalPage table table {
-    border-collapse: collapse;
-    margin-top: 10px;
+.post-box,
+.comment-box {
+    padding: 15px !important;
+    border: none !important;
 }
 
-.post {
+.post-contents {
+    font-size: 1.4em;
+}
+
+.post-meta,
+.comment-meta {
+    margin-top: 15px;
+}
+
+.post-created,
+.comment-created {
+    margin-left: 25px;
+}
+
+#pPageForm {
+    margin-top: 15px;
+}
+
+.post-input input {
+    width: 90%;
+    height: 100px;
+    margin-right: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
-    border-radius: 8px;
-    background-color: #fff;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.postContents{
-    font-size: 1.2em;
 }
 
 .comment {
@@ -166,8 +180,12 @@ header h1 {
     border-bottom: 1px solid darkblue;
 }
 
-.commentContent {
-    font-size: 0.85em;
+.comment-div {
+    margin-top: 20px;
+}
+
+.comment-contents {
+    font-size: 1.15em;
 }
 
 .authorDate {
@@ -245,6 +263,18 @@ header h1 {
 }
 .ui-button {
     margin-top: 10px !important;
+}
+
+.ui-datatable thead th {
+    display: none;
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+    text-align: left !important;
+}
+
+.ui-datatable tbody td {
+    border: none !important;
 }
 
 /* PRIMEFACES MENU BAR */
