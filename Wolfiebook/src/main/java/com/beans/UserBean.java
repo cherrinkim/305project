@@ -49,8 +49,8 @@ public class UserBean extends GlobalBean implements Serializable {
     }
         
     public String login() {
-        
-        Users user = userService.authenticateUser(email, password);
+        String hashedPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+        Users user = userService.authenticateUser(email, hashedPassword);
         
         if(user != null) {
             getSession().setAttribute("userSession", user);
