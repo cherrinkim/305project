@@ -32,6 +32,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
     private String state;
     private String telephone;
     private String city;
+    private int purchaseRating;
     
     public String register() { 
         Users user = new Users();
@@ -44,6 +45,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
         user.setState(state);
         user.setTelephone(telephone);
         user.setZipcode(zipcode);
+        user.setPurchaseRating(0);
         
         try {
             userService.registerUser(user);
@@ -54,7 +56,14 @@ public class RegisterBean extends GlobalBean implements Serializable {
         return "";
     }
 
-
+    public int getPurchaseRating(){
+        return purchaseRating;
+    }
+    
+    public void setPurchaseRating(int rating){
+        purchaseRating = rating;
+    }
+    
     public String getUserPassword() {
         return userPassword;
     }
