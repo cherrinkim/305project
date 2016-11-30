@@ -18,11 +18,11 @@
                         <h:outputLabel value="Password" for="login-pwd"/>
                         <h:outputLabel value=""/>
 
-                        <h:inputText id="login-mail" value="#{loginBean.email}" 
+                        <h:inputText id="login-mail" value="#{userBean.email}" 
                                      required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
-                        <h:inputSecret id="login-pwd" value="#{loginBean.password}" 
+                        <h:inputSecret id="login-pwd" value="#{userBean.password}" 
                                        required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
-                        <h:commandButton id="login-btn" value="Log In" action="#{loginBean.login()}"/>
+                        <h:commandButton id="login-btn" value="Log In" action="#{userBean.login()}"/>
                     </p:panelGrid>
                     <h:messages id="login-msg"/>
                 </h:form>

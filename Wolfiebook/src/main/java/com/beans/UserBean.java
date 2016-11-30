@@ -9,6 +9,8 @@ import com.model.Users;
 import com.model.UsersFacade;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -18,9 +20,9 @@ import javax.faces.application.FacesMessage;
  *
  * @author jeonghoon-kim
  */
-@Named(value = "loginBean")
+@Named(value = "userBean")
 @SessionScoped
-public class LoginBean extends GlobalBean implements Serializable {
+public class UserBean extends GlobalBean implements Serializable {
     
     @EJB
     private UsersFacade userService;
@@ -28,6 +30,24 @@ public class LoginBean extends GlobalBean implements Serializable {
     private String email;
     private String password;
     
+    private Users selected;
+    
+    private List<Users> users;
+    private List<Users> filteredUsers;
+    
+    @PostConstruct
+    public void init() {
+        users = userService.findAll();
+    }
+    
+    public Users getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Users selected) {
+        this.selected = selected;
+    }
+        
     public String login() {
         
         Users user = userService.authenticateUser(email, password);
@@ -61,5 +81,17 @@ public class LoginBean extends GlobalBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public List<Users> getUsers() {
+        return users;
+    }
+    
+    public List<Users> getFilteredUsers(){
+        return filteredUsers;
+    }
+    
+    public void setFilteredUsers(List<Users> filteredUsers) {
+        this.filteredUsers = filteredUsers;
     }
 }

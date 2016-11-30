@@ -5,8 +5,10 @@
  */
 package com.model;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -26,6 +28,18 @@ public class MessagesFacade extends AbstractFacade<Messages> {
 
     public MessagesFacade() {
         super(Messages.class);
+    }
+    
+    public List<Messages> messageHistory(Users sender, Users receiver) {    
+        try {
+            List<Messages> msg = (List<Messages>) em.createNamedQuery("Messages.findBySR")
+                .setParameter("sender", sender)
+                .setParameter("receiver", receiver)
+                .getResultList();
+            return msg;
+        } catch(NoResultException e) {
+            return null;
+        }
     }
     
 }
