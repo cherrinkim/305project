@@ -21,7 +21,7 @@
             String userid = request.getParameter("id");    
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Wolfiebook",
-            "root", "");
+            "root", "!Q@W3e4r");
             Statement st = con.createStatement();
             ResultSet rs;
             rs = st.executeQuery("SELECT firstName, lastName FROM Users where userId = '" + userid + "'");

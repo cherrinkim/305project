@@ -23,7 +23,7 @@
             String lastName = request.getParameter("lastName");
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Wolfiebook",
-            "root", "");
+            "root", "!Q@W3e4r");
             Statement st = con.createStatement();
             ResultSet rs;
             rs = st.executeQuery("SELECT S.transactionId, S.buyerId, S.cardNumber, S.dateSold, "
