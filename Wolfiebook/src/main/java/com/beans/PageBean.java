@@ -101,7 +101,7 @@ public class PageBean extends GlobalBean implements Serializable {
         getSession().setAttribute("pageSession", page);
         getSession().setAttribute("postSession", post);
         
-        pageFacade.edit(page);
+        //pageFacade.edit(page);
         postFacade.edit(post);
         
         return "/pages/home?faces-redirect=true";
