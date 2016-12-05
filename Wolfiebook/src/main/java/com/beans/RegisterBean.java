@@ -11,7 +11,7 @@ import com.model.Users;
 import com.model.UsersFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 
@@ -20,13 +20,12 @@ import javax.inject.Named;
  * @author cherrinkim
  */
 @Named(value = "registerBean")
-@SessionScoped
+@RequestScoped
 public class RegisterBean extends GlobalBean implements Serializable {
     @EJB
     private UsersFacade userService;
     @EJB
     private PagesFacade pageService;
-    private Users user;
     private String email;
     private String userPassword;
     private String firstName;
@@ -50,8 +49,6 @@ public class RegisterBean extends GlobalBean implements Serializable {
         user.setTelephone(telephone);
         user.setZipcode(zipcode);
         user.setPurchaseRating(0);
-        
-     
         
         try {
             userService.registerUser(user);

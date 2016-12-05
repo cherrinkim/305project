@@ -61,6 +61,11 @@ public class UserBean extends GlobalBean implements Serializable {
         }
     }
     
+    public String logout() {
+        getSession().invalidate();
+        return "/index?faces-redirect=true";
+    }
+    
     public String userName() {
         
         Users user = (Users) getSession().getAttribute("userSession");

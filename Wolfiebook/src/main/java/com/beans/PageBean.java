@@ -40,7 +40,7 @@ public class PageBean extends GlobalBean implements Serializable {
     private String postContent;
     private String commentContent;
     
-    private List<Posts> posts;
+    
     
     private boolean editmode;
     
@@ -99,11 +99,8 @@ public class PageBean extends GlobalBean implements Serializable {
         posts.add(post);
         page.setPostsList(posts);
         getSession().setAttribute("pageSession", page);
-        getSession().setAttribute("postSession", post);
         
-        //pageFacade.edit(page);
-        postFacade.edit(post);
-        
+        pageFacade.edit(page);
         return "/pages/home?faces-redirect=true";
     }
     
