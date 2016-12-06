@@ -7,18 +7,18 @@
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
             <h:form id="personalPage">
-                <p:inputTextarea id="postMessage" value="#{pageBean.postContent}" 
+                <p:editor id="postMessage" value="#{pageBean.postContent}"
                              required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
                 <p:commandButton  update="postTable" id="post-btn" value="Post" action="#{pageBean.newPost()}"/>                
-                <p:dataTable id="postTable" value="#{pageBean.getPosts()}" var="post"
-                             sortBy="#{post.postId}" sortOrder="descending">
-                    <p:column>
-                        <h:outputText value="#{post.content}"/>
+                <p:dataTable id="postTable" value="#{pageBean.getPosts()}" var="post" style="margin-top: 25px;"
+                             sortBy="#{post.dateCreated}" sortOrder="descending" emptyMessage="No post available">
+                    <p:column headerText="Content">
+                        <h:outputText value="#{post.content}" escape="false"/>
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Author">
                         <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Created Date">
                         <h:outputText value="#{post.dateCreated}"/>
                     </p:column>
                 </p:dataTable>

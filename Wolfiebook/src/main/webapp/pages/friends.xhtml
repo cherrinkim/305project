@@ -7,26 +7,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-                
                 <ui:include src="view.xhtml"/>
                 <h:form id="UsersListForm">
                     <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
-                                 emptyMessage="No users found with given criteria" filteredValue="#{userBean.filteredUsers}"
-                                 rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}">
-                        
+                                 emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}"
+                                 rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
                         <p:ajax event="rowSelect"   update="viewButton"/>
                         <p:ajax event="rowUnselect" update="viewButton"/>
-                        
                         <f:facet name="header">
                             <p:outputPanel>
-                                <h:outputText value="Search users:"/>
-                                <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="width: 300px;" placeholder="Enter user name, email or phone number"/>
+                                <h:outputText value="Search users: "/>
+                                <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="width: 400px;" placeholder="Enter user name, email or phone number"/>
                             </p:outputPanel>
                         </f:facet>
-                        <p:column filterBy="#{user.firstName}" headerText="First Name" filterMatchMode="contains">
+                        <p:column headerText="First Name" filterMatchMode="contains">
                             <h:outputText value="#{user.firstName}"/>
                         </p:column>
-                        <p:column filterBy="#{user.lastName}" headerText="Last Name" filterMatchMode="contains">
+                        <p:column  headerText="Last Name" filterMatchMode="contains">
                             <h:outputText value="#{user.lastName}"/>
                         </p:column>
                         <p:column filterBy="#{user.telephone}" headerText="" filterMatchMode="contains" style="display:none;">
@@ -36,12 +33,10 @@
                             <h:outputText value="#{user.email}"/>
                         </p:column>
                         <f:facet name="footer">
-                            
                             <p:commandButton id="viewButton"   icon="fa fa-search" value="#{bundle['button.view']}" update=":UsersViewForm" oncomplete="PF('UsersViewDialog').show()" disabled="#{empty userBean.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </h:form>
-
         </ui:define>
     </ui:composition>
 </html>

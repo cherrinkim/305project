@@ -7,29 +7,46 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition>
-
-        <p:dialog id="UsersViewDlg" widgetVar="UsersViewDialog" modal="true" resizable="false" appendTo="@(content)" header="hello">
+        <p:dialog id="UsersViewDlg" widgetVar="UsersViewDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)">
             <h:form id="UsersViewForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="3" rendered="#{userBean.selected != null}">
-                        <h:outputText value="Message with"/>
-                        <h:outputText value="#{userBean.selected.firstName}"/>
-                        <h:outputText value="#{userBean.selected.lastName}"/>
-                    </p:panelGrid>
-                    <p:dataTable value="#{messageBean.getMessages(userBean.selected)}" var="msg"
-                                 emptyMessage="No messages">
-                        <p:column headerText="MSG">
-                            <h:outputText value="#{msg.content}"/>
+                <h:outputText value="#{userBean.selected.firstName} #{userBean.selected.lastName}" style="font-size:1.2em"/>
+                <p:panelGrid style="margin-top:20px;">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="3">Messages</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column rowspan="3">
+                            <p:dataTable id="msgTable" value="#{messageBean.getMessages(userBean.selected)}" var="msg" emptyMessage="No messages" >
+                                <p:column headerText="Content">
+                                    <h:outputText value="#{msg.content}"/>
+                                </p:column>
+                                <p:column headerText="From">
+                                    <h:outputText value="#{msg.sender.firstName} #{msg.sender.lastName}"/>
+                                </p:column>
+                            </p:dataTable>
                         </p:column>
-                    </p:dataTable>
-                    <h:inputText value="#{messageBean.subject}"/>
-                    <h:inputTextarea value="#{messageBean.content}"/>
-                    <p:commandButton value="Send" action="messageBean.sendMessages()"/>
-                    <p:commandButton value="#{bundle['button.close']}" onclick="UsersViewDialog.hide()"/>
-                </h:panelGroup>
+                        <p:column colspan="2">
+                            <p:inputText value="#{messageBean.subject}" style="width:300px;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:inputTextarea value="#{messageBean.content}" style="width:300px;min-height:300px;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="1">
+                            <p:commandButton value="Send" action="#{messageBean.sendMessages(userBean.selected)}" update="msgTable"/>
+                        </p:column>
+                        <p:column colspan="1">
+                            <p:commandButton value="#{bundle['button.close']}" onclick="UsersViewDialog.hide()"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
             </h:form>
         </p:dialog>
 
     </ui:composition>
 </html>
-

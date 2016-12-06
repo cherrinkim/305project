@@ -58,7 +58,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
             System.out.println("user exists");
             sendMessage("register-msg", FacesMessage.SEVERITY_ERROR, "User with email already exists.");
         }
-        return "";
+        return "/index?faces-redirect=true";
     }
 
     public int getPurchaseRating(){

@@ -184,3 +184,15 @@ header h1 {
 .ui-state-default {
     text-shadow: none !important;
 }
+
+.ui-panelgrid .ui-panelgrid-cell{
+    border: none !important;
+}
+
+.ui-panelgrid {
+    border-collapse: separate !important;
+}
+
+#messageTitle .ui-widget-content {
+    border: none !important;
+}

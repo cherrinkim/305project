@@ -3,6 +3,8 @@ package com.beans;
 import com.model.Messages;
 import com.model.MessagesFacade;
 import com.model.Users;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -55,15 +57,14 @@ public class MessageBean extends GlobalBean {
     }
     
     public void sendMessages(Users receiver) {
-        
+        Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
         Messages msg = new Messages();
         msg.setSubject(subject);
         msg.setContent(content);
+        msg.setDateSent(currentTimestamp);
         msg.setSender(user);
         msg.setReceiver(receiver);
-        
-        
-        
+        messageService.edit(msg);
     }
 
     public String getSubject() {
