@@ -19,6 +19,10 @@ public class GlobalBean {
         return FacesContext.getCurrentInstance();
     }
     
+    protected HttpSession startSession() {
+        return (HttpSession) getFacesContext().getExternalContext().getSession(true);
+    }
+    
     protected HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }

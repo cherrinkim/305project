@@ -65,7 +65,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
         return purchaseRating;
     }
     
-    public void setPurchaseRating(int rating){
+    public void setPurchaseRating(int rating) {
         purchaseRating = rating;
     }
     

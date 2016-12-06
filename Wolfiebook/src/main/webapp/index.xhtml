@@ -3,59 +3,124 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-    <h:head>
-        <title>#{bundle['app.title']}</title>
-        <h:outputStylesheet name="css/index.css"/>
-    </h:head>
-    <h:body>
-        <div class="main-wrapper">
-            <header class="clearfix">
-                <h1 class="lfloat">#{bundle['app.title']}</h1>
-                <h:form class="rfloat" id="login-form" prependId="false">
-                    <p:panelGrid id="login-grid" columns="3">
-                        <h:outputLabel value="Email" for="login-mail"/>
-                        <h:outputLabel value="Password" for="login-pwd"/>
-                        <h:outputLabel value=""/>
-
-                        <h:inputText id="login-mail" value="#{userBean.email}" 
-                                     required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
-                        <h:inputSecret id="login-pwd" value="#{userBean.password}" 
-                                       required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
-                        <h:commandButton id="login-btn" value="Log In" action="#{userBean.login()}"/>
-                    </p:panelGrid>
-                    <h:messages id="login-msg"/>
-                </h:form>
-            </header>
-            <div class="content clearfix">
-<!--                <div class="banner-img lfloat">
-                    <p:graphicImage name="img/seawolves.png"/>
-                </div>-->
-                <div class="register rfloat">
-                    
-                    <h:form id="register-form" prependId="false">
-                        <h3>Sign Up</h3>
-                        <div class="clearfix">
-                            <h:inputText class="lfloat mbox" value="#{registerBean.firstName}"  id="first_name" required="true" a:placeholder="First name"/>
-                            <h:inputText class="rfloat mbox" value="#{registerBean.lastName}"  id="last_name" required="true" a:placeholder="Last name"/>
-                        </div>
-                        <h:inputText class="lbox" value="#{registerBean.email}" id="email" required="true" a:placeholder="Email address"/>
-                        <h:inputSecret class="lbox" value="#{registerBean.userPassword}" id="pwd" required="true" a:placeholder="New password"/>
-                        <h:inputText class="lbox" value="#{registerBean.address}" id="addr" required="true" a:placeholder="Address"/>
-                        <div class="clearfix">
-                            <h:inputText class="lfloat sbox" value="#{registerBean.city}" id="city" required="true" a:placeholder="City"/>
-                            <h:inputText class="mfloat sbox" value="#{registerBean.state}" id="state" required="true" a:placeholder="State"/>
-                            <h:inputText class="rfloat sbox" value="#{registerBean.zipcode}" id="zip" required="true" a:placeholder="Zipcode"/>
-                        </div>
-                        <h:inputText class="lbox" value="#{registerBean.telephone}" id="mobile" required="true" a:placeholder="Mobile number"/>
-                        <h:commandButton id="register-btn" value="Sign Up" action="#{registerBean.register()}"/>
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
+        <ui:define name="header">
+            <p:menubar></p:menubar>
+            <div class="nav-wrapper clearfix">
+                <div class="lfloat clearfix" id="logobox">
+                    <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
+                    <h3 class="rfloat">#{bundle['app.title']}</h3>
+                </div>
+                <div class="navbar rfloat">
+                    <h:form>
+                        <p:growl id="login-msg" life="2000"/>
+                        <!--Log in Form HERE-->
+                        <h:panelGrid columns="6" cellpadding="5">
+                            <h:outputLabel value="Email:" for="login-mail"/>
+                            <p:inputText id="login-mail" value="#{userBean.email}" 
+                                         required="true" requiredMessage="#{bundle['msg.usermail.validation']}"/>
+                            <h:outputLabel value="Password:" for="login-pwd"/>
+                            <p:password id="login-pwd" value="#{userBean.password}" 
+                                        required="true" requiredMessage="#{bundle['msg.userpwd.validation']}"/>
+                            <p:commandButton id="login-btn" value="Log In" action="#{userBean.login}" update="login-msg"/>
+                        </h:panelGrid>
                     </h:form>
                 </div>
             </div>
+        </ui:define>
+        <ui:define name="content">
+            <!-- Register Form HERE -->
+            <div class="ui-g" style="background-image: url('./resources/img/background.png'); background-size: 100%; background-repeat: no-repeat; height: 550px; padding-top: 65px;">
+                <div class="ui-g-12 ui-md-8" style="padding: 15px;">
+                    <p:graphicImage id="banner" name="img/seawolves.png" style="width:100%;"/>
+                </div>
+                <div class="ui-g-12 ui-md-4 ui-g-nopad register" style="padding: 15px;">
+                    <h:form>
+                        <p:growl id="register-msg" life="2000" />
+                        <div class="ui-g-12"><h3>Sign Up</h3></div>
+                        <div class="ui-g-12 ui-g-nopad">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.firstName}"  id="first_name" required="true" requiredMessage="#{bundle['msg.firstname.validation']}" a:placeholder="First name" style="width:100%;"/></div>
+                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.lastName}"  id="last_name" required="true" requiredMessage="#{bundle['msg.lastname.validation']}" a:placeholder="Last name" style="width:100%;"/></div>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-g-12"><p:inputText  value="#{registerBean.email}" id="email" required="true" requiredMessage="#{bundle['msg.usermail.validation']}" a:placeholder="Email address" style="width:100%;"/></div>
+                                <div class="ui-g-12"><p:password value="#{registerBean.userPassword}" id="pwd" required="true" requiredMessage="#{bundle['msg.userpwd.validation']}" a:placeholder="New password" style="width:100%;"/></div>
+                                <div class="ui-g-12"><p:inputText value="#{registerBean.address}" id="addr" required="true" requiredMessage="#{bundle['msg.address.validation']}" a:placeholder="Address" style="width:100%;"/></div>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.city}" id="city" required="true" requiredMessage="#{bundle['msg.city.validation']}" a:placeholder="City" style="width:100%;"/></div>
+                                <div class="ui-g-12 ui-md-6">
+                                    <p:selectOneMenu id="state" value="#{registerBean.state}" style="width:100%;" required="true" requiredMessage="#{bundle['msg.state.validation']}">
+                                        <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" id="selectOne"/>
+                                        <f:selectItem itemLabel="Alabama" itemValue="AL" />
+                                        <f:selectItem itemLabel="Alaska" itemValue="AK" />
+                                        <f:selectItem itemLabel="Arizona" itemValue="AZ" />
+                                        <f:selectItem itemLabel="Arkansas" itemValue="AR" />
+                                        <f:selectItem itemLabel="California" itemValue="CA" />
+                                        <f:selectItem itemLabel="Colorado" itemValue="CO" />
+                                        <f:selectItem itemLabel="Connecticut" itemValue="CT" />
+                                        <f:selectItem itemLabel="Delaware" itemValue="DE" />
+                                        <f:selectItem itemLabel="Florida" itemValue="FL" />
+                                        <f:selectItem itemLabel="Georgia" itemValue="GA" />
+                                        <f:selectItem itemLabel="Hawaii" itemValue="HI" />
+                                        <f:selectItem itemLabel="Idaho" itemValue="ID" />
+                                        <f:selectItem itemLabel="Illinois" itemValue="IL" />
+                                        <f:selectItem itemLabel="Indiana" itemValue="IN" />
+                                        <f:selectItem itemLabel="Iowa" itemValue="IA" />
+                                        <f:selectItem itemLabel="Kensas" itemValue="KS" />
+                                        <f:selectItem itemLabel="Kentucky" itemValue="KY" />
+                                        <f:selectItem itemLabel="Louisiana" itemValue="LA" />
+                                        <f:selectItem itemLabel="Maine" itemValue="ME" />
+                                        <f:selectItem itemLabel="Maryland" itemValue="MD" />
+                                        <f:selectItem itemLabel="Massachusetts" itemValue="MA" />
+                                        <f:selectItem itemLabel="Michigan" itemValue="MI" />
+                                        <f:selectItem itemLabel="Minnesota" itemValue="MN" />
+                                        <f:selectItem itemLabel="Mississippi" itemValue="MS" />
+                                        <f:selectItem itemLabel="Missouri" itemValue="MO" />
+                                        <f:selectItem itemLabel="Montana" itemValue="MT" />
+                                        <f:selectItem itemLabel="Nebraska" itemValue="NE" />
+                                        <f:selectItem itemLabel="Nevada" itemValue="NV" />
+                                        <f:selectItem itemLabel="New Hampshire" itemValue="NH" />
+                                        <f:selectItem itemLabel="New Jersey" itemValue="NJ" />
+                                        <f:selectItem itemLabel="New Mexico" itemValue="NM" />
+                                        <f:selectItem itemLabel="New York" itemValue="NY" />
+                                        <f:selectItem itemLabel="North Carolina" itemValue="NC" />
+                                        <f:selectItem itemLabel="North Dakota" itemValue="ND" />
+                                        <f:selectItem itemLabel="Ohio" itemValue="OH" />
+                                        <f:selectItem itemLabel="Oklahoma" itemValue="OK" />
+                                        <f:selectItem itemLabel="Oregon" itemValue="OR" />
+                                        <f:selectItem itemLabel="Pennsylvania" itemValue="PA" />
+                                        <f:selectItem itemLabel="Rhode Island" itemValue="RI" />
+                                        <f:selectItem itemLabel="South Carolina" itemValue="SC" />
+                                        <f:selectItem itemLabel="South Dakota" itemValue="SD" />
+                                        <f:selectItem itemLabel="Tennessee" itemValue="TN" />
+                                        <f:selectItem itemLabel="Texas" itemValue="TX" />
+                                        <f:selectItem itemLabel="Utah" itemValue="UT" />
+                                        <f:selectItem itemLabel="Vermont" itemValue="VT" />
+                                        <f:selectItem itemLabel="Virginia" itemValue="VA" />
+                                        <f:selectItem itemLabel="Washington" itemValue="WA" />
+                                        <f:selectItem itemLabel="West Virginia" itemValue="WV" />
+                                        <f:selectItem itemLabel="Wisconsin" itemValue="WI" />
+                                        <f:selectItem itemLabel="Wyoming" itemValue="WY" />
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.zipcode}" id="zip" required="true" requiredMessage="#{bundle['msg.zipcode.validation']}" a:placeholder="Zipcode" style="width:100%;"/></div>
+                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.telephone}" id="mobile" required="true" requiredMessage="#{bundle['msg.mobile.validation']}" a:placeholder="Mobile number" style="width:100%;"/></div>
+                            </div>
+                            <div class="ui-g">
+                                <div class="ui-g-12"><p:commandButton id="register-btn" value="Sign Up" action="#{registerBean.register()}" update="register-msg"/></div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
 
-            <footer>
-                #{bundle['footer.copyright']}
-            </footer>
-        </div>
-    </h:body>
 </html>
