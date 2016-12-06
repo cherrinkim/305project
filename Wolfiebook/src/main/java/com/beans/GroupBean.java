@@ -66,6 +66,20 @@ public class GroupBean extends GlobalBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    public String deleteGroup(){
+        Groups group = groupFacade.findGroup(groupName);
+        List<Groups> groups = user.getGroupsList();
+        groups.remove(group);
+        user.setGroupsList(groups);
+        
+        groupFacade.deleteGroup(groupName);
+        
+        
+        userFacade.edit(user);
+        
+        return "/pages/group?faces-redirect=true";
+    }
+    
     public String createGroup(){
         Groups group = new Groups();
         group.setGroupName(groupName);
@@ -93,9 +107,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
 
     
-    public String deleteGroup(){
-        return "";
-    }
+    
     
     public String getGroupName() {
         return groupName;
@@ -132,10 +144,5 @@ public class GroupBean extends GlobalBean implements Serializable {
     public Boolean getIsEditable(){
         return isEditable;
     }
-    
-    public void editGroupName(){
-        this.isEditable = false;
-        //groupFacade.renameGroup(group);
-        //return "/pages/group?faces-redirect=true";
-    }
+
 }

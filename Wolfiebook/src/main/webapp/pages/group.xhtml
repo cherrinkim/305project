@@ -46,6 +46,7 @@
                     <p:column style="width:32px">
                         <p:rowEditor />
                     </p:column>
+                    
 
                 </p:dataTable>
             </h:form>
@@ -57,6 +58,13 @@
                     <h:inputText  value="#{groupBean.type}"  id="last_name" required="true" a:placeholder="Type"/>
                 </div>
                 <h:commandButton id="createGroupButton" value="Create" action="#{groupBean.createGroup()}"/>
+            </h:form>
+            <h:form id="deleteGroup-form" prependId="false">
+                <h3>Delete Group</h3>
+                <div class="clearfix">
+                    <h:inputText  value="#{groupBean.groupName}"  id="deleteGroup_name" required="true" a:placeholder="Group name"/>
+                </div>
+                <h:commandButton id="deleteGroupButton" value="Delete" action="#{groupBean.deleteGroup()}"/>
             </h:form>
         </ui:define>
 
