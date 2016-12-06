@@ -40,4 +40,7 @@ public class GroupsFacade extends AbstractFacade<Groups> {
         }  
     }
     
+    public void renameGroup(Groups group){
+            em.merge(group);  
+    }
 }

@@ -20,7 +20,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -33,6 +36,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     private String type;
     private Users user;
     private String newName;
+    private Boolean isEditable;
     
     @EJB
     private GroupsFacade groupFacade;
@@ -49,6 +53,17 @@ public class GroupBean extends GlobalBean implements Serializable {
         } catch(NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
+    }
+    
+    public void onRowEdit(RowEditEvent event){
+        FacesMessage msg = new FacesMessage("Name edited", ((Groups) event.getObject()).getGroupName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        groupFacade.renameGroup((Groups) event.getObject());
+    }
+    
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Groups) event.getObject()).getGroupName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     public String createGroup(){
@@ -104,5 +119,23 @@ public class GroupBean extends GlobalBean implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public void edit(){
+        this.isEditable = true;
+    }
+    
+    public void save(){
+        this.isEditable = false;
+    }
+    
+    public Boolean getIsEditable(){
+        return isEditable;
+    }
+    
+    public void editGroupName(){
+        this.isEditable = false;
+        //groupFacade.renameGroup(group);
+        //return "/pages/group?faces-redirect=true";
     }
 }

@@ -8,15 +8,48 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-            <h3>Your Groups</h3>
-            <p:dataTable id="groupsTable" value="#{groupBean.getGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                <p:column>
-                    <h:outputText value="#{group.groupName}"/>
-                </p:column>
-                <p:column>
-                    <h:outputText value="#{group.ownerId.firstName}"/>
-                </p:column>
-            </p:dataTable>
+            
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable id="groupsTable" editable="true" value="#{groupBean.getGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                    <f:facet name="header">
+                        Your Groups
+                    </f:facet>
+                    
+                    <p:ajax event="rowEdit" listener="#{groupBean.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{groupBean.onRowCancel}" update=":form:msgs" />
+
+                    <p:column headerText="Group Name">
+                        <p:cellEditor>
+                            <f:facet name="input">
+                                <h:inputText value="#{group.groupName}" />
+                            </f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{group.groupName}" />
+                            </f:facet>
+                        </p:cellEditor>
+
+
+                    </p:column>
+                    <p:column headerText="Owner">
+                        <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{group.ownerId.firstName}"/> 
+                        </f:facet>
+                            <f:facet name="input">
+                                <h:outputText value="#{group.ownerId.firstName}"/> 
+                            </f:facet>
+                        </p:cellEditor>
+                        
+                    </p:column>
+
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
             <h:form id="createGroup-form" prependId="false">
                 <h3>Create Group</h3>
                 <div class="clearfix">
