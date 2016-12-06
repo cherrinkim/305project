@@ -4,14 +4,22 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-            <p:button href="/pages/manageGroups.xhtml" value="Manage Groups"></p:button>
-<!--            <p:dataTable id="groupsTable" value="" var="group" sortBy="" sortOrder="descending">
-                
-            </p:dataTable>-->
+
+
+            <h:form id="createGroup-form" prependId="false">
+                <h3>Create Group</h3>
+                <div class="clearfix">
+                    <h:inputText  value="#{groupBean.groupName}"  id="group_name" required="true" a:placeholder="Group name"/>
+                    <h:inputText  value="#{groupBean.type}"  id="last_name" required="true" a:placeholder="Type"/>
+                </div>
+                <h:commandButton id="createGroupButton" value="Create" action="#{groupBean.createGroup()}"/>
+            </h:form>
         </ui:define>
+
     </ui:composition>
 </html>
 

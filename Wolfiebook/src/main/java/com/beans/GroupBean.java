@@ -8,9 +8,13 @@ package com.beans;
 import com.model.GroupExistsException;
 import com.model.Groups;
 import com.model.GroupsFacade;
+import com.model.Pages;
+import com.model.PagesFacade;
+import com.model.Posts;
 import com.model.UserExistsException;
 import com.model.Users;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -27,9 +31,12 @@ public class GroupBean extends GlobalBean implements Serializable {
     private String groupName;
     private String type;
     private Users user;
+    private String newName;
     
     @EJB
-    private GroupsFacade groupsService;
+    private GroupsFacade groupService;
+    @EJB
+    private PagesFacade pageService;
     
     @PostConstruct
     public void init() {
@@ -47,18 +54,33 @@ public class GroupBean extends GlobalBean implements Serializable {
         group.setType(type);
         group.setOwnerId(user);
         
+        List<Groups> groups = user.getGroupsList();
+        groups.add(group);
+        
+      
         try {
-            groupsService.createGroup(group);
+            groupService.createGroup(group);
+            pageService.createPage(group);
         } catch (GroupExistsException ex) {
             sendMessage("group-msg", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
         }
         
-        return "";
+        return "/pages/group?faces-redirect=true";
     }
     
-    public String renameGroup(){
-        return "";
-    }
+//    public List<Groups> getGroups() {
+//        
+//        Groups group = groupsService.findPage(user);
+//        
+//        if(page != null) {
+//            getSession().setAttribute("pageSession", page);
+//            return page.getPostsList();
+//        } else {
+//            sendMessage("load-msg", FacesMessage.SEVERITY_ERROR, "No page available.");
+//            return null;
+//        }
+//    }
+
     
     public String deleteGroup(){
         return "";
@@ -72,6 +94,14 @@ public class GroupBean extends GlobalBean implements Serializable {
         this.groupName = groupName;
     }
 
+    public String getNewName() {
+        return groupName;
+    }
+
+    public void setNewName(String newName) {
+        this.newName = newName;
+    }
+    
     public String getType() {
         return type;
     }

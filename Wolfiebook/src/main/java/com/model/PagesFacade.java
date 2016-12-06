@@ -40,6 +40,21 @@ public class PagesFacade extends AbstractFacade<Pages> {
             }  
     }
     
+    public void createPage(Groups group){
+        try {
+            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+                    .setParameter("groupName", group.getGroupName())
+                    .getSingleResult();
+
+            Pages page = new Pages();
+            page.setGroupId(existingGroup);
+            page.setPostCount(0);
+            em.persist(page);
+            } catch(NoResultException e){
+                
+            }  
+    }
+    
     public Pages findPage(Users user){
         try{
             Pages page = (Pages) em.createNamedQuery("Pages.findByOwner")
