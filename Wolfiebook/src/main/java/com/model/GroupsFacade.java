@@ -7,6 +7,7 @@ package com.model;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -28,4 +29,43 @@ public class GroupsFacade extends AbstractFacade<Groups> {
         super(Groups.class);
     }
     
+    public void createGroup(Groups group) throws GroupExistsException{
+        try {
+            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+                .setParameter("groupName", group.getGroupName())
+                .getSingleResult();
+            throw new GroupExistsException();
+        } catch(NoResultException e){
+            em.persist(group);
+        }  
+    }
+    
+    public void renameGroup(Groups group){
+        em.merge(group);  
+    }
+    
+    public void deleteGroup(String groupName){
+        try {
+            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+                .setParameter("groupName", groupName)
+                .getSingleResult();
+            
+            em.remove(existingGroup);
+        } catch(NoResultException e){
+            System.out.println("Group doesn't exist");
+        }
+    }
+    
+    public Groups findGroup(String groupName){
+        try {
+            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+                .setParameter("groupName", groupName)
+                .getSingleResult();
+            
+            return existingGroup;
+        } catch(NoResultException e){
+            System.out.println("Group doesn't exist");
+        }
+        return null;
+    }
 }
