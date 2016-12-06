@@ -8,8 +8,15 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-
-
+            <h3>Your Groups</h3>
+            <p:dataTable id="groupsTable" value="#{groupBean.getGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                <p:column>
+                    <h:outputText value="#{group.groupName}"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{group.ownerId.firstName}"/>
+                </p:column>
+            </p:dataTable>
             <h:form id="createGroup-form" prependId="false">
                 <h3>Create Group</h3>
                 <div class="clearfix">

@@ -13,6 +13,7 @@ import com.model.PagesFacade;
 import com.model.Posts;
 import com.model.UserExistsException;
 import com.model.Users;
+import com.model.UsersFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,9 +35,11 @@ public class GroupBean extends GlobalBean implements Serializable {
     private String newName;
     
     @EJB
-    private GroupsFacade groupService;
+    private GroupsFacade groupFacade;
     @EJB
-    private PagesFacade pageService;
+    private PagesFacade pageFacade;
+    @EJB
+    private UsersFacade userFacade;
     
     @PostConstruct
     public void init() {
@@ -56,11 +59,12 @@ public class GroupBean extends GlobalBean implements Serializable {
         
         List<Groups> groups = user.getGroupsList();
         groups.add(group);
+        user.setGroupsList(groups);
         
-      
+        userFacade.edit(user);
         try {
-            groupService.createGroup(group);
-            pageService.createPage(group);
+            groupFacade.createGroup(group);
+            pageFacade.createPage(group);
         } catch (GroupExistsException ex) {
             sendMessage("group-msg", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
         }
@@ -68,18 +72,10 @@ public class GroupBean extends GlobalBean implements Serializable {
         return "/pages/group?faces-redirect=true";
     }
     
-//    public List<Groups> getGroups() {
-//        
-//        Groups group = groupsService.findPage(user);
-//        
-//        if(page != null) {
-//            getSession().setAttribute("pageSession", page);
-//            return page.getPostsList();
-//        } else {
-//            sendMessage("load-msg", FacesMessage.SEVERITY_ERROR, "No page available.");
-//            return null;
-//        }
-//    }
+    public List<Groups> getGroups() {
+        return user.getGroupsList();
+       
+    }
 
     
     public String deleteGroup(){
