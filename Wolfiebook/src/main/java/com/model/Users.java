@@ -56,6 +56,11 @@ import javax.validation.constraints.Size;
 @RequestScoped
 public class Users implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "purchaseRating")
+    private int purchaseRating;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,8 +119,6 @@ public class Users implements Serializable {
     @Size(max = 16)
     @Column(name = "creditCard")
     private String creditCard;
-    @Column(name = "purchaseRating")
-    private Integer purchaseRating;
     @JoinTable(name = "LikedComments", joinColumns = {
         @JoinColumn(name = "userId", referencedColumnName = "userId")}, inverseJoinColumns = {
         @JoinColumn(name = "commentId", referencedColumnName = "commentId")})
@@ -269,14 +272,6 @@ public class Users implements Serializable {
         this.creditCard = creditCard;
     }
 
-    public Integer getPurchaseRating() {
-        return purchaseRating;
-    }
-
-    public void setPurchaseRating(Integer purchaseRating) {
-        this.purchaseRating = purchaseRating;
-    }
-
     public List<Comments> getCommentsList() {
         return commentsList;
     }
@@ -396,6 +391,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.model.Users[ userId=" + userId + " ]";
+    }
+
+    public int getPurchaseRating() {
+        return purchaseRating;
+    }
+
+    public void setPurchaseRating(int purchaseRating) {
+        this.purchaseRating = purchaseRating;
     }
     
 }

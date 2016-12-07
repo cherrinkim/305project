@@ -28,6 +28,9 @@ public class MessageBean extends GlobalBean {
     private String subject;
     private String content;
     
+    private Messages selected;
+    private List<Messages> filteredMessages;
+    
     @ManagedProperty (value="#{param.receiver}")
     private Users receiver;
     
@@ -81,5 +84,21 @@ public class MessageBean extends GlobalBean {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Messages getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Messages selected) {
+        this.selected = selected;
+    }
+
+    public List<Messages> getFilteredMessages() {
+        return filteredMessages;
+    }
+
+    public void setFilteredMessages(List<Messages> filteredMessages) {
+        this.filteredMessages = filteredMessages;
     }
 }

@@ -13,34 +13,44 @@
                 <p:panelGrid style="margin-top:20px;">
                     <f:facet name="header">
                         <p:row>
-                            <p:column colspan="3">Messages</p:column>
+                            <p:column colspan="4">Messages</p:column>
                         </p:row>
                     </f:facet>
                     <p:row>
                         <p:column rowspan="3">
-                            <p:dataTable id="msgTable" value="#{messageBean.getMessages(userBean.selected)}" var="msg" emptyMessage="No messages" >
-                                <p:column headerText="Content">
+                            <p:dataTable id="msgTable" value="#{messageBean.getMessages(userBean.selected)}" var="msg" emptyMessage="No messages found" 
+                                         rowKey="#{msg.messageId}" widgetVar="msgTable" selectionMode="single" selection="#{messageBean.selected}" paginator="true">
+                                <p:ajax event="rowSelect"   update="delete-btn"/>
+                                <p:ajax event="rowUnselect" update="delete-btn"/>
+                                <p:column headerText="Subject" filterMatchMode="contains">
+                                    <h:outputText value="#{msg.subject}"/>
+                                </p:column>
+                                <p:column headerText="Content" filterMatchMode="contains">
                                     <h:outputText value="#{msg.content}"/>
                                 </p:column>
-                                <p:column headerText="From">
+                                <p:column headerText="From" filterMatchMode="contains">
                                     <h:outputText value="#{msg.sender.firstName} #{msg.sender.lastName}"/>
                                 </p:column>
+                                <p:column headerText="From" filterMatchMode="contains" filterBy="#{msg.receiver}" style="display:none;">
+                                    <h:outputText value="#{msg.receiver.firstName} #{msg.receiver.lastName}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="delete-btn" value="Delete" action="#{messageBean.deleteMessages()}" update="msgTable" disabled="#{empty messageBean.selected}"/>
+                                </f:facet>
                             </p:dataTable>
                         </p:column>
-                        <p:column colspan="2">
+                        <p:column colspan="3">
                             <p:inputText value="#{messageBean.subject}" style="width:300px;"/>
                         </p:column>
                     </p:row>
                     <p:row>
-                        <p:column colspan="2">
+                        <p:column colspan="3">
                             <p:inputTextarea value="#{messageBean.content}" style="width:300px;min-height:300px;"/>
                         </p:column>
                     </p:row>
                     <p:row>
                         <p:column colspan="1">
                             <p:commandButton value="Send" action="#{messageBean.sendMessages(userBean.selected)}" update="msgTable"/>
-                        </p:column>
-                        <p:column colspan="1">
                             <p:commandButton value="#{bundle['button.close']}" onclick="UsersViewDialog.hide()"/>
                         </p:column>
                     </p:row>
