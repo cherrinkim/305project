@@ -42,8 +42,11 @@ public class GroupsFacade extends AbstractFacade<Groups> {
     }
     
     public void renameGroup(Groups group){
-        Query query = em.createQuery("UPDATE Groups SET g.groupName = :groupName WHERE g.groupId = :groupId");
-        int update = query.setParameter("groupName", group.getGroupName()).setParameter("groupId", group.getGroupId()).executeUpdate();
+        Groups g = em.find(Groups.class, group.getGroupId());
+        if(g == null) {
+            throw new IllegalArgumentException("Unknown Group id");
+        }
+        g.setGroupName(group.getGroupName());
     }
     
     public Groups findGroup(String groupName){
