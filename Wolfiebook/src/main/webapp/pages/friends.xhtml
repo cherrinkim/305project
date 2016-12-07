@@ -8,7 +8,6 @@
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
                 <ui:include src="view.xhtml"/>
-                <ui:include src="view_1.xhtml"/>
                 <h:form id="UsersListForm">
                     <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
                                  emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}"
