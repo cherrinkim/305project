@@ -8,116 +8,41 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-
-            <h:form id="form">
-                <p:growl id="msgs" showDetail="true"/>
-                <p:dataTable id="groupsTable" editable="true" value="#{groupBean.getOwnedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                    <f:facet name="header">
-                        Your Groups
-                    </f:facet>
-
-                    <p:ajax event="rowEdit"  listener="#{groupBean.onRowEdit}" update=":form:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{groupBean.onRowCancel}" update=":form:msgs" />
-
-                    <p:column headerText="Group Name" >
-                        <p:cellEditor>
-                            <f:facet name="input">
-                                <h:inputText value="#{group.groupName}" />
-                            </f:facet>
-                            <f:facet name="output">
-                                <h:outputText value="#{group.groupName}" />
-                            </f:facet>
-                        </p:cellEditor>
-
-
-                    </p:column>
-                    <p:column headerText="Owner" >
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{group.ownerId.firstName}"/> 
-                            </f:facet>
-                            <f:facet name="input">
-                                <h:outputText value="#{group.ownerId.firstName}"/> 
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Type" >
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{group.type}"/> 
-                            </f:facet>
-                            <f:facet name="input">
-                                <h:outputText value="#{group.type}"/> 
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-
-
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-
-
-                </p:dataTable>
-            </h:form>
-
-            <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                <f:facet name="header">
-                    Joined Groups
-                </f:facet>
-                <p:column headerText="Group Name" >
-                    <h:outputText value="#{group.groupName}" />
-                </p:column>
-                <p:column headerText="Owner" >
-                    <h:outputText value="#{group.ownerId.firstName}"/> 
-                </p:column>
-                <p:column headerText="Type" >
-                    <h:outputText value="#{group.type}"/> 
-                </p:column>
-            </p:dataTable>
-            
-            <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                <f:facet name="header">
-                    All Groups
-                </f:facet>
-                <p:column headerText="Group Name" >
-                    <h:outputText value="#{group.groupName}" />
-                </p:column>
-                <p:column headerText="Owner" >
-                    <h:outputText value="#{group.ownerId.firstName}"/> 
-                </p:column>
-                <p:column headerText="Type" >
-                    <h:outputText value="#{group.type}"/> 
-                </p:column>
-            </p:dataTable>
-
-            <h:form id="joinGroup-form" prependId="false">
-                <h3>Join Group</h3>
-                <div class="clearfix">
-                    <h:inputText  value="#{groupBean.groupName}"  id="joinGroup_name" required="true" a:placeholder="Group name"/>
+            <div class="ui-g">
+                <div class="ui-g-6">
+                    <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                        <f:facet name="header">
+                            All Groups
+                        </f:facet>
+                        <p:column headerText="Group Name" >
+                            <h:outputText value="#{group.groupName}" />
+                        </p:column>
+                        <p:column headerText="Owner" >
+                            <h:outputText value="#{group.ownerId.firstName}"/> 
+                        </p:column>
+                        <p:column headerText="Type" >
+                            <h:outputText value="#{group.type}"/> 
+                        </p:column>
+                    </p:dataTable>
                 </div>
-                <h:commandButton id="joinGroupButton" value="Join" action="#{groupBean.joinGroup()}"/>
-            </h:form>
-
-            <h:form id="createGroup-form" prependId="false">
-                <h3>Create Group</h3>
-                <div class="clearfix">
-                    <h:inputText  value="#{groupBean.groupName}"  id="createGroup_name" required="true" a:placeholder="Group name"/>
-                    <h:inputText  value="#{groupBean.type}"  id="last_name" required="true" a:placeholder="Type"/>
+                <div class="ui-g-6">
+                    <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                        <f:facet name="header">
+                            Joined Groups
+                        </f:facet>
+                        <p:column headerText="Group Name" >
+                            <h:outputText value="#{group.groupName}" />
+                        </p:column>
+                        <p:column headerText="Owner" >
+                            <h:outputText value="#{group.ownerId.firstName}"/> 
+                        </p:column>
+                        <p:column headerText="Type" >
+                            <h:outputText value="#{group.type}"/> 
+                        </p:column>
+                    </p:dataTable>
                 </div>
-                <p:commandButton id="createGroupButton" value="Create" action="#{groupBean.createGroup()}"/>
-            </h:form>
-            <h:form id="deleteGroup-form" prependId="false">
-                <h3>Delete Group</h3>
-                <div class="clearfix">
-                    <p:inputText  value="#{groupBean.groupName}"  id="deleteGroup_name" required="true" a:placeholder="Group name"/>
-                </div>
-                <p:commandButton id="deleteGroupButton" value="Delete" action="#{groupBean.deleteGroup()}"/>
-            </h:form>
+            </div>
         </ui:define>
-
     </ui:composition>
 </html>
 
