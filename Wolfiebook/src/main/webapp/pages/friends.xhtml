@@ -13,8 +13,8 @@
                     <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
                                  emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}"
                                  rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
-                        <p:ajax event="rowSelect"   update="viewButton addToGroupButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton addToGroupButton"/>
+                        <p:ajax event="rowSelect"   />
+                        <p:ajax event="rowUnselect" />
                         <f:facet name="header">
                             <p:outputPanel>
                                 <h:outputText value="Search users: "/>
@@ -35,7 +35,6 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="fa fa-search" value="#{bundle['button.view']}" update=":UsersViewForm" oncomplete="PF('UsersViewDialog').show()" disabled="#{empty userBean.selected}"/>
-                            <p:commandButton id="addToGroupButton"   icon="fa fa-search" value="Add to Group" update=":GroupsViewForm" oncomplete="PF('GroupsViewDialog').show()" disabled="#{empty userBean.selected}"/>
 
                         </f:facet>
                     </p:dataTable>
