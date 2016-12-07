@@ -60,4 +60,9 @@ public class GroupsFacade extends AbstractFacade<Groups> {
         }
         return null;
     }
+    
+    public void deleteGroup(Groups group){
+        Groups myGroup = em.merge(group);
+        em.remove(myGroup);
+    }
 }

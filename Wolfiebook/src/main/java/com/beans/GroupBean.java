@@ -18,6 +18,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 
@@ -26,13 +27,12 @@ import org.primefaces.event.RowEditEvent;
  * @author cherrinkim
  */
 @Named(value = "groupBean")
-@SessionScoped
+@ViewScoped
 public class GroupBean extends GlobalBean implements Serializable {
 
     private String groupName;
     private String type;
     private Users user;
-    private String newName;
     private Boolean isEditable;
     
     private Groups selected;
@@ -48,6 +48,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     public void init() {
         try {
             user = (Users) getSession().getAttribute("userSession");
+            
 
         } catch (NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
@@ -76,6 +77,8 @@ public class GroupBean extends GlobalBean implements Serializable {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Groups) event.getObject()).getGroupName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+    
+
 
     public String deleteGroup() {
         List<Groups> groups = user.getGroupsList();
@@ -175,13 +178,6 @@ public class GroupBean extends GlobalBean implements Serializable {
         this.groupName = groupName;
     }
 
-    public String getNewName() {
-        return groupName;
-    }
-
-    public void setNewName(String newName) {
-        this.newName = newName;
-    }
 
     public String getType() {
         return type;
