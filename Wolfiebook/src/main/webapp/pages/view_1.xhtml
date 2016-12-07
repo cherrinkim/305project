@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:composition>
+        <p:dialog id="GroupsViewDlg" widgetVar="GroupsViewDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)">
+            <h:form id="GroupsListForm">
+                <p:dataTable id="groupsDatalist" value="#{groupBean.getAllGroups()}" var="group" widgetVar="allGroupsTable"
+                                 emptyMessage="No groups found"
+                                 rowKey="#{group.groupId}" selectionMode="single" selection="#{groupBean.selected}" paginator="true">
+                        <p:ajax event="rowSelect"   update="addButton"/>
+                        <p:ajax event="rowUnselect" update="addButton"/>
+
+                        <p:column headerText="" style="display:none;">
+                            <h:outputText value="#{group.groupName}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="addButton" value="Add" action="#{groupBean.addToGroup(userBean.selected)}"/>
+                        </f:facet>
+                    </p:dataTable>
+            </h:form>
+            <h:form id="GroupsViewForm">
+                <h3>Add to Group</h3>
+                <div class="clearfix">
+                    <h:inputText  value="#{groupBean.groupName}"  id="createGroup_name" required="true" a:placeholder="Group name"/>
+                </div>
+                <p:commandButton id="addToGroupButton" value="Add" action="#{groupBean.addToGroup(userBean.selected)}"/>
+                <p:commandButton value="#{bundle['button.close']}" onclick="GroupsViewDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

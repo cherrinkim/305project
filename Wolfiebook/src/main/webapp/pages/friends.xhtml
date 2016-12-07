@@ -8,12 +8,13 @@
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
                 <ui:include src="view.xhtml"/>
+                <ui:include src="view_1.xhtml"/>
                 <h:form id="UsersListForm">
                     <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
                                  emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}"
                                  rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
-                        <p:ajax event="rowSelect"   update="viewButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton addToGroupButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton addToGroupButton"/>
                         <f:facet name="header">
                             <p:outputPanel>
                                 <h:outputText value="Search users: "/>
@@ -34,6 +35,8 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="fa fa-search" value="#{bundle['button.view']}" update=":UsersViewForm" oncomplete="PF('UsersViewDialog').show()" disabled="#{empty userBean.selected}"/>
+                            <p:commandButton id="addToGroupButton"   icon="fa fa-search" value="Add to Group" update=":GroupsViewForm" oncomplete="PF('GroupsViewDialog').show()" disabled="#{empty userBean.selected}"/>
+
                         </f:facet>
                     </p:dataTable>
                 </h:form>

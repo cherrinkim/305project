@@ -19,7 +19,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -30,7 +32,7 @@ import org.primefaces.event.RowEditEvent;
  * @author cherrinkim
  */
 @Named(value = "groupBean")
-@RequestScoped
+@SessionScoped
 public class GroupBean extends GlobalBean implements Serializable {
 
     private String groupName;
@@ -38,6 +40,8 @@ public class GroupBean extends GlobalBean implements Serializable {
     private Users user;
     private String newName;
     private Boolean isEditable;
+    
+    private Groups selected;
 
     @EJB
     private GroupsFacade groupFacade;
@@ -99,7 +103,7 @@ public class GroupBean extends GlobalBean implements Serializable {
         List<Groups> groups = user.getGroupsList1();
         groups.add(group);
         user.setGroupsList1(groups);
-
+        
         userFacade.edit(user);
         try {
             groupFacade.createGroup(group);
@@ -132,6 +136,25 @@ public class GroupBean extends GlobalBean implements Serializable {
         }
         groupName = "";
         return null;
+    }
+    
+    public void addToGroup(Users newMember){
+        Groups group = groupFacade.findGroup(groupName);
+        if (group != null) {
+            List<Users> users = group.getUsersList();
+            users.add(newMember);
+            group.setUsersList(users);
+
+            List<Groups> groups = newMember.getGroupsList();
+            groups.add(group);
+            newMember.setGroupsList(groups);
+
+
+            userFacade.edit(newMember);
+        } else {
+            FacesMessage msg = new FacesMessage("Group not found", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public List<Groups> getOwnedGroups() {
@@ -182,4 +205,11 @@ public class GroupBean extends GlobalBean implements Serializable {
         return isEditable;
     }
 
+    public void setSelected(Groups selected){
+        this.selected = selected;
+    }
+    
+    public Groups getSelected(){
+        return selected;
+    }
 }
