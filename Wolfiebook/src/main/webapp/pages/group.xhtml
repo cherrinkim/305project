@@ -77,6 +77,21 @@
                     <h:outputText value="#{group.type}"/> 
                 </p:column>
             </p:dataTable>
+            
+            <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                <f:facet name="header">
+                    All Groups
+                </f:facet>
+                <p:column headerText="Group Name" >
+                    <h:outputText value="#{group.groupName}" />
+                </p:column>
+                <p:column headerText="Owner" >
+                    <h:outputText value="#{group.ownerId.firstName}"/> 
+                </p:column>
+                <p:column headerText="Type" >
+                    <h:outputText value="#{group.type}"/> 
+                </p:column>
+            </p:dataTable>
 
             <h:form id="joinGroup-form" prependId="false">
                 <h3>Join Group</h3>

@@ -142,6 +142,10 @@ public class GroupBean extends GlobalBean implements Serializable {
     public List<Groups> getJoinedGroups() {
         return user.getGroupsList();
     }
+    
+    public List<Groups> getAllGroups() {
+        return groupFacade.findAll();
+    }
 
     public String getGroupName() {
         return groupName;
