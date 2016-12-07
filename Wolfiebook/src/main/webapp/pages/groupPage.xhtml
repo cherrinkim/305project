@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        <p:dialog id="GroupPageDlg" widgetVar="GroupPageDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)" header="Group Page">
+            <h:form id="GroupPageForm">
+                <p:dataTable id="datalist" value="#{pageBean.posts}" var="post" widgetVar="pageTable" lazy="false"
+                             emptyMessage="No posts found" rowsPerPageTemplate="5,10,15">
+                    <p:column>
+                        <h:outputText value="#{post.content}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton id="addpost-btn" value="Add Post"/>
+                <p:commandButton id="close-btn" value="Close" onclick="GroupPageDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>
+

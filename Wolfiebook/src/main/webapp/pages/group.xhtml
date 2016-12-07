@@ -23,6 +23,9 @@
                         <p:column headerText="Type" >
                             <h:outputText value="#{group.type}"/> 
                         </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="join-btn" value="Join"/>
+                        </f:facet>
                     </p:dataTable>
                 </div>
                 <div class="ui-g-6">
@@ -39,6 +42,9 @@
                         <p:column headerText="Type" >
                             <h:outputText value="#{group.type}"/> 
                         </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="view-btn" value="View"/>
+                        </f:facet>
                     </p:dataTable>
                 </div>
             </div>
