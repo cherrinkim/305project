@@ -89,6 +89,7 @@ public class GroupBean extends GlobalBean implements Serializable {
         groups2.remove(selected);
         user.setGroupsList1(groups2);
         
+        pageFacade.remove(selected.getPagesList().get(0));
         groupFacade.remove(selected);
         return null;
     }
