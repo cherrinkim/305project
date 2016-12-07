@@ -9,6 +9,7 @@
         <ui:define name="content">
             <p:growl id="growl" life="3000" />
             <ui:include src="createGroup.xhtml"/>
+            <ui:include src="addGroup.xhtml"/>
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
                 <p:dataTable id="groupsTable" editable="true" value="#{groupBean.getOwnedGroups()}" var="group" rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}"
@@ -17,8 +18,8 @@
                     <f:facet name="header">My Groups</f:facet>
                     <p:ajax event="rowEdit"  listener="#{groupBean.onRowEdit}" update=":form:msgs" />
                     <p:ajax event="rowEditCancel" listener="#{groupBean.onRowCancel}" update=":form:msgs" />
-                    <p:ajax event="rowSelect"   update="delete-btn"/>
-                    <p:ajax event="rowUnselect" update="delete-btn"/>
+                    <p:ajax event="rowSelect"   update="addUser-btn delete-btn"/>
+                    <p:ajax event="rowUnselect" update="addUser-btn delete-btn"/>
 
                     <p:column headerText="Group Name" >
                         <p:cellEditor>
@@ -41,6 +42,7 @@
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="create-btn" value="Create" action="#{groupBean.prepareCreate()}" update=":GroupCreateForm" oncomplete="PF('GroupCreateDialog').show()"/>
+                        <p:commandButton id="addUser-btn" value="Add User" update=":GroupAddForm" oncomplete="PF('GroupAddDialog').show()" disabled="#{empty groupBean.selected}"/>
                         <p:commandButton id="delete-btn" value="Delete" action="#{groupBean.deleteGroup()}" update="groupsTable" disabled="#{empty groupBean.selected}"/>
                     </f:facet>
                 </p:dataTable>

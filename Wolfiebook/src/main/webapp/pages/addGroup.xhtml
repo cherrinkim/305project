@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        <p:dialog id="GroupAddDlg" widgetVar="GroupAddDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)" header="Create Group">
+            <h:form id="GroupAddForm">
+                <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
+                             emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}" rowsPerPageTemplate="5,10,15"
+                             rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
+                    <p:ajax event="rowSelect" update="add-btn"  />
+                    <p:ajax event="rowUnselect" update="add-btn" />
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Search users: "/>
+                            <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="width: 400px;" placeholder="Enter user name, email or phone number"/>
+                        </p:outputPanel>
+                    </f:facet>
+                    <p:column headerText="First Name" filterMatchMode="contains">
+                        <h:outputText value="#{user.firstName}"/>
+                    </p:column>
+                    <p:column  headerText="Last Name" filterMatchMode="contains">
+                        <h:outputText value="#{user.lastName}"/>
+                    </p:column>
+                    <p:column filterBy="#{user.telephone}" headerText="" filterMatchMode="contains" style="display:none;">
+                        <h:outputText value="#{user.telephone}"/>
+                    </p:column>
+                    <p:column filterBy="#{user.email}" headerText="" filterMatchMode="contains" style="display:none;">
+                        <h:outputText value="#{user.email}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="add-btn" action="#{groupBean.addToGroup(userBean.selected)}" value="Submit" update=":form:groupsTable,:growl" oncomplete="handleSubmit(args, 'GroupAddDialog');"/>
+                        <p:commandButton id="cancel-btn" value="Cancel" onclick="GroupAddDialog.hide()"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>
+

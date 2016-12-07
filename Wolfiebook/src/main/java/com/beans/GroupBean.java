@@ -135,7 +135,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
     
     public void addToGroup(Users newMember){
-        Groups group = groupFacade.findGroup(groupName);
+        Groups group = selected;
         if (group != null) {
             List<Users> users = group.getUsersList();
             users.add(newMember);
@@ -144,7 +144,6 @@ public class GroupBean extends GlobalBean implements Serializable {
             List<Groups> groups = newMember.getGroupsList();
             groups.add(group);
             newMember.setGroupsList(groups);
-
 
             userFacade.edit(newMember);
             
