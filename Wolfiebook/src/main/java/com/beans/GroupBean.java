@@ -8,6 +8,7 @@ package com.beans;
 import com.model.GroupExistsException;
 import com.model.Groups;
 import com.model.GroupsFacade;
+import com.model.Pages;
 import com.model.PagesFacade;
 import com.model.Users;
 import com.model.UsersFacade;
@@ -89,9 +90,11 @@ public class GroupBean extends GlobalBean implements Serializable {
         groups2.remove(selected);
         user.setGroupsList1(groups2);
         
-        pageFacade.remove(selected.getPagesList().get(0));
+       
+        Pages page = pageFacade.findPage(selected);
+        pageFacade.remove(page);
         groupFacade.remove(selected);
-        return null;
+        return "/pages/editGroup?faces-redirect=true";
     }
 
     public String createGroup() {
@@ -104,7 +107,10 @@ public class GroupBean extends GlobalBean implements Serializable {
             groupFacade.createGroup(group);
             pageFacade.createPage(group);
         } catch (GroupExistsException ex) {
-            sendMessage(":growl", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
+            FacesMessage msg = new FacesMessage("Group name already exists", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            
+            return "/pages/editGroup?faces-redirect=true";
         }
 
         List<Groups> groups = user.getGroupsList1();

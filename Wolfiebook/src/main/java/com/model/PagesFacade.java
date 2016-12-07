@@ -62,8 +62,19 @@ public class PagesFacade extends AbstractFacade<Pages> {
                     .getSingleResult();
             
             return page;
-        } catch(NoResultException e){
+        } catch(NoResultException e){   
+        }
+        return null;
+    }
+    
+    public Pages findPage(Groups group){
+        try{
+            Pages page = (Pages) em.createNamedQuery("Pages.findByGroup")
+                    .setParameter("groupId", group)
+                    .getSingleResult();
             
+            return page;
+        } catch(NoResultException e){   
         }
         return null;
     }
