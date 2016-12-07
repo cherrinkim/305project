@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,7 +30,7 @@ public class GroupsFacade extends AbstractFacade<Groups> {
         super(Groups.class);
     }
     
-    public void createGroup(Groups group) throws GroupExistsException{
+    public void createGroup(Groups group) throws GroupExistsException {
         try {
             Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
                 .setParameter("groupName", group.getGroupName())
@@ -41,7 +42,8 @@ public class GroupsFacade extends AbstractFacade<Groups> {
     }
     
     public void renameGroup(Groups group){
-        em.merge(group);  
+        Query query = em.createQuery("UPDATE Groups SET g.groupName = :groupName WHERE g.groupId = :groupId");
+        int update = query.setParameter("groupName", group.getGroupName()).setParameter("groupId", group.getGroupId()).executeUpdate();
     }
     
     public Groups findGroup(String groupName){

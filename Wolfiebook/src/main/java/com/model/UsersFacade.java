@@ -10,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import com.model.UserExistsException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
