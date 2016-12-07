@@ -32,64 +32,75 @@ import org.primefaces.event.RowEditEvent;
 @Named(value = "groupBean")
 @RequestScoped
 public class GroupBean extends GlobalBean implements Serializable {
+
     private String groupName;
     private String type;
     private Users user;
     private String newName;
     private Boolean isEditable;
-    
+
     @EJB
     private GroupsFacade groupFacade;
     @EJB
     private PagesFacade pageFacade;
     @EJB
     private UsersFacade userFacade;
-    
+
     @PostConstruct
     public void init() {
         try {
             user = (Users) getSession().getAttribute("userSession");
-            
-        } catch(NullPointerException e) {
+
+        } catch (NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
     }
-    
-    public void onRowEdit(RowEditEvent event){
+
+    public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Name edited", ((Groups) event.getObject()).getGroupName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         groupFacade.renameGroup((Groups) event.getObject());
     }
-    
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Groups) event.getObject()).getGroupName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    public String deleteGroup(){
+
+    public String deleteGroup() {
         Groups group = groupFacade.findGroup(groupName);
-        List<Groups> groups = user.getGroupsList();
-        groups.remove(group);
-        user.setGroupsList(groups);
-        
-        groupFacade.deleteGroup(groupName);
-        
-        
-        userFacade.edit(user);
-        
-        return "/pages/group?faces-redirect=true";
+        if (group != null) {
+            List<Groups> groups = user.getGroupsList();
+            groups.remove(group);
+            user.setGroupsList(groups);
+
+            groupFacade.deleteGroup(groupName);
+
+            groupFacade.edit(group);
+            userFacade.edit(user);
+
+            return "/pages/group?faces-redirect=true";
+        } else {
+            FacesMessage msg = new FacesMessage("Group not found", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        groupName = "";
+        return null;
     }
-    
-    public String createGroup(){
+
+    public String createGroup() {
         Groups group = new Groups();
         group.setGroupName(groupName);
         group.setType(type);
         group.setOwnerId(user);
-        
-        List<Groups> groups = user.getGroupsList();
+
+        List<Groups> groups = user.getGroupsList1();
         groups.add(group);
-        user.setGroupsList(groups);
-        
+        user.setGroupsList1(groups);
+        List<Groups> groups2 = user.getGroupsList();
+        groups2.add(group);
+        user.setGroupsList(groups2);
+
         userFacade.edit(user);
         try {
             groupFacade.createGroup(group);
@@ -97,18 +108,41 @@ public class GroupBean extends GlobalBean implements Serializable {
         } catch (GroupExistsException ex) {
             sendMessage("group-msg", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
         }
-        
+
         return "/pages/group?faces-redirect=true";
     }
-    
-    public List<Groups> getGroups() {
-        return user.getGroupsList();
-       
+
+    public String joinGroup() {
+        Groups group = groupFacade.findGroup(groupName);
+        if (group != null) {
+            List<Users> users = group.getUsersList();
+            users.add(user);
+            group.setUsersList(users);
+
+            List<Groups> groups = user.getGroupsList();
+            groups.add(group);
+            user.setGroupsList(groups);
+
+
+            userFacade.edit(user);
+
+            return "/pages/group?faces-redirect=true";
+        } else {
+            FacesMessage msg = new FacesMessage("Group not found", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        groupName = "";
+        return null;
     }
 
+    public List<Groups> getOwnedGroups() {
+        return user.getGroupsList1();
+    }
     
-    
-    
+    public List<Groups> getJoinedGroups() {
+        return user.getGroupsList();
+    }
+
     public String getGroupName() {
         return groupName;
     }
@@ -124,7 +158,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     public void setNewName(String newName) {
         this.newName = newName;
     }
-    
+
     public String getType() {
         return type;
     }
@@ -132,16 +166,16 @@ public class GroupBean extends GlobalBean implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    
-    public void edit(){
+
+    public void edit() {
         this.isEditable = true;
     }
-    
-    public void save(){
+
+    public void save() {
         this.isEditable = false;
     }
-    
-    public Boolean getIsEditable(){
+
+    public Boolean getIsEditable() {
         return isEditable;
     }
 
