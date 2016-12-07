@@ -12,8 +12,8 @@
                     <p:dataTable id="datalist" value="#{userBean.users}" var="user" widgetVar="userTable" lazy="false"
                                  emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}"
                                  rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
-                        <p:ajax event="rowSelect"   />
-                        <p:ajax event="rowUnselect" />
+                        <p:ajax event="rowSelect" update="viewButton"  />
+                        <p:ajax event="rowUnselect" update="viewButton" />
                         <f:facet name="header">
                             <p:outputPanel>
                                 <h:outputText value="Search users: "/>
