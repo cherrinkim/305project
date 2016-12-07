@@ -73,6 +73,10 @@ public class GroupBean extends GlobalBean implements Serializable {
             List<Groups> groups = user.getGroupsList();
             groups.remove(group);
             user.setGroupsList(groups);
+            
+            List<Groups> groups2 = user.getGroupsList1();
+            groups2.remove(group);
+            user.setGroupsList1(groups2);
 
             groupFacade.deleteGroup(groupName);
 
@@ -97,9 +101,6 @@ public class GroupBean extends GlobalBean implements Serializable {
         List<Groups> groups = user.getGroupsList1();
         groups.add(group);
         user.setGroupsList1(groups);
-        List<Groups> groups2 = user.getGroupsList();
-        groups2.add(group);
-        user.setGroupsList(groups2);
 
         userFacade.edit(user);
         try {
