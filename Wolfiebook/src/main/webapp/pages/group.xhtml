@@ -21,47 +21,6 @@
 
                     <p:column headerText="Group Name" >
                         <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{group.groupName}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputText value="#{group.groupName}" />
-                            </f:facet>
-                        </p:cellEditor>
-
-
-                    </p:column>
-                    <p:column headerText="Owner" >
-                        <f:facet name="output">
-                            <h:outputText value="#{group.ownerId.firstName}"/> 
-                        </f:facet>
-                    </p:column>
-                    
-                    <p:column headerText="Type" >
-                        <f:facet name="output">
-                            <h:outputText value="#{group.type}"/> 
-                        </f:facet>
-   
-                    </p:column>
-                    
-                    
-
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-                    
-
-                </p:dataTable>
-            </h:form>
-            
-            <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                    <f:facet name="header">
-                        Joined Groups
-                    </f:facet>
-                   
-
-                    <p:column headerText="Group Name" style="width:200px">
-                        <p:cellEditor>
                             <f:facet name="input">
                                 <h:inputText value="#{group.groupName}" />
                             </f:facet>
@@ -72,30 +31,29 @@
 
 
                     </p:column>
-                    <p:column headerText="Owner" style="width:100px">
+                    <p:column headerText="Owner" >
                         <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{group.ownerId.firstName}"/> 
-                        </f:facet>
-                            <f:facet name="input">
+                            <f:facet name="output">
                                 <h:outputText value="#{group.ownerId.firstName}"/> 
                             </f:facet>
                             <f:facet name="input">
-                                <p:inputText value="#{group.ownerId.firstName}"/> 
+                                <h:outputText value="#{group.ownerId.firstName}"/> 
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    
-                    <p:column headerText="Type" style="width:40px">
+
+                    <p:column headerText="Type" >
                         <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{group.type}"/> 
-                        </f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{group.type}"/> 
+                            </f:facet>
                             <f:facet name="input">
                                 <h:outputText value="#{group.type}"/> 
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
+
+
 
                     <p:column style="width:32px">
                         <p:rowEditor />
@@ -103,7 +61,23 @@
 
 
                 </p:dataTable>
-            
+            </h:form>
+
+            <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
+                <f:facet name="header">
+                    Joined Groups
+                </f:facet>
+                <p:column headerText="Group Name" >
+                    <h:outputText value="#{group.groupName}" />
+                </p:column>
+                <p:column headerText="Owner" >
+                    <h:outputText value="#{group.ownerId.firstName}"/> 
+                </p:column>
+                <p:column headerText="Type" >
+                    <h:outputText value="#{group.type}"/> 
+                </p:column>
+            </p:dataTable>
+
             <h:form id="joinGroup-form" prependId="false">
                 <h3>Join Group</h3>
                 <div class="clearfix">
