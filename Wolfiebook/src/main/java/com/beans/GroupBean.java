@@ -151,6 +151,9 @@ public class GroupBean extends GlobalBean implements Serializable {
 
 
             userFacade.edit(newMember);
+            
+            FacesMessage msg = new FacesMessage("Added to", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
         } else {
             FacesMessage msg = new FacesMessage("Group not found", groupName);
             FacesContext.getCurrentInstance().addMessage(null, msg);

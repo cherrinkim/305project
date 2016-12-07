@@ -5,25 +5,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+          xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition>
         <p:dialog id="GroupsViewDlg" widgetVar="GroupsViewDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)">
-            <h:form id="GroupsListForm">
-                <p:dataTable id="groupsDatalist" value="#{groupBean.getAllGroups()}" var="group" widgetVar="allGroupsTable"
-                                 emptyMessage="No groups found"
-                                 rowKey="#{group.groupId}" selectionMode="single" selection="#{groupBean.selected}" paginator="true">
-                        <p:ajax event="rowSelect"   update="addButton"/>
-                        <p:ajax event="rowUnselect" update="addButton"/>
-
-                        <p:column headerText="" style="display:none;">
-                            <h:outputText value="#{group.groupName}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="addButton" value="Add" action="#{groupBean.addToGroup(userBean.selected)}"/>
-                        </f:facet>
-                    </p:dataTable>
-            </h:form>
             <h:form id="GroupsViewForm">
                 <h3>Add to Group</h3>
                 <div class="clearfix">
