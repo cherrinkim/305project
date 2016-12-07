@@ -3,13 +3,14 @@ package com.beans;
 import com.model.Messages;
 import com.model.MessagesFacade;
 import com.model.Users;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
 
 /**
@@ -17,8 +18,8 @@ import javax.faces.bean.ManagedProperty;
  * @author jeonghoon-kim
  */
 @Named(value = "messageBean")
-@RequestScoped
-public class MessageBean extends GlobalBean {
+@SessionScoped
+public class MessageBean extends GlobalBean implements Serializable {
     
     @EJB
     private MessagesFacade messageService;
@@ -68,6 +69,11 @@ public class MessageBean extends GlobalBean {
         msg.setSender(user);
         msg.setReceiver(receiver);
         messageService.edit(msg);
+    }
+    
+    public String deleteMessages() {
+        messageService.remove(selected);
+        return null;
     }
 
     public String getSubject() {
