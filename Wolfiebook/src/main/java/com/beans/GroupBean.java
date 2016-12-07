@@ -78,9 +78,7 @@ public class GroupBean extends GlobalBean implements Serializable {
             groups2.remove(group);
             user.setGroupsList1(groups2);
 
-            groupFacade.deleteGroup(groupName);
-
-            groupFacade.edit(group);
+            groupFacade.remove(group);
             userFacade.edit(user);
 
             return "/pages/group?faces-redirect=true";

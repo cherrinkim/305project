@@ -44,18 +44,6 @@ public class GroupsFacade extends AbstractFacade<Groups> {
         em.merge(group);  
     }
     
-    public void deleteGroup(String groupName){
-        try {
-            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
-                .setParameter("groupName", groupName)
-                .getSingleResult();
-            
-            em.remove(existingGroup);
-        } catch(NoResultException e){
-            System.out.println("Group doesn't exist");
-        }
-    }
-    
     public Groups findGroup(String groupName){
         try {
             Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
