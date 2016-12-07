@@ -8,21 +8,15 @@ package com.beans;
 import com.model.GroupExistsException;
 import com.model.Groups;
 import com.model.GroupsFacade;
-import com.model.Pages;
 import com.model.PagesFacade;
-import com.model.Posts;
-import com.model.UserExistsException;
 import com.model.Users;
 import com.model.UsersFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -59,6 +53,18 @@ public class GroupBean extends GlobalBean implements Serializable {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
     }
+    
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
+    
+    public Groups prepareCreate() {
+        selected = new Groups();
+        initializeEmbeddableKey();
+        return selected;
+    }
 
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Name edited", ((Groups) event.getObject()).getGroupName());
@@ -72,30 +78,20 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
 
     public String deleteGroup() {
-        Groups group = groupFacade.findGroup(groupName);
-        if (group != null) {
-            List<Groups> groups = user.getGroupsList();
-            groups.remove(group);
-            user.setGroupsList(groups);
-            
-            List<Groups> groups2 = user.getGroupsList1();
-            groups2.remove(group);
-            user.setGroupsList1(groups2);
+        List<Groups> groups = user.getGroupsList();
+        groups.remove(selected);
+        user.setGroupsList(groups);
 
-            groupFacade.remove(group);
-            userFacade.edit(user);
-
-            return "/pages/group?faces-redirect=true";
-        } else {
-            FacesMessage msg = new FacesMessage("Group not found", groupName);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-        groupName = "";
+        List<Groups> groups2 = user.getGroupsList1();
+        groups2.remove(selected);
+        user.setGroupsList1(groups2);
+        
+        groupFacade.remove(selected);
         return null;
     }
 
     public String createGroup() {
-        Groups group = new Groups();
+        Groups group = selected;
         group.setGroupName(groupName);
         group.setType(type);
         group.setOwnerId(user);
@@ -109,10 +105,10 @@ public class GroupBean extends GlobalBean implements Serializable {
             groupFacade.createGroup(group);
             pageFacade.createPage(group);
         } catch (GroupExistsException ex) {
-            sendMessage("group-msg", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
+            sendMessage(":growl", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
         }
 
-        return "/pages/group?faces-redirect=true";
+        return "/pages/editGroup?faces-redirect=true";
     }
 
     public String joinGroup() {
