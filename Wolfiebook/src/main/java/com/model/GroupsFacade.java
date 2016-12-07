@@ -31,9 +31,10 @@ public class GroupsFacade extends AbstractFacade<Groups> {
     
     public void createGroup(Groups group) throws GroupExistsException {
         try {
-            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
-                .setParameter("groupName", group.getGroupName())
-                .getSingleResult();
+            Groups existingGroup =  findGroup(group.getGroupName());
+//            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+//                .setParameter("groupName", group.getGroupName())
+//                .getSingleResult();
             throw new GroupExistsException();
         } catch(NoResultException e){
             em.persist(group);

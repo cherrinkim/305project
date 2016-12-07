@@ -94,22 +94,24 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
 
     public String createGroup() {
-        Groups group = selected;
+        Groups group = new Groups();
         group.setGroupName(groupName);
         group.setType(type);
         group.setOwnerId(user);
-
-        List<Groups> groups = user.getGroupsList1();
-        groups.add(group);
-        user.setGroupsList1(groups);
         
-        userFacade.edit(user);
         try {
             groupFacade.createGroup(group);
             pageFacade.createPage(group);
         } catch (GroupExistsException ex) {
             sendMessage(":growl", FacesMessage.SEVERITY_ERROR, "Group with name already exists.");
         }
+
+        List<Groups> groups = user.getGroupsList1();
+        groups.add(group);
+        user.setGroupsList1(groups);
+        
+        userFacade.edit(user);
+        
 
         return "/pages/editGroup?faces-redirect=true";
     }
