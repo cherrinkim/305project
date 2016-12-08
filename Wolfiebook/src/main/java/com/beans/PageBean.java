@@ -13,6 +13,7 @@ import com.model.PagesFacade;
 import com.model.Posts;
 import com.model.PostsFacade;
 import com.model.Users;
+import com.model.UsersFacade;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -21,6 +22,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 
 /**
@@ -30,37 +34,36 @@ import javax.inject.Named;
 @Named("pageBean")
 @RequestScoped
 public class PageBean extends GlobalBean implements Serializable {
-    
+
     @EJB
     private PagesFacade pageFacade;
     @EJB
     private PostsFacade postFacade;
     @EJB
     private CommentsFacade commentFacade;
+    @EJB
+    private UsersFacade userFacade;
     private Users user;
     private String postContent;
     private String commentContent;
-    
-    
-    
+
     private boolean editmode;
-    
-    
+
     @PostConstruct
     public void init() {
         try {
             user = (Users) getSession().getAttribute("userSession");
-            
-        } catch(NullPointerException e) {
+
+        } catch (NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
     }
-    
+
     public Pages getPage() {
-        
+
         Pages page = pageFacade.find(user.getUserId());
-        
-        if(page != null) {
+
+        if (page != null) {
             getSession().setAttribute("pageSession", page);
             return page;
         } else {
@@ -68,12 +71,12 @@ public class PageBean extends GlobalBean implements Serializable {
             return null;
         }
     }
-    
+
     public List<Posts> getPosts() {
-        
+
         Pages page = pageFacade.findPage(user);
-        
-        if(page != null) {
+
+        if (page != null) {
             getSession().setAttribute("pageSession", page);
             return page.getPostsList();
         } else {
@@ -81,12 +84,12 @@ public class PageBean extends GlobalBean implements Serializable {
             return null;
         }
     }
-    
+
     public List<Posts> getGroupPosts(Groups group) {
-        
+
         Pages page = pageFacade.findPage(group);
-        
-        if(page != null) {
+
+        if (page != null) {
             getSession().setAttribute("pageSession", page);
             return page.getPostsList();
         } else {
@@ -94,77 +97,106 @@ public class PageBean extends GlobalBean implements Serializable {
             return null;
         }
     }
-    
+
     public String newPost() {
-        
+
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-        
+
         Pages page = pageFacade.findPage(user);
-        page.setPostCount(page.getPostCount()+1);
-        
+        page.setPostCount(page.getPostCount() + 1);
+
         Posts post = new Posts();
         post.setPageId(page);
         post.setAuthorId(user);
         post.setDateCreated(currentTimestamp);
         post.setContent(postContent);
         post.setCommentCount(0);
-        
+
         List<Posts> posts = page.getPostsList();
         posts.add(post);
         page.setPostsList(posts);
         getSession().setAttribute("pageSession", page);
-        
+
         pageFacade.edit(page);
         return "/pages/home?faces-redirect=true";
     }
-    
+
     public String newGroupPost(Groups group) {
-        
+
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-        
+
         Pages page = pageFacade.findPage(group);
-        page.setPostCount(page.getPostCount()+1);
-        
+        page.setPostCount(page.getPostCount() + 1);
+
         Posts post = new Posts();
         post.setPageId(page);
         post.setAuthorId(user);
         post.setDateCreated(currentTimestamp);
         post.setContent(postContent);
         post.setCommentCount(0);
-        
+
         List<Posts> posts = page.getPostsList();
         posts.add(post);
         page.setPostsList(posts);
         getSession().setAttribute("pageSession", page);
-        
+
         pageFacade.edit(page);
         return null;
     }
-    
+
     public String newComment(Posts postId) {
-        
+
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-        
+
         Posts post = postFacade.find(postId);
-        post.setCommentCount(post.getCommentCount()+1);
-        
+        post.setCommentCount(post.getCommentCount() + 1);
+
         Comments comment = new Comments();
         comment.setPostId(postId);
         comment.setAuthorId(user);
         comment.setDateCreated(currentTimestamp);
         comment.setContent(commentContent);
-        
+
         List<Comments> comments = post.getCommentsList();
         comments.add(comment);
         post.setCommentsList(comments);
-        
+
         getSession().setAttribute("postSession", post);
         getSession().setAttribute("commentSession", comment);
-        
+
         postFacade.edit(post);
         commentFacade.edit(comment);
+
+        return "/pages/home?faces-redirect=true";
+    }
+
+    public String likePost(Posts post) {
+        List<Posts> posts = user.getPostsList();
+        if(posts.contains(post)) {
+            unlikePost(post);
+        } else {
+            posts.add(post);
+
+//            Users user2 = userFacade.findUserByEmail(user);
+            userFacade.edit(user);
+        }
         
         return "/pages/home?faces-redirect=true";
+    }
+
+    public String checkLikedPost(Posts post) {
+        List<Posts> posts = user.getPostsList();
+        if (posts.contains(post)) {
+            return "Unlike";
+        }
+        return "Like";
+    }
+
+    public void unlikePost(Posts post) {
+        List<Posts> posts = user.getPostsList();
+        posts.remove(post);
+
+        userFacade.edit(user);
     }
 
     public String getPostContent() {
@@ -182,18 +214,18 @@ public class PageBean extends GlobalBean implements Serializable {
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
     }
-    
+
     public void edit() {
         editmode = true;
     }
-    
+
     public void save(Posts post) {
         postFacade.editPost(post);
         editmode = false;
     }
 
-    
-    public boolean isEditmode(){
+    public boolean isEditmode() {
         return editmode;
     }
+
 }

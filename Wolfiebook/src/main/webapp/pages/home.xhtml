@@ -3,27 +3,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
             <h:form id="personalPage">
                 <p:editor id="postMessage" value="#{pageBean.postContent}"
-                             required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
+                          required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
                 <p:commandButton  update="postTable" id="post-btn" value="Post" action="#{pageBean.newPost()}"/>                
-                <p:dataTable id="postTable" value="#{pageBean.getPosts()}" var="post" style="margin-top: 25px;"
-                             sortBy="#{post.dateCreated}" sortOrder="descending" emptyMessage="No post available">
-                    <p:column headerText="Content">
-                        <h:outputText value="#{post.content}" escape="false"/>
-                    </p:column>
-                    <p:column headerText="Author">
-                        <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
-                    </p:column>
-                    <p:column headerText="Created Date">
-                        <h:outputText value="#{post.dateCreated}"/>
-                    </p:column>
-                </p:dataTable>
-                <h:messages id="load-msg"/>
             </h:form>
+            <p:dataTable id="postTable" value="#{pageBean.getPosts()}" var="post" style="margin-top: 25px;"
+                         sortBy="#{post.dateCreated}" sortOrder="descending" emptyMessage="No post available">
+                <p:column headerText="Content">
+                    <h:outputText value="#{post.content}" escape="false"/>
+                </p:column>
+                <p:column headerText="Author">
+                    <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
+                </p:column>
+                <p:column headerText="Created Date">
+                    <h:outputText value="#{post.dateCreated}"/>
+                </p:column>
+                <p:column>
+                    <h:form>     
+                        <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/>
+                            
+   
+                        
+                          
+
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+            <h:messages id="load-msg"/>
+
         </ui:define>
     </ui:composition>
 </html>
