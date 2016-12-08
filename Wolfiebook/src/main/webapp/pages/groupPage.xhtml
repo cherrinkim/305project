@@ -8,6 +8,7 @@
         <ui:define name="content">
             <h:form id="GroupPageForm">
                 <p:growl id="groupPageGrowl" life="3000"/>
+                <h:outputText value="#{groupBean.selectedName}"/>
                 <p:editor id="postMessage" value="#{pageBean.postContent}"
                           required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
 
