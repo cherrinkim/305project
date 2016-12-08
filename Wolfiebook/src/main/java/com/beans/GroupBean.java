@@ -28,7 +28,7 @@ import org.primefaces.event.RowEditEvent;
  * @author cherrinkim
  */
 @Named(value = "groupBean")
-@ViewScoped
+@SessionScoped
 public class GroupBean extends GlobalBean implements Serializable {
 
     private String groupName;
@@ -69,6 +69,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
     
     public String toGroupPage() {
+        getSession().setAttribute("groupSession", selected);
         return "/pages/groupPage?faces-redirect=true";
     }
 
@@ -224,5 +225,10 @@ public class GroupBean extends GlobalBean implements Serializable {
     
     public Groups getSelected(){
         return selected;
+    }
+    
+    public String getSelectedName() {
+        selected = (Groups) getSession().getAttribute("groupSession");
+        return selected.getGroupName();
     }
 }
