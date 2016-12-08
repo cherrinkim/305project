@@ -8,44 +8,57 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
+            <ui:include src="groupPage.xhtml"/>
             <div class="ui-g">
                 <div class="ui-g-6">
-                    <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                        <f:facet name="header">
-                            All Groups
-                        </f:facet>
-                        <p:column headerText="Group Name" >
-                            <h:outputText value="#{group.groupName}" />
-                        </p:column>
-                        <p:column headerText="Owner" >
-                            <h:outputText value="#{group.ownerId.firstName}"/> 
-                        </p:column>
-                        <p:column headerText="Type" >
-                            <h:outputText value="#{group.type}"/> 
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="join-btn" value="Join"/>
-                        </f:facet>
-                    </p:dataTable>
+                    <h:form id="allGroupForm">
+                        <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending"
+                                     rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="groupsTable"
+                                     selectionMode="single" selection="#{groupBean.selected}" paginator="true">
+                            <p:ajax event="rowSelect"   update="join-btn"/>
+                            <p:ajax event="rowUnselect" update="join-btn"/>
+                            <f:facet name="header">
+                                All Groups
+                            </f:facet>
+                            <p:column headerText="Group Name" >
+                                <h:outputText value="#{group.groupName}" />
+                            </p:column>
+                            <p:column headerText="Owner" >
+                                <h:outputText value="#{group.ownerId.firstName}"/> 
+                            </p:column>
+                            <p:column headerText="Type" >
+                                <h:outputText value="#{group.type}"/> 
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="join-btn" value="Join" action="#{groupBean.joinGroup()}" disabled="#{empty groupBean.selected}"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </h:form>
                 </div>
                 <div class="ui-g-6">
-                    <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending">
-                        <f:facet name="header">
-                            Joined Groups
-                        </f:facet>
-                        <p:column headerText="Group Name" >
-                            <h:outputText value="#{group.groupName}" />
-                        </p:column>
-                        <p:column headerText="Owner" >
-                            <h:outputText value="#{group.ownerId.firstName}"/> 
-                        </p:column>
-                        <p:column headerText="Type" >
-                            <h:outputText value="#{group.type}"/> 
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="view-btn" value="View"/>
-                        </f:facet>
-                    </p:dataTable>
+                    <h:form id="joinedGroupForm">
+                        <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending"
+                                     rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="groupsTable"
+                                     selectionMode="single" selection="#{groupBean.selected}" paginator="true">
+                            <p:ajax event="rowSelect"   update="view-btn"/>
+                            <p:ajax event="rowUnselect" update="view-btn"/>
+                            <f:facet name="header">
+                                Joined Groups
+                            </f:facet>
+                            <p:column headerText="Group Name" >
+                                <h:outputText value="#{group.groupName}" />
+                            </p:column>
+                            <p:column headerText="Owner" >
+                                <h:outputText value="#{group.ownerId.firstName}"/> 
+                            </p:column>
+                            <p:column headerText="Type" >
+                                <h:outputText value="#{group.type}"/> 
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="view-btn" value="View" update=":GroupPageForm" oncomplete="PF('GroupPageDialog').show()" disabled="#{empty groupBean.selected}"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </h:form>
                 </div>
             </div>
         </ui:define>
