@@ -93,7 +93,8 @@ public class GroupBean extends GlobalBean implements Serializable {
        
         Pages page = pageFacade.findPage(selected);
         pageFacade.remove(page);
-        groupFacade.remove(selected);
+        Groups group = groupFacade.findGroup(selected.getGroupName());
+        groupFacade.remove(group);
         return "/pages/editGroup?faces-redirect=true";
     }
 
