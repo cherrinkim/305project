@@ -26,7 +26,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -49,8 +51,6 @@ public class PageBean extends GlobalBean implements Serializable {
     private String commentContent;
     private Posts selected;
 
-    private boolean editmode;
-
     @PostConstruct
     public void init() {
         try {
@@ -59,6 +59,18 @@ public class PageBean extends GlobalBean implements Serializable {
         } catch (NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
+    }
+
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Post edited", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Posts post = (Posts) event.getObject();
+        postFacade.editPost(post);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public Pages getPage() {
@@ -124,7 +136,7 @@ public class PageBean extends GlobalBean implements Serializable {
     }
 
     public String newGroupPost(Groups group) {
-        
+
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
 
         Pages page = pageFacade.findPage(group);
@@ -151,7 +163,7 @@ public class PageBean extends GlobalBean implements Serializable {
 
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
 
-        Posts post = postFacade.find(postId);
+        Posts post = postFacade.findPost(postId);
         post.setCommentCount(post.getCommentCount() + 1);
 
         Comments comment = new Comments();
@@ -187,6 +199,21 @@ public class PageBean extends GlobalBean implements Serializable {
         return "/pages/groupPage?faces-redirect=true";
     }
 
+    public String deleteComment(Posts post, Comments comment) {
+        Posts post2 = postFacade.findPost(post);
+        post2.setCommentCount(post.getCommentCount() - 1);
+
+        List<Comments> comments = post.getCommentsList();
+        comments.remove(comment);
+        post.setCommentsList(comments);
+        getSession().setAttribute("postSession", post);
+        getSession().setAttribute("commentSession", comment);
+        postFacade.edit(post);
+        commentFacade.remove(comment);
+
+        return "/pages/groupPage?faces-redirect=true";
+    }
+
     public String likePost(Posts post) {
         List<Posts> posts = user.getPostsList();
         if (posts.contains(post)) {
@@ -214,6 +241,33 @@ public class PageBean extends GlobalBean implements Serializable {
         userFacade.edit(user);
     }
 
+    public String likeComment(Comments comment) {
+        List<Comments> comments = user.getCommentsList();
+        if (comments.contains(comment)) {
+            unlikeComment(comment);
+        } else {
+            comments.add(comment);
+            userFacade.edit(user);
+        }
+
+        return "/pages/groupPage?faces-redirect=true";
+    }
+
+    public String checkLikedComment(Comments comment) {
+        List<Comments> comments = user.getCommentsList();
+        if (comments.contains(comment)) {
+            return "Unlike";
+        }
+        return "Like";
+    }
+
+    public void unlikeComment(Comments comment) {
+        List<Comments> comments = user.getCommentsList();
+        comments.remove(comment);
+
+        userFacade.edit(user);
+    }
+
     public String getPostContent() {
         return postContent;
     }
@@ -228,19 +282,6 @@ public class PageBean extends GlobalBean implements Serializable {
 
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
-    }
-
-    public void edit() {
-        editmode = true;
-    }
-
-    public void save(Posts post) {
-        postFacade.editPost(post);
-        editmode = false;
-    }
-
-    public boolean isEditmode() {
-        return editmode;
     }
 
     public Posts getSelected() {

@@ -72,6 +72,10 @@ public class GroupBean extends GlobalBean implements Serializable {
         getSession().setAttribute("groupSession", group);        
         return "/pages/groupPage?faces-redirect=true";
     }
+    
+    public String toPrevious(){
+        return "/pages/group?faces-redirect=true";
+    }
 
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Name edited", ((Groups) event.getObject()).getGroupName());
@@ -225,5 +229,10 @@ public class GroupBean extends GlobalBean implements Serializable {
     
     public Groups getSelected(){
         return selected;
+    }
+    
+    public String getGroupPageName() {
+        Groups g = (Groups) getSession().getAttribute("groupSession");
+        return selected.getGroupName();
     }
 }

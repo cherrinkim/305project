@@ -53,7 +53,7 @@
                                 <h:outputText value="#{group.type}"/> 
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage()}" disabled="#{empty groupBean.selected}"/>
+                                <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage(groupBean.selected)}" disabled="#{empty groupBean.selected}"/>
                             </f:facet>
                         </p:dataTable>
                     </h:form>

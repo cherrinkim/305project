@@ -3,47 +3,69 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition  template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-            <h:form id="GroupPageForm">
+            <p:commandButton value="Back" action="#{groupBean.toPrevious()}"/>
+            <h:outputText value="#{groupBean.groupPageName}" style="font-size:3em; display:block;"/>
+            <h:form id="GroupPageForm" style="margin-top:20px;">
                 <p:growl id="groupPageGrowl" life="3000"/>
                 <div class="ui-g" style="margin-bottom:30px;">
                     <div class="ui-g-8">
                         <p:inputTextarea id="postMessage" value="#{pageBean.postContent}" required="true" requiredMessage="#{bundle['msg.postcontent.validation']}" style="width:100%; min-height:150px;"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:commandButton update="datalist" id="post-btn" value="post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
+                        <p:commandButton update=":groupPostForm:datalist" id="post-btn" value="post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
                     </div>
                 </div>
             </h:form>
-            <p:dataTable id="datalist" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
+            <h:form id="groupPostForm">
+                <p:growl id="msgs" showDetail="true"/>
+            <p:dataTable id="datalist" editable="true" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
                          emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" selectionMode="single" 
                          selection="#{pageBean.selected}" paginator="true">
+                <p:ajax event="rowEdit"  listener="#{pageBean.onRowEdit}" update=":groupPostForm:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{pageBean.onRowCancel}" update=":groupPostForm:msgs" />
                 <p:column style="width:16px">
                     <p:rowToggler />
                 </p:column>
                 <p:column headerText="Content">
-                    <h:outputText value="#{post.content}" escape="false"/>
+                    <p:cellEditor>
+
+                        <f:facet name="input">
+                            <h:inputText value="#{post.content}"/>
+                        </f:facet>
+                        <f:facet name="output">
+                            <h:outputText value="#{post.content}"/>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
+                <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
                 <p:column headerText="Author">
                     <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
                 </p:column>
                 <p:column headerText="Created Date">
                     <h:outputText value="#{post.dateCreated}"/>
                 </p:column>
+
                 <p:column> 
-                    <h:form>      
-                        <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
-                    </h:form> 
-                    <h:form>      
-                        <p:commandButton id="deletePostButton" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
-                    </h:form> 
+                    <p:panelGrid columns="2" layout="grid" styleClass="panelGrid">
+                            
+                            <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
+                             
+                            <p:commandButton id="deletePostButton" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
+                         
+
+                    </p:panelGrid>
+
                 </p:column> 
                 <p:rowExpansion>
                     <p:inputText id="postComment" value="#{pageBean.commentContent}"
                                  required="true" requiredMessage="#{bundle['msg.commentcontent.validation']}"/>
-                    <p:commandButton update="commentlist" id="comment-btn" value="comment" action="#{pageBean.newComment(pageBean.selected)}"/>
+                    <p:commandButton update="commentlist" id="comment-btn" value="comment" action="#{pageBean.newComment(post)}"/>
                     <p:dataTable id="commentlist" value="#{post.commentsList}" var="comment" widgetVar="commentTable" lazy="false"
                                  emptyMessage="No commnets found" rowsPerPageTemplate="5,10,15">
                         <p:column headerText="Content">
@@ -55,10 +77,16 @@
                         <p:column headerText="Created Date">
                             <h:outputText value="#{comment.dateCreated}"/>
                         </p:column>
+                        <p:column>
+                            <p:commandButton id="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/> 
+                             
+                            <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, pageBean.selected)}"/> 
+                         </p:column>
+                        
                     </p:dataTable>
                 </p:rowExpansion>
             </p:dataTable>
-
+</h:form>
         </ui:define>
     </ui:composition>
 </html>
