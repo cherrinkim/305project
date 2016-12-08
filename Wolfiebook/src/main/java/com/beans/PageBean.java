@@ -26,7 +26,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -49,7 +51,6 @@ public class PageBean extends GlobalBean implements Serializable {
     private String commentContent;
     private Posts selected;
 
-    private boolean editmode;
 
     @PostConstruct
     public void init() {
@@ -59,6 +60,18 @@ public class PageBean extends GlobalBean implements Serializable {
         } catch (NullPointerException e) {
             getFacesContext().getApplication().getNavigationHandler().handleNavigation(getFacesContext(), null, "/index?faces-redirect=true");
         }
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Post edited", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Posts post = (Posts) event.getObject();
+        postFacade.editPost(post);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public Pages getPage() {
@@ -228,19 +241,6 @@ public class PageBean extends GlobalBean implements Serializable {
 
     public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
-    }
-
-    public void edit() {
-        editmode = true;
-    }
-
-    public void save(Posts post) {
-        postFacade.editPost(post);
-        editmode = false;
-    }
-
-    public boolean isEditmode() {
-        return editmode;
     }
 
     public Posts getSelected() {
