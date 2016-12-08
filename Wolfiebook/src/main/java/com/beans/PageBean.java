@@ -7,6 +7,7 @@ package com.beans;
 
 import com.model.Comments;
 import com.model.CommentsFacade;
+import com.model.Groups;
 import com.model.Pages;
 import com.model.PagesFacade;
 import com.model.Posts;
@@ -81,6 +82,19 @@ public class PageBean extends GlobalBean implements Serializable {
         }
     }
     
+    public List<Posts> getGroupPosts(Groups group) {
+        
+        Pages page = pageFacade.findPage(group);
+        
+        if(page != null) {
+            getSession().setAttribute("pageSession", page);
+            return page.getPostsList();
+        } else {
+//            sendMessage("groupPageGrowl", FacesMessage.SEVERITY_ERROR, "No page available.");
+            return null;
+        }
+    }
+    
     public String newPost() {
         
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
@@ -102,6 +116,29 @@ public class PageBean extends GlobalBean implements Serializable {
         
         pageFacade.edit(page);
         return "/pages/home?faces-redirect=true";
+    }
+    
+    public String newGroupPost(Groups group) {
+        
+        Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+        
+        Pages page = pageFacade.findPage(group);
+        page.setPostCount(page.getPostCount()+1);
+        
+        Posts post = new Posts();
+        post.setPageId(page);
+        post.setAuthorId(user);
+        post.setDateCreated(currentTimestamp);
+        post.setContent(postContent);
+        post.setCommentCount(0);
+        
+        List<Posts> posts = page.getPostsList();
+        posts.add(post);
+        page.setPostsList(posts);
+        getSession().setAttribute("pageSession", page);
+        
+        pageFacade.edit(page);
+        return null;
     }
     
     public String newComment(Posts postId) {
