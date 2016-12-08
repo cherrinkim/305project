@@ -123,6 +123,8 @@ public class GroupBean extends GlobalBean implements Serializable {
         userFacade.edit(user);
         
 
+        selected = group;
+        joinGroup();
         return "/pages/editGroup?faces-redirect=true";
     }
 
