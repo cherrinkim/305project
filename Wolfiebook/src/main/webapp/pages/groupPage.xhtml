@@ -22,7 +22,6 @@
             </h:form>
             <h:form id="groupPostForm">
                 <p:growl id="msgs" showDetail="true"/>
-
             <p:dataTable id="datalist" editable="true" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
                          emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" selectionMode="single" 
                          selection="#{pageBean.selected}" paginator="true">
@@ -78,6 +77,12 @@
                         <p:column headerText="Created Date">
                             <h:outputText value="#{comment.dateCreated}"/>
                         </p:column>
+                        <p:column>
+                            <p:commandButton id="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/> 
+                             
+                            <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, pageBean.selected)}"/> 
+                         </p:column>
+                        
                     </p:dataTable>
                 </p:rowExpansion>
             </p:dataTable>

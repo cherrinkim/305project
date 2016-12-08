@@ -36,4 +36,12 @@ public class PostsFacade extends AbstractFacade<Posts> {
         }
         p.setContent(post.getContent());
     }
+    
+    public Posts findPost(Posts post){
+        Posts p = em.find(Posts.class, post.getPostId());
+        if(p == null) {
+            throw new IllegalArgumentException("Unknown post id");
+        }
+        return p;
+    }
 }
