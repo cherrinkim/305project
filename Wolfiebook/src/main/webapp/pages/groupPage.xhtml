@@ -23,8 +23,8 @@
             <h:form id="groupPostForm">
                 <p:growl id="msgs" showDetail="true"/>
             <p:dataTable id="datalist" editable="true" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
-                         emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" selectionMode="single" 
-                         selection="#{pageBean.selected}" paginator="true">
+                         emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" 
+                          paginator="true">
                 <p:ajax event="rowEdit"  listener="#{pageBean.onRowEdit}" update=":groupPostForm:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{pageBean.onRowCancel}" update=":groupPostForm:msgs" />
                 <p:column style="width:16px">
@@ -54,7 +54,7 @@
                 <p:column> 
                     <p:panelGrid columns="2" layout="grid" styleClass="panelGrid">
                             
-                            <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
+                            <p:commandButton id="likeButton" update="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
                              
                             <p:commandButton id="deletePostButton" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
                          
@@ -78,9 +78,8 @@
                             <h:outputText value="#{comment.dateCreated}"/>
                         </p:column>
                         <p:column>
-                            <p:commandButton id="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/> 
-                             
-                            <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, pageBean.selected)}"/> 
+                            <p:commandButton id="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/>         
+                            <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
                          </p:column>
                         
                     </p:dataTable>

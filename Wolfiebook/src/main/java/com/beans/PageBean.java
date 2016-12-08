@@ -199,7 +199,7 @@ public class PageBean extends GlobalBean implements Serializable {
         return "/pages/groupPage?faces-redirect=true";
     }
 
-    public String deleteComment(Posts post, Comments comment) {
+    public String deleteComment(Comments comment, Posts post) {
         Posts post2 = postFacade.findPost(post);
         post2.setCommentCount(post.getCommentCount() - 1);
 
@@ -223,7 +223,7 @@ public class PageBean extends GlobalBean implements Serializable {
             userFacade.edit(user);
         }
 
-        return "/pages/groupPage?faces-redirect=true";
+        return null;
     }
 
     public String checkLikedPost(Posts post) {
@@ -250,7 +250,7 @@ public class PageBean extends GlobalBean implements Serializable {
             userFacade.edit(user);
         }
 
-        return "/pages/groupPage?faces-redirect=true";
+        return null;
     }
 
     public String checkLikedComment(Comments comment) {
