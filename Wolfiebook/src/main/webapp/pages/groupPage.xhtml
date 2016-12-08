@@ -65,7 +65,7 @@
                 <p:rowExpansion>
                     <p:inputText id="postComment" value="#{pageBean.commentContent}"
                                  required="true" requiredMessage="#{bundle['msg.commentcontent.validation']}"/>
-                    <p:commandButton update="commentlist" id="comment-btn" value="comment" action="#{pageBean.newComment(pageBean.selected)}"/>
+                    <p:commandButton update="commentlist" id="comment-btn" value="comment" action="#{pageBean.newComment(post)}"/>
                     <p:dataTable id="commentlist" value="#{post.commentsList}" var="comment" widgetVar="commentTable" lazy="false"
                                  emptyMessage="No commnets found" rowsPerPageTemplate="5,10,15">
                         <p:column headerText="Content">

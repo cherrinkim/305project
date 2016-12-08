@@ -200,7 +200,7 @@ public class PageBean extends GlobalBean implements Serializable {
     }
 
     public String deleteComment(Posts post, Comments comment) {
-        Posts post2 = postFacade.find(post);
+        Posts post2 = postFacade.findPost(post);
         post2.setCommentCount(post.getCommentCount() - 1);
 
         List<Comments> comments = post.getCommentsList();
