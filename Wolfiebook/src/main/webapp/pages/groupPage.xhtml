@@ -6,13 +6,17 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>
         <p:growl id="groupPageGrowl" life="3000"/>
-        <p:dialog id="GroupPageDlg" widgetVar="GroupPageDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)" header="Group Page">
+        <p:dialog id="GroupPageDlg" widgetVar="GroupPageDialog" modal="false" resizable="false" responsive="true" appendTo="@(content)" header="Group Page" fitViewport="true">
             <h:form id="GroupPageForm">
                 <p:editor id="postMessage" value="#{pageBean.postContent}"
                           required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
-                <p:commandButton update="datalist" id="post-btn" value="Post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
+                <p:commandButton update="datalist" id="post-btn" value="post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
                 <p:dataTable id="datalist" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
-                             emptyMessage="No posts found" rowsPerPageTemplate="5,10,15">
+                             emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" selectionMode="single" 
+                             selection="#{pageBean.selected}" paginator="true">
+                    <p:column style="width:16px">
+                        <p:rowToggler />
+                    </p:column>
                     <p:column headerText="Content">
                         <h:outputText value="#{post.content}" escape="false"/>
                     </p:column>
@@ -22,6 +26,23 @@
                     <p:column headerText="Created Date">
                         <h:outputText value="#{post.dateCreated}"/>
                     </p:column>
+                    <p:rowExpansion>
+                        <p:inputText id="postComment" value="#{pageBean.commentContent}"
+                          required="true" requiredMessage="#{bundle['msg.commentcontent.validation']}"/>
+                        <p:commandButton update="commentlist" id="comment-btn" value="comment" action="#{pageBean.newComment(pageBean.selected)}"/>
+                        <p:dataTable id="commentlist" value="#{post.commentsList}" var="comment" widgetVar="commentTable" lazy="false"
+                                     emptyMessage="No commnets found" rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="Content">
+                                <h:outputText value="#{comment.content}" escape="false"/>
+                            </p:column>
+                            <p:column headerText="Author">
+                                <h:outputText value="#{comment.authorId.firstName} #{comment.authorId.lastName}"/>
+                            </p:column>
+                            <p:column headerText="Created Date">
+                                <h:outputText value="#{comment.dateCreated}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:rowExpansion>
                 </p:dataTable>
             </h:form>
             <h:form>

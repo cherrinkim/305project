@@ -7,6 +7,7 @@ package com.model;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -31,5 +32,4 @@ public class PostsFacade extends AbstractFacade<Posts> {
     public void editPost(Posts post){
         em.persist(post);
     }
-    
 }

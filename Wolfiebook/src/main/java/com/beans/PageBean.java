@@ -46,6 +46,7 @@ public class PageBean extends GlobalBean implements Serializable {
     private Users user;
     private String postContent;
     private String commentContent;
+    private Posts selected;
 
     private boolean editmode;
 
@@ -228,4 +229,11 @@ public class PageBean extends GlobalBean implements Serializable {
         return editmode;
     }
 
+    public Posts getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Posts selected) {
+        this.selected = selected;
+    }
 }
