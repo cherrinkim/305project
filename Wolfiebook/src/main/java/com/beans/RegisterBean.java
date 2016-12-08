@@ -46,7 +46,7 @@ public class RegisterBean extends GlobalBean implements Serializable {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setState(state);
-        user.setTelephone(telephone);
+        user.setTelephone(telephone.replaceAll("[^0-9]", ""));
         user.setZipcode(zipcode);
         user.setPurchaseRating(0);
         

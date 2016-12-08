@@ -110,8 +110,10 @@
                                 </div>
                             </div>
                             <div class="ui-g">
-                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.zipcode}" id="zip" required="true" requiredMessage="#{bundle['msg.zipcode.validation']}" a:placeholder="Zipcode" style="width:100%;"/></div>
-                                <div class="ui-g-12 ui-md-6"><p:inputText value="#{registerBean.telephone}" id="mobile" required="true" requiredMessage="#{bundle['msg.mobile.validation']}" a:placeholder="Mobile number" style="width:100%;"/></div>
+                                <div class="ui-g-12 ui-md-6"><p:inputMask value="#{registerBean.zipcode}" id="zip" required="true" requiredMessage="#{bundle['msg.zipcode.validation']}" a:placeholder="Zipcode" style="width:100%;" mask="99999"/></div>
+                                <div class="ui-g-12 ui-md-6">
+                                    <p:inputMask id="mobile" required="true" value="#{registerBean.telephone}" mask="(999) 999-9999" requiredMessage="#{bundle['msg.mobile.validation']}" style="width:100%;" a:placeholder="Phone Number"/>
+                                </div>
                             </div>
                             <div class="ui-g">
                                 <div class="ui-g-12"><p:commandButton id="register-btn" value="Sign Up" action="#{registerBean.register()}" update="register-msg"/></div>
