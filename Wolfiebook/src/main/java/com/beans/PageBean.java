@@ -182,9 +182,9 @@ public class PageBean extends GlobalBean implements Serializable {
         page.setPostsList(posts);
         getSession().setAttribute("pageSession", page);
         pageFacade.edit(page);
+        postFacade.remove(post);
 
         return "/pages/groupPage?faces-redirect=true";
-
     }
 
     public String likePost(Posts post) {

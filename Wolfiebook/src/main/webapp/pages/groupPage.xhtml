@@ -32,6 +32,9 @@
                     <h:form>      
                         <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
                     </h:form> 
+                    <h:form>      
+                        <p:commandButton id="deletePostButton" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
+                    </h:form> 
                 </p:column> 
                 <p:rowExpansion>
                     <p:inputText id="postComment" value="#{pageBean.commentContent}"
