@@ -8,10 +8,14 @@
         <ui:define name="content">
             <h:form id="GroupPageForm">
                 <p:growl id="groupPageGrowl" life="3000"/>
-                <p:editor id="postMessage" value="#{pageBean.postContent}"
-                          required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
-
-                <p:commandButton update="datalist" id="post-btn" value="post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
+                <div class="ui-g" style="margin-bottom:30px;">
+                    <div class="ui-g-8">
+                        <p:inputTextarea id="postMessage" value="#{pageBean.postContent}" required="true" requiredMessage="#{bundle['msg.postcontent.validation']}" style="width:100%; min-height:150px;"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:commandButton update="datalist" id="post-btn" value="post" action="#{pageBean.newGroupPost(groupBean.selected)}"/>
+                    </div>
+                </div>
             </h:form>
             <p:dataTable id="datalist" value="#{pageBean.getGroupPosts(groupBean.selected)}" var="post" widgetVar="pageTable" lazy="false"
                          emptyMessage="No posts found" rowsPerPageTemplate="5,10,15" rowKey="#{post.postId}" selectionMode="single" 
