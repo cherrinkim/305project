@@ -22,6 +22,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -123,7 +124,7 @@ public class PageBean extends GlobalBean implements Serializable {
     }
 
     public String newGroupPost(Groups group) {
-
+        
         Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
 
         Pages page = pageFacade.findPage(group);
@@ -194,7 +195,7 @@ public class PageBean extends GlobalBean implements Serializable {
             userFacade.edit(user);
         }
 
-        return "/pages/home?faces-redirect=true";
+        return "/pages/groupPage?faces-redirect=true";
     }
 
     public String checkLikedPost(Posts post) {

@@ -44,7 +44,7 @@
                     <f:facet name="footer">
                         <p:commandButton id="create-btn" value="Create"  update=":GroupCreateForm" oncomplete="PF('GroupCreateDialog').show()"/>
                         <p:commandButton id="addUser-btn" value="Add User" update=":GroupAddForm" oncomplete="PF('GroupAddDialog').show()" disabled="#{empty groupBean.selected}"/>
-                        <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage()}" disabled="#{empty groupBean.selected}"/>
+                        <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage(group)}" disabled="#{empty groupBean.selected}"/>
                         <p:commandButton id="delete-btn" value="Delete" action="#{groupBean.deleteGroup()}" update="groupsTable" disabled="#{empty groupBean.selected}"/>
                     </f:facet>
                 </p:dataTable>
