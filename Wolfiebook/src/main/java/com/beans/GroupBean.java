@@ -67,6 +67,10 @@ public class GroupBean extends GlobalBean implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public String toGroupPage() {
+        return "/pages/groupPage?faces-redirect=true";
+    }
 
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Name edited", ((Groups) event.getObject()).getGroupName());

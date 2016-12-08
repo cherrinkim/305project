@@ -119,7 +119,7 @@ public class PageBean extends GlobalBean implements Serializable {
         getSession().setAttribute("pageSession", page);
 
         pageFacade.edit(page);
-        return "/pages/home?faces-redirect=true";
+        return null;
     }
 
     public String newGroupPost(Groups group) {
@@ -168,7 +168,7 @@ public class PageBean extends GlobalBean implements Serializable {
         postFacade.edit(post);
         commentFacade.edit(comment);
 
-        return "/pages/home?faces-redirect=true";
+        return null;
     }
 
     public String likePost(Posts post) {
@@ -182,7 +182,7 @@ public class PageBean extends GlobalBean implements Serializable {
             userFacade.edit(user);
         }
         
-        return "/pages/home?faces-redirect=true";
+        return null;
     }
 
     public String checkLikedPost(Posts post) {
