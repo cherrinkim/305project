@@ -7,7 +7,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition  template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-            <h:form id="GroupPageForm">
+            <p:commandButton value="Back" action="#{groupBean.toPrevious()}"/>
+            <h:outputText value="#{groupBean.groupPageName}" style="font-size:3em; display:block;"/>
+            <h:form id="GroupPageForm" style="margin-top:20px;">
                 <p:growl id="groupPageGrowl" life="3000"/>
                 <div class="ui-g" style="margin-bottom:30px;">
                     <div class="ui-g-8">
