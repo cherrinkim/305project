@@ -143,7 +143,8 @@ public class PageBean extends GlobalBean implements Serializable {
         getSession().setAttribute("pageSession", page);
 
         pageFacade.edit(page);
-        return null;
+        return "/pages/groupPage?faces-redirect=true";
+
     }
 
     public String newComment(Posts postId) {

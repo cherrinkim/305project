@@ -226,9 +226,4 @@ public class GroupBean extends GlobalBean implements Serializable {
     public Groups getSelected(){
         return selected;
     }
-    
-    public String getSelectedName() {
-        selected = (Groups) getSession().getAttribute("groupSession");
-        return selected.getGroupName();
-    }
 }
