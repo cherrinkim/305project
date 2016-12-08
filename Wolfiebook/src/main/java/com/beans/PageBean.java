@@ -171,18 +171,30 @@ public class PageBean extends GlobalBean implements Serializable {
         return null;
     }
 
+    public String deletePost(Posts post, Groups group) {
+        Pages page = pageFacade.findPage(group);
+        page.setPostCount(page.getPostCount() - 1);
+
+        List<Posts> posts = page.getPostsList();
+        posts.remove(post);
+        page.setPostsList(posts);
+        getSession().setAttribute("pageSession", page);
+        pageFacade.edit(page);
+
+        return "/pages/groupPage?faces-redirect=true";
+
+    }
+
     public String likePost(Posts post) {
         List<Posts> posts = user.getPostsList();
-        if(posts.contains(post)) {
+        if (posts.contains(post)) {
             unlikePost(post);
         } else {
             posts.add(post);
-
-//            Users user2 = userFacade.findUserByEmail(user);
             userFacade.edit(user);
         }
-        
-        return null;
+
+        return "/pages/home?faces-redirect=true";
     }
 
     public String checkLikedPost(Posts post) {

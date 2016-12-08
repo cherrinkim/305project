@@ -23,16 +23,7 @@
                 <p:column headerText="Created Date">
                     <h:outputText value="#{post.dateCreated}"/>
                 </p:column>
-                <p:column>
-                    <h:form>     
-                        <p:commandButton id="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/>
-                            
-   
-                        
-                          
-
-                    </h:form>
-                </p:column>
+                
             </p:dataTable>
             <h:messages id="load-msg"/>
 
