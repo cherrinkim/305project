@@ -13,7 +13,7 @@
                 <div class="ui-g-6">
                     <h:form id="allGroupForm">
                         <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending"
-                                     rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="groupsTable"
+                                     rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="allGroupsTable"
                                      selectionMode="single" selection="#{groupBean.selected}" paginator="true">
                             <p:ajax event="rowSelect"   update="join-btn"/>
                             <p:ajax event="rowUnselect" update="join-btn"/>
