@@ -62,11 +62,18 @@ public class PageBean extends GlobalBean implements Serializable {
     }
 
     public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Post edited", "");
+        FacesMessage msg = new FacesMessage("Edited", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        Posts post = (Posts) event.getObject();
-        post.setContent(postContent);
-        postFacade.editPost(post);
+        try{
+            Posts post = (Posts) event.getObject();
+            post.setContent(postContent);
+            postFacade.editPost(post);
+        } catch(ClassCastException e){
+            Comments comment = (Comments) event.getObject();
+            comment.setContent(commentContent);
+            commentFacade.edit(comment);
+        }
+        
     }
 
     public void onRowCancel(RowEditEvent event) {
