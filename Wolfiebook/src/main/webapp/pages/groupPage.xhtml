@@ -56,7 +56,7 @@
                             
                             <p:commandButton id="likeButton" update="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
                              
-                            <p:commandButton id="deletePostButton" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
+                            <p:commandButton id="deletePostButton" update="datalist" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
                          
 
                     </p:panelGrid>
@@ -79,7 +79,7 @@
                         </p:column>
                         <p:column>
                             <p:commandButton id="likeCommentButton" update="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/>         
-                            <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
+                            <p:commandButton id="deleteCommentButton" update="commentlist" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
                          </p:column>
                         
                     </p:dataTable>

@@ -196,7 +196,7 @@ public class PageBean extends GlobalBean implements Serializable {
         pageFacade.edit(page);
         postFacade.remove(post);
 
-        return "/pages/groupPage?faces-redirect=true";
+        return null;
     }
 
     public String deleteComment(Comments comment, Posts post) {
