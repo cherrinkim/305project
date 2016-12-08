@@ -95,6 +95,8 @@ public class GroupBean extends GlobalBean implements Serializable {
         pageFacade.remove(page);
         Groups group = groupFacade.findGroup(selected.getGroupName());
         groupFacade.remove(group);
+        
+        
         return "/pages/editGroup?faces-redirect=true";
     }
 
@@ -125,7 +127,7 @@ public class GroupBean extends GlobalBean implements Serializable {
     }
 
     public String joinGroup() {
-        Groups group = groupFacade.findGroup(groupName);
+        Groups group = groupFacade.findGroup(selected.getGroupName());
         if (group != null) {
             List<Users> users = group.getUsersList();
             users.add(user);
@@ -143,7 +145,6 @@ public class GroupBean extends GlobalBean implements Serializable {
             FacesMessage msg = new FacesMessage("Group not found", groupName);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        groupName = "";
         return null;
     }
     
@@ -159,6 +160,8 @@ public class GroupBean extends GlobalBean implements Serializable {
             newMember.setGroupsList(groups);
 
             userFacade.edit(newMember);
+            
+         
             
             FacesMessage msg = new FacesMessage("Added to", groupName);
             FacesContext.getCurrentInstance().addMessage(null, msg);
