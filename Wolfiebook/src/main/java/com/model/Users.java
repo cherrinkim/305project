@@ -27,7 +27,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -55,6 +54,11 @@ import javax.validation.constraints.Size;
 @Named
 @RequestScoped
 public class Users implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "purchaseRating")
+    private int purchaseRating;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -102,7 +106,7 @@ public class Users implements Serializable {
     @Size(min = 1, max = 12)
     @Column(name = "telephone")
     private String telephone;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    //@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -114,8 +118,6 @@ public class Users implements Serializable {
     @Size(max = 16)
     @Column(name = "creditCard")
     private String creditCard;
-    @Column(name = "purchaseRating")
-    private Integer purchaseRating;
     @JoinTable(name = "LikedComments", joinColumns = {
         @JoinColumn(name = "userId", referencedColumnName = "userId")}, inverseJoinColumns = {
         @JoinColumn(name = "commentId", referencedColumnName = "commentId")})
@@ -269,14 +271,6 @@ public class Users implements Serializable {
         this.creditCard = creditCard;
     }
 
-    public Integer getPurchaseRating() {
-        return purchaseRating;
-    }
-
-    public void setPurchaseRating(Integer purchaseRating) {
-        this.purchaseRating = purchaseRating;
-    }
-
     public List<Comments> getCommentsList() {
         return commentsList;
     }
@@ -396,6 +390,14 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "com.model.Users[ userId=" + userId + " ]";
+    }
+
+    public int getPurchaseRating() {
+        return purchaseRating;
+    }
+
+    public void setPurchaseRating(int purchaseRating) {
+        this.purchaseRating = purchaseRating;
     }
     
 }

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="growl" life="3000" />
+            <ui:include src="createGroup.xhtml"/>
+            <ui:include src="addGroup.xhtml"/>
+            <!--            <ui:include src="groupPage.xhtml"/>-->
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable id="groupsTable" editable="true" value="#{groupBean.getOwnedGroups()}" var="group" rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}"
+                             emptyMessage="No group found" widgetVar="groupsTable" selectionMode="single" selection="#{groupBean.selected}"
+                             paginator="true">
+                    <f:facet name="header">My Groups</f:facet>
+                    <p:ajax event="rowEdit"  listener="#{groupBean.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{groupBean.onRowCancel}" update=":form:msgs" />
+                    <p:ajax event="rowSelect"   update="addUser-btn view-btn delete-btn"/>
+                    <p:ajax event="rowUnselect" update="addUser-btn view-btn delete-btn"/>
+
+                    <p:column headerText="Group Name" >
+                        <p:cellEditor>
+                            <f:facet name="input">
+                                <h:inputText value="#{group.groupName}" />
+                            </f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{group.groupName}" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Owner" >
+                        <h:outputText value="#{group.ownerId.firstName}"/>     
+                    </p:column>
+                    <p:column headerText="Type" >
+                        <h:outputText value="#{group.type}"/> 
+                    </p:column>
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="create-btn" value="Create"  update=":GroupCreateForm" oncomplete="PF('GroupCreateDialog').show()"/>
+                        <p:commandButton id="addUser-btn" value="Add User" update=":GroupAddForm" oncomplete="PF('GroupAddDialog').show()" disabled="#{empty groupBean.selected}"/>
+                        <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage(group)}" disabled="#{empty groupBean.selected}"/>
+                        <p:commandButton id="delete-btn" value="Delete" action="#{groupBean.deleteGroup()}" update="groupsTable" disabled="#{empty groupBean.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

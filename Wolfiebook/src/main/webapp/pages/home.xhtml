@@ -3,23 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/WEB-INF/templates/usertemplate.xhtml">
         <ui:define name="content">
-            <div id="main-div">
-                <p>Hello #{loginBean.user.firstName}</p>
-                <br/>
-                <p>Your user id is #{loginBean.user.userId}</p>
-                <br/>
-                <h:form>
-                    <ui:repeat value="#{pageBean.getPage(1)}" var="page">
-                        <h:outputText value="#{page.pageId}"/>
-                    </ui:repeat>
-                    <h:messages id="page-msg"/>
-                </h:form>
-            </div>
-            
+            <h:form id="personalPage">
+                <p:editor id="postMessage" value="#{pageBean.postContent}"
+                          required="true" requiredMessage="#{bundle['msg.postcontent.validation']}"/>
+                <p:commandButton  update="postTable" id="post-btn" value="Post" action="#{pageBean.newPost()}"/>                
+            </h:form>
+            <p:dataTable id="postTable" value="#{pageBean.getPosts()}" var="post" style="margin-top: 25px;"
+                         sortBy="#{post.dateCreated}" sortOrder="descending" emptyMessage="No post available">
+                <p:column headerText="Content">
+                    <h:outputText value="#{post.content}" escape="false"/>
+                </p:column>
+                <p:column headerText="Author">
+                    <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
+                </p:column>
+                <p:column headerText="Created Date">
+                    <h:outputText value="#{post.dateCreated}"/>
+                </p:column>
+                
+            </p:dataTable>
+            <h:messages id="load-msg"/>
+
         </ui:define>
     </ui:composition>
 </html>

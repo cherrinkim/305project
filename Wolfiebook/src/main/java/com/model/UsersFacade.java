@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import com.model.UserExistsException;
+import java.util.List;
 
 /**
  *
@@ -41,14 +43,25 @@ public class UsersFacade extends AbstractFacade<Users> {
         }
     }
     
-    public void registerUser(Users user) throws UserExistsException {
-        try {
-            em.createNamedQuery("Users.findByEmail")
+    public void registerUser(Users user) throws UserExistsException{
+            try {
+                Users usr = (Users) em.createNamedQuery("Users.findByEmail")
                     .setParameter("email", user.getEmail())
                     .getSingleResult();
-            throw new UserExistsException();
-        } catch(NoResultException e) {
-            em.persist(user);
+                throw new UserExistsException();
+            } catch(NoResultException e){
+                em.persist(user);
+            }  
+    }
+    
+    public void editOwnerList(Users user, Groups group) {
+        Users u = em.find(Users.class, user.getUserId());
+        if(u == null) {
+            throw new IllegalArgumentException("Unknown User id");
         }
+        List<Groups> g = u.getGroupsList1();
+        g.remove(group);
+        u.setGroupsList1(g);
+        em.merge(u);
     }
 }

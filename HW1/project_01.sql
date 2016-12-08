@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS Users (
 	zipcode varchar(10) NOT NULL, 
 	telephone char(12) NOT NULL,
 	email varchar(255) NOT NULL,
-	accountCreated datetime DEFAULT CURRENT_TIMESTAMP,
-	creditCard char(16), # keep account history
-	purchaseRating int(1), # active status in terms of making purchases
+	accountCreated timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	creditCard char(16) DEFAULT NULL, # keep account history
+	purchaseRating int(1) NOT NULL DEFAULT 0, # active status in terms of making purchases
 	PRIMARY KEY (userId),
 	FULLTEXT(firstName, lastName)
 );
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS Groups (
 
 CREATE TABLE IF NOT EXISTS Pages (
 	pageId int(11) NOT NULL AUTO_INCREMENT,
-	ownerId int(11),
-	groupId int(11),
+	ownerId int(11) DEFAULT NULL,
+	groupId int(11) DEFAULT NULL,
 	postCount int DEFAULT 0,
 	PRIMARY KEY (pageId),
 	FOREIGN KEY (ownerId) REFERENCES Users(userId),
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS Posts (
 	pageId int(11) NOT NULL,
 	postId int(11) NOT NULL AUTO_INCREMENT,
 	authorId int(11) NOT NULL,
-	dateCreated datetime DEFAULT CURRENT_TIMESTAMP,
+	dateCreated timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	content text,
-	commentCount int DEFAULT 0,
+	commentCount int(11) DEFAULT 0,
 	PRIMARY KEY (postId),
 	FOREIGN KEY (pageId) REFERENCES Pages (pageId),
 	FOREIGN KEY (authorId) REFERENCES Users (userId)
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Comments (
 	postId int(11) NOT NULL,
 	commentId int(11) NOT NULL AUTO_INCREMENT,
 	authorId int(11) NOT NULL,
-	dateCreated datetime DEFAULT CURRENT_TIMESTAMP,
+	dateCreated timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	content text NOT NULL,
 	PRIMARY KEY (commentId),
 	FOREIGN KEY (authorId) REFERENCES Users(userId),
@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS Comments (
 
 CREATE TABLE IF NOT EXISTS Messages (
 	messageId int(11) NOT NULL AUTO_INCREMENT,
-	dateSent datetime DEFAULT CURRENT_TIMESTAMP,
-	subject varchar(50) DEFAULT '(No Subject)',
-	content text,
+	dateSent timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	subject varchar(50) NOT NULL DEFAULT '(No Subject)',
+	content text NOT NULL,
 	sender int(11) NOT NULL,
 	receiver int(11) NOT NULL,
 	PRIMARY KEY (messageId),
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS GroupMembers (
 
 CREATE TABLE IF NOT EXISTS Employees (
 	employeeId int(11) NOT NULL AUTO_INCREMENT,
-    employeePassword CHAR(64) NOT NULL,
+    employeePassword char(64) NOT NULL,
 	ssn char(11) NOT NULL,
 	firstName varchar(50) NOT NULL,
 	lastName varchar(50) NOT NULL,
@@ -129,12 +129,12 @@ CREATE TABLE IF NOT EXISTS Advertisements (
 	advertisementId int(11) NOT NULL AUTO_INCREMENT,
 	employeeId int(11) NOT NULL,
 	type varchar(50) NOT NULL, #(e.g. clothing, computers)
-	dateCreated datetime DEFAULT CURRENT_TIMESTAMP,
+	dateCreated timestamp DEFAULT CURRENT_TIMESTAMP,
 	company varchar(50) NOT NULL, #(e.g. Ford, Gap, Google)
 	itemName varchar(50) NOT NULL, #(e.g. particular car, article of clothing, smartphone)
 	content text NOT NULL,
 	unitPrice decimal(7,2) NOT NULL,
-	availableUnits int NOT NULL,
+	availableUnits int(11) NOT NULL,
 	PRIMARY KEY (advertisementId),
 	FOREIGN KEY (employeeId) REFERENCES Employees(employeeId)
 );
@@ -144,10 +144,10 @@ CREATE TABLE IF NOT EXISTS Sales (
 	transactionId int(11) NOT NULL AUTO_INCREMENT,
 	buyerId int(11) NOT NULL,
     cardNumber char(16) NOT NULL,
-	dateSold datetime DEFAULT CURRENT_TIMESTAMP,
+	dateSold timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	advertisementId int(11) NOT NULL,
 	numberOfUnits int NOT NULL,
-	overseerId int(11),
+	overseerId int(11) DEFAULT NULL,
     chargeAmount decimal(10,2) NOT NULL,
 	PRIMARY KEY (transactionId),
 	FOREIGN KEY (advertisementId) REFERENCES Advertisements(advertisementId),

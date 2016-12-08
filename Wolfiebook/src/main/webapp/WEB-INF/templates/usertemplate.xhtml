@@ -3,9 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet name="index.css" library="css"/>
+        <h:outputStylesheet name="pftheme.css" library="css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
         <title>
             <ui:insert name="title">
                 #{bundle['app.title']}
@@ -16,37 +19,44 @@
     </h:head>
     <h:body>
         <header>
-                <ui:insert name="header">
-                    <div class="nav-wrapper clearfix">
-                        <div class="lfloat clearfix" id="logobox">
-                            <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
-                            <h3 class="rfloat">#{bundle['app.title']}</h3>
-                        </div>
-                        <div class="navbar rfloat">
+            <ui:insert name="header">
+                <p:menubar></p:menubar>
+                <div class="nav-wrapper clearfix">
+                    <div class="lfloat clearfix" id="logobox">
+                        <p:graphicImage class="lfloat" id="logo" name="img/wolfie_logo.png"/>
+                        <h3 class="rfloat">#{bundle['app.title']}</h3>
+                    </div>
+                    <div class="navbar rfloat">
+                        <h:form>
                             <p:menubar>
-                                <p:menuitem value="Home" url="#" icon="fa fa-home fa-2x" />
-                                <p:menuitem value="Group" url="#" icon="fa fa-file-text-o fa-2x"/>
-                                <p:menuitem value="Messages" url="#" icon="fa fa-envelope-o fa-2x"/>
-                                <p:menuitem value="Friends" url="#" icon="fa fa-users fa-2x"/>
+                                <p:menuitem value="Home" url="/pages/home.xhtml" icon="fa fa-home" />
+                                <p:menuitem value="Edit Group" url="/pages/editGroup.xhtml" icon="fa fa-file-text-o"/>
+                                <p:menuitem value="Group" url="/pages/group.xhtml" icon="fa fa-file-text-o"/>
+                                <p:menuitem value="Friends" url="/pages/friends.xhtml" icon="fa fa-envelope-o"/>
+                                <f:facet name="options">
+                                    <p:commandButton id="logout-btn" value="Logout" action="#{userBean.logout}" immediate="true"/>
+                                </f:facet>
                             </p:menubar>
-                        </div>
+
+                        </h:form>
                     </div>
-                </ui:insert>
-            </header>
-            
-            <div class="content" id="content">
-                <ui:insert name="content">
-                    <div id="pna">
-                        <h3>#{bundle['content.sorry']}</h3>
-                    </div>
-                </ui:insert>
-            </div>
-            
-            <footer>
-                <ui:insert name="footer">
-                    <p>#{bundle['footer.copyright']}</p>
-                </ui:insert>
-            </footer>
+                </div>
+            </ui:insert>
+        </header>
+
+        <div class="content" id="content">
+            <ui:insert name="content">
+                <div id="pna">
+                    <h3>#{bundle['content.sorry']}</h3>
+                </div>
+            </ui:insert>
+        </div>
+
+        <footer>
+            <ui:insert name="footer">
+                <p>#{bundle['footer.copyright']}</p>
+            </ui:insert>
+        </footer>
     </h:body>
 </html>
 

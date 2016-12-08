@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.model;
 
 import java.util.List;
@@ -30,14 +25,57 @@ public class PagesFacade extends AbstractFacade<Pages> {
         super(Pages.class);
     }
     
-    public List<Pages> getPersonalPage(Integer ownerId) {
+    public void createPage(Users user){
         try {
-            List<Pages> items = (List<Pages>) em.createNamedQuery("Pages.findByOwner")
-                    .setParameter("ownerId", ownerId)
-                    .getResultList();
-            return items;
-        } catch(NoResultException e) {
-            return null;
+            Users usr = (Users) em.createNamedQuery("Users.findByEmail")
+                    .setParameter("email", user.getEmail())
+                    .getSingleResult();
+
+            Pages page = new Pages();
+            page.setOwnerId(usr);
+            page.setPostCount(0);
+            em.persist(page);
+            } catch(NoResultException e){
+                
+            }  
+    }
+    
+    public void createPage(Groups group){
+        try {
+            Groups existingGroup = (Groups) em.createNamedQuery("Groups.findByGroupName")
+                    .setParameter("groupName", group.getGroupName())
+                    .getSingleResult();
+
+            Pages page = new Pages();
+            page.setGroupId(existingGroup);
+            page.setPostCount(0);
+            em.persist(page);
+            } catch(NoResultException e){
+                
+            }  
+    }
+    
+    public Pages findPage(Users user){
+        try{
+            Pages page = (Pages) em.createNamedQuery("Pages.findByOwner")
+                    .setParameter("ownerId", user)
+                    .getSingleResult();
+            
+            return page;
+        } catch(NoResultException e){   
         }
+        return null;
+    }
+    
+    public Pages findPage(Groups group){
+        try{
+            Pages page = (Pages) em.createNamedQuery("Pages.findByGroup")
+                    .setParameter("groupId", group)
+                    .getSingleResult();
+            
+            return page;
+        } catch(NoResultException e){   
+        }
+        return null;
     }
 }

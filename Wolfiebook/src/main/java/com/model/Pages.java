@@ -31,6 +31,7 @@ import javax.persistence.Table;
 @Table(name = "Pages")
 @NamedQueries({
     @NamedQuery(name = "Pages.findByOwner", query = "SELECT p FROM Pages p WHERE p.ownerId = :ownerId"),
+    @NamedQuery(name = "Pages.findByGroup", query = "SELECT p FROM Pages p WHERE p.groupId = :groupId"),
     @NamedQuery(name = "Pages.findAll", query = "SELECT p FROM Pages p")
     , @NamedQuery(name = "Pages.findByPageId", query = "SELECT p FROM Pages p WHERE p.pageId = :pageId")
     , @NamedQuery(name = "Pages.findByPostCount", query = "SELECT p FROM Pages p WHERE p.postCount = :postCount")})
