@@ -181,7 +181,6 @@ public class PageBean extends GlobalBean implements Serializable {
         getSession().setAttribute("commentSession", comment);
 
         postFacade.edit(post);
-        commentFacade.edit(comment);
 
         return null;
     }
@@ -212,7 +211,7 @@ public class PageBean extends GlobalBean implements Serializable {
         postFacade.edit(post);
         commentFacade.remove(comment);
 
-        return "/pages/groupPage?faces-redirect=true";
+        return null;
     }
 
     public String likePost(Posts post) {
