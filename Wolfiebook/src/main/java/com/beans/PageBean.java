@@ -65,6 +65,7 @@ public class PageBean extends GlobalBean implements Serializable {
         FacesMessage msg = new FacesMessage("Post edited", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Posts post = (Posts) event.getObject();
+        post.setContent(postContent);
         postFacade.editPost(post);
     }
 

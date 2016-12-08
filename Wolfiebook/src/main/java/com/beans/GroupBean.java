@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.ToggleEvent;
 
 /**
  *
