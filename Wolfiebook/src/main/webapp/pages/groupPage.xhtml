@@ -78,7 +78,7 @@
                             <h:outputText value="#{comment.dateCreated}"/>
                         </p:column>
                         <p:column>
-                            <p:commandButton id="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/>         
+                            <p:commandButton id="likeCommentButton" update="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/>         
                             <p:commandButton id="deleteCommentButton" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
                          </p:column>
                         
