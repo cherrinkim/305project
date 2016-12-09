@@ -8,7 +8,7 @@
     <ui:composition>
         <p:dialog id="GroupRemoveDlg" widgetVar="GroupRemoveDialog" modal="true" resizable="false" responsive="true" appendTo="@(content)" header="Remove From Group">
             <h:form id="GroupRemoveForm">
-                <p:dataTable id="datalist" value="#{groupBean.getUsers(groupBean.selected)}" var="user" widgetVar="userTable" lazy="false"
+                <p:dataTable id="removeGroupDatalist" value="#{userBean.users}" var="user" widgetVar="removeUserTable" lazy="false"
                              emptyMessage="No users found" filteredValue="#{userBean.filteredUsers}" rowsPerPageTemplate="5,10,15"
                              rowKey="#{user.userId}" selectionMode="single" selection="#{userBean.selected}" paginator="true">
                     <p:ajax event="rowSelect" update="remove-btn"  />
@@ -32,7 +32,7 @@
                         <h:outputText value="#{user.email}"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="remove-btn" action="#{groupBean.removeFromGroup(groupBean.selected, userBean.selected)}" value="Submit" update=":form:groupsTable,:growl" oncomplete="handleSubmit(args, 'GroupAddDialog');"/>
+                        <p:commandButton id="remove-btn" action="#{groupBean.removeFromGroup(userBean.selected)}" value="Submit" update=":form:groupsTable,:growl" oncomplete="handleSubmit(args, 'GroupRemoveDialog');"/>
                         <p:commandButton id="cancel-btn" value="Cancel" onclick="GroupAddDialog.hide()"/>
                     </f:facet>
                 </p:dataTable>

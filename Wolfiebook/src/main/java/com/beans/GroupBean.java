@@ -89,20 +89,33 @@ public class GroupBean extends GlobalBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    public void removeFromGroup(Groups group, Users user2){
-        List<Users> users = group.getUsersList();
+    public void removeFromGroup(Users user2){
+        if(user2.getEmail().equals(user.getEmail())){
+            FacesMessage msg = new FacesMessage("Can't remove yourself", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return;
+        }
+        if(!selected.getUsersList().contains(user2)){
+            FacesMessage msg = new FacesMessage("User does not exist in group", user2.getFirstName());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return;
+        }
+        List<Users> users = selected.getUsersList();
         users.remove(user2);
-        group.setUsersList(users);
+        selected.setUsersList(users);
         
         List<Groups> groups = user2.getGroupsList();
-        groups.remove(group);
+        groups.remove(selected);
         user2.setGroupsList(groups);
         
         userFacade.edit(user2);
     }
     
-    public List<Users> getUsers(Groups group){
-        return group.getUsersList();
+    public List<Users> getUsers(){
+        if(selected == null){
+            return null;
+        }
+        return selected.getUsersList();
     }
     
     public String deleteGroup() {

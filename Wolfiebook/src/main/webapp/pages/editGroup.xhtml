@@ -21,6 +21,9 @@
                     <p:ajax event="rowEditCancel" listener="#{groupBean.onRowCancel}" update=":form:msgs" />
                     <p:ajax event="rowSelect"   update="addUser-btn delete-btn removeUser-btn"/>
                     <p:ajax event="rowUnselect" update="addUser-btn delete-btn removeUser-btn"/>
+                    
+                    <p:inputText value="#{groupBean.selected}" immediate="true"/>
+
 
                     <p:column headerText="Group Name" >
                         <p:cellEditor>
