@@ -10,6 +10,8 @@
             <div class="ui-g">
                 <div class="ui-g-6">
                     <h:form id="allGroupForm">
+                        <p:growl id="msgs1" showDetail="true"/>
+
                         <p:dataTable id="allGroupsTable" value="#{groupBean.getAllGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending"
                                      rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="allGroupsTable"
                                      selectionMode="single" selection="#{groupBean.selected}" paginator="true">
@@ -28,18 +30,19 @@
                                 <h:outputText value="#{group.type}"/> 
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="join-btn" value="Join" action="#{groupBean.joinGroup()}" disabled="#{empty groupBean.selected}"/>
+                                <p:commandButton id="join-btn" value="Join" update=":allGroupForm:msgs1" action="#{groupBean.joinGroup()}" disabled="#{empty groupBean.selected}"/>
                             </f:facet>
                         </p:dataTable>
                     </h:form>
                 </div>
                 <div class="ui-g-6">
                     <h:form id="joinedGroupForm">
+                        <p:growl id="msgs2" showDetail="true"/>
                         <p:dataTable id="joinedGroupsTable" value="#{groupBean.getJoinedGroups()}" var="group" sortBy="#{group.groupId}" sortOrder="descending"
                                      rowKey="#{not empty group.groupId ? group.groupId : group.hashCode()}" emptyMessage="No group found" widgetVar="joinedGroupsTable"
                                      selectionMode="single" selection="#{groupBean.selected}" paginator="true">
-                            <p:ajax event="rowSelect"   update="view-btn"/>
-                            <p:ajax event="rowUnselect" update="view-btn"/>
+                            <p:ajax event="rowSelect"   update="view-btn unjoin-btn"/>
+                            <p:ajax event="rowUnselect" update="view-btn unjoin-btn"/>
                             <f:facet name="header">
                                 Joined Groups
                             </f:facet>
@@ -54,6 +57,7 @@
                             </p:column>
                             <f:facet name="footer">
                                 <p:commandButton id="view-btn" value="View" action="#{groupBean.toGroupPage(groupBean.selected)}" disabled="#{empty groupBean.selected}"/>
+                                <p:commandButton id="unjoin-btn" value="Unjoin" update="joinedGroupsTable :joinedGroupForm:msgs2" action="#{groupBean.unjoinGroup(groupBean.selected)}" disabled="#{empty groupBean.selected}"/>
                             </f:facet>
                         </p:dataTable>
                     </h:form>

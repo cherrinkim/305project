@@ -89,8 +89,7 @@ public class GroupBean extends GlobalBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-
-
+    
     public String deleteGroup() {
         List<Groups> groups = user.getGroupsList();
         groups.remove(selected);
@@ -159,6 +158,26 @@ public class GroupBean extends GlobalBean implements Serializable {
         }
         return null;
     }
+    
+    public void unjoinGroup(Groups group){
+        if(group.getOwnerId().getEmail().equals(user.getEmail())){
+            FacesMessage msg = new FacesMessage("Can't unjoin group created", group.getGroupName());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return;
+        }
+        List<Users> users = group.getUsersList();
+        users.remove(user);
+        group.setUsersList(users);
+        
+        List<Groups> groups = user.getGroupsList();
+        groups.remove(group);
+        user.setGroupsList(groups);
+        
+        userFacade.edit(user);
+        FacesMessage msg = new FacesMessage("Group unjoined", group.getGroupName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
     
     public void addToGroup(Users newMember){
         Groups group = selected;
