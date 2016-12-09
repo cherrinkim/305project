@@ -146,7 +146,7 @@ INSERT INTO Users (userId, userPassword, firstName, lastName, address, city, sta
 
 INSERT INTO Preferences VALUES (100015, "LARPing"), (100015, "Walking"),
 								(100015, "Slacklining"), (100015, "Foraging"),
-								(100015, "Rock climbing"). (100015, "Taekwondo"),
+								(100015, "Rock climbing"), (100015, "Taekwondo"),
                                 (100015, "Inline skating");
 
 INSERT INTO Users (userId, userPassword, firstName, lastName, address, city, state, zipcode,
@@ -200,8 +200,7 @@ INSERT INTO Users (userId, userPassword, firstName, lastName, address, city, sta
 INSERT INTO Preferences VALUES (100020, "Parkour"), (100020, "Rock climbing"),
 								(100020, "Handball"), (100020, "Surfing");
 
-INSERT INTO Groups VALUES (200000, "My Friends", "Friends", 100000),
-							(200001, "My Friends", "Friends", 100001),
+INSERT INTO Groups VALUES   (200001, "My Friends", "Friends", 100001),
 							(200002, "Best Friends", "Friends", 100002),
                             (200003, "StonyBrookGang", "Friends", 100003),
                             (200004, "CS Folks", "Friends", 100004),
