@@ -89,6 +89,21 @@ public class GroupBean extends GlobalBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    public void removeFromGroup(Groups group, Users user2){
+        List<Users> users = group.getUsersList();
+        users.remove(user2);
+        group.setUsersList(users);
+        
+        List<Groups> groups = user2.getGroupsList();
+        groups.remove(group);
+        user2.setGroupsList(groups);
+        
+        userFacade.edit(user2);
+    }
+    
+    public List<Users> getUsers(Groups group){
+        return group.getUsersList();
+    }
     
     public String deleteGroup() {
         List<Groups> groups = user.getGroupsList();
