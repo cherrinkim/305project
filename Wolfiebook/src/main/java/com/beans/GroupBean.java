@@ -209,6 +209,16 @@ public class GroupBean extends GlobalBean implements Serializable {
     
     public void addToGroup(Users newMember){
         Groups group = selected;
+        if(newMember.getEmail().equals(user.getEmail())){
+            FacesMessage msg = new FacesMessage("You are already in", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return;
+        }
+        if(group.getUsersList().contains(newMember)){
+            FacesMessage msg = new FacesMessage("Group member already exists in", groupName);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return;
+        }
         if (group != null) {
             List<Users> users = group.getUsersList();
             users.add(newMember);
