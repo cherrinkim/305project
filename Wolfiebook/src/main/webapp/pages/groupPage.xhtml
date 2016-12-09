@@ -41,9 +41,8 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
+
+
                     <p:column headerText="Author">
                         <h:outputText value="#{post.authorId.firstName} #{post.authorId.lastName}"/>
                     </p:column>
@@ -56,12 +55,15 @@
 
                             <p:commandButton id="likeButton" update="likeButton" value="#{pageBean.checkLikedPost(post)}" action="#{pageBean.likePost(post)}"/> 
 
-                            <p:commandButton id="deletePostButton" update="datalist" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
+                            <p:commandButton id="deletePostButton" update="datalist" rendered="#{pageBean.checkOwner1(post)}" value="Delete Post" action="#{pageBean.deletePost(post, groupBean.selected)}"/> 
 
 
                         </p:panelGrid>
 
                     </p:column> 
+                    <p:column style="width:32px" rendered="#{pageBean.checkOwner1(post)}">
+                        <p:rowEditor />
+                    </p:column>
                     <p:rowExpansion>
                         <p:inputText id="postComment" value="#{pageBean.commentContent}"
                                      required="true" requiredMessage="#{bundle['msg.commentcontent.validation']}"/>
@@ -69,7 +71,7 @@
                         <p:dataTable editable="true" id="commentlist" value="#{post.commentsList}" var="comment" widgetVar="commentTable" lazy="false"
                                      emptyMessage="No commnets found" rowsPerPageTemplate="5,10,15">
                             <p:ajax event="rowEdit"  listener="#{pageBean.onRowEdit}" update=":groupPostForm:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{pageBean.onRowCancel}" update=":groupPostForm:msgs" />
+                            <p:ajax event="rowEditCancel" listener="#{pageBean.onRowCancel}" update=":groupPostForm:msgs" />
                             <p:column headerText="Content">
                                 <p:cellEditor>
                                     <f:facet name="input">
@@ -80,9 +82,7 @@
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>
-                            <p:column style="width:32px">
-                                <p:rowEditor />
-                            </p:column>
+
                             <p:column headerText="Author">
                                 <h:outputText value="#{comment.authorId.firstName} #{comment.authorId.lastName}"/>
                             </p:column>
@@ -91,9 +91,11 @@
                             </p:column>
                             <p:column>
                                 <p:commandButton id="likeCommentButton" update="likeCommentButton" value="#{pageBean.checkLikedComment(comment)}" action="#{pageBean.likeComment(comment)}"/>         
-                                <p:commandButton id="deleteCommentButton" update="commentlist" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
+                                <p:commandButton id="deleteCommentButton" rendered="#{pageBean.checkOwner2(comment)}" update="commentlist" value="Delete Comment" action="#{pageBean.deleteComment(comment, post)}"/> 
                             </p:column>
-
+                            <p:column style="width:32px" rendered="#{pageBean.checkOwner2(comment)}">
+                                <p:rowEditor />
+                            </p:column>
                         </p:dataTable>
                     </p:rowExpansion>
                 </p:dataTable>

@@ -75,6 +75,26 @@ public class PageBean extends GlobalBean implements Serializable {
         }
         
     }
+    
+    public boolean checkOwner1(Posts post){
+        if(post != null){
+            if(user.getEmail().equals(post.getAuthorId().getEmail())){
+            return true;
+        }
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean checkOwner2(Comments comment){
+        if(comment != null){
+            if(user.getEmail().equals(comment.getAuthorId().getEmail())){
+            return true;
+        }
+        return false;
+        }
+        return true;
+    }
 
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", "");
